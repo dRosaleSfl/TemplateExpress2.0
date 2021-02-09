@@ -1,0 +1,261 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h1>Clientes</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)"> </div>
+        <div class="col-sm">
+          <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#myModalnew" >Agregar nuevo cliente</button>
+        </div>
+        <div class="col-sm">
+          <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#caliz" >Agenda</button>
+  
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Id del cliente</th>
+            <th>Nombre o Razón social</th>
+            <th>Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientes" >
+              <td>{{cliente.id_cliente}}</td>
+              <td> {{cliente.nombre}}  {{cliente.ape_pat}}  {{cliente.ape_mat}}</td>
+              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="vercliente(cliente)">Ver mas</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+ <!-- The Modal mostrar-->
+ <div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Clientes</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+          <!-- Modal body -->
+            <div class="modal-body">
+              <form [formGroup]="addclientForm" id="addclientForm">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                    <label for="nombre">Nombre o Razón social</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="" formControlName="nombre_cliente">
+                    </div>
+                    <div class="form-group col-md-4">
+                    <label for="ape_pat">Apellido paterno</label>
+                    <input type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="ape_mat">Apellido materno</label>
+                      <input type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat">
+                      </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="rfc">Rfc</label>
+                    <input type="text" class="form-control"  placeholder="" formControlName="rfc">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="tipo">Tipo</label>
+                    <input type="text" class="form-control" id="tipo" placeholder=""  formControlName="tipo">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="telefono">Telefono</label>
+                    <input type="text" class="form-control" id="telefono" placeholder=" "  formControlName="telefono">
+                  </div>
+                <div class="form-group col-md-6">
+                  <label for="correo">correo</label>
+                  <input type="text" class="form-control" id="correo" placeholder=""  formControlName="correo"  >
+                </div>
+              </div>
+                <label for="id_direccion">Direccion</label>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="table_direccion" width="100%" cellspacing="0">
+                      <thead>
+                        <tr >
+                          <th>Calle</th>
+                          <th>Numero interior</th>
+                          <th>numero exterior</th>
+                          <th>colonia</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr> 
+                          <td><input placeholder="" formControlName="calle" class="form-control" ></td>
+                          <td><input placeholder="" formControlName="num_int" class="form-control" ></td>
+                          <td><input placeholder="" formControlName="num_ext" class="form-control" ></td>
+                          <td><input placeholder="" formControlName="colonia" class="form-control"></td>
+                        </tr>
+                        <tr>
+                      </tbody>
+                      <thead>
+                        <tr>
+                          <th>Codigo Postal</th>
+                          <th>Ciudad</th>
+                          <th>Estado</th>
+                          <th>País</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr> 
+                          <td><input placeholder="" formControlName="cp" class="form-control" ></td>
+                          <td><input placeholder="" formControlName="ciudad" class="form-control" ></td>
+                          <td><input placeholder="" formControlName="estado" class="form-control" ></td>
+                          <td><input placeholder="" formControlName="pais" class="form-control" ></td>
+                        </tr>
+                        <tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- Modal footer -->
+              <div class="modal-footer">
+              <button type="button" (click)="borrar()" class="btn btn-danger" >Eliminar</button>
+              <button type="button" (click)="editar()" class="btn btn-danger" >Editar</button>
+            </div>
+            </form>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+<!-- The Modal agregar -->
+<div class="modal" id="myModalnew">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Clientes</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+          <!-- Modal body -->
+            <div class="modal-body">
+              <form [formGroup]="clientForm" id="clientForm">
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="nombre_cliente">Nombre o Razón social</label>
+                    <input type="text" formControlName="nombre_cliente" class="form-control" placeholder=" "  >
+                </div>
+                 <div class="form-group col-md-4">
+                    <label for="ape_pat">Apellido paterno</label>
+                    <input type="text" formControlName="ape_pat" class="form-control" placeholder=" "  >
+                </div>
+                  <div class="form-group col-md-4">
+                    <label for="ape_mat">Apellido materno</label>
+                    <input type="text" formControlName="ape_mat" class="form-control" placeholder=" "  >
+                </div>
+              </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="tipo">Tipo</label>
+                <input type="text" formControlName="tipo" class="form-control" placeholder="" >
+              </div>
+              <div class="form-group col-md-6">
+                <label for="rfc">Rfc</label>
+                <input type="text" formControlName="rfc" class="form-control" placeholder="" >
+              </div>
+            </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                  <label for="telefono">Telefono</label>
+                  <input type="text" formControlName="telefono" class="form-control" placeholder="" >
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="correo">Correo</label>
+                    <input type="text" formControlName="correo" class="form-control" placeholder="" >
+                  </div>
+              </div>
+                <label for="id_direccion">Direccion</label>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="table_direccion" width="100%" >
+                      <thead>
+                        <tr >
+                          <th>Calle</th>
+                          <th>Numero interior</th>
+                          <th>numero exterior</th>
+                          <th>colonia</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr> 
+                          <td><input placeholder="" formControlName="calle" class="form-control"></td>
+                          <td><input placeholder="" formControlName="num_int" class="form-control"></td>
+                          <td><input laceholder="" formControlName="num_ext" class="form-control"></td>
+                          <td><input placeholder="" formControlName="colonia" class="form-control"></td>
+                        </tr>
+                        <tr>
+                      </tbody>
+                      <thead>
+                        <tr>
+                          <th>Codigo Postal</th>
+                          <th>Ciudad</th>
+                          <th>Estado</th>
+                          <th>País</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr> 
+                          <td><input placeholder="" formControlName="cp" class="form-control"></td>
+                          <td><input placeholder="" formControlName="ciudad" class="form-control"></td>
+                          <td><input placeholder="" formControlName="estado" class="form-control"></td>
+                          <td><input placeholder="" formControlName="pais" class="form-control"></td>
+                        </tr>
+                        <tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" (click)=newcliente() >Guardar</button>
+            </form>
+            </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- The Modal agenda -->
+<div class="modal" id="caliz">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Agenda</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+          <!-- Modal body -->
+            <div class="modal-body">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Nombre o Razón social</th>
+                    <th>Telefono</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cliente of clientes" >
+                      <td>{{cliente.nombre}}  {{cliente.ape_pat}}  {{cliente.ape_mat}}</td>
+                      <td> {{cliente.telefono}}  </td>
+                   </tr>
+                </tbody>
+              </table>
+            </div>
+    </div>
+  </div>
+</div>

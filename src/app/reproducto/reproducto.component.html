@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes</title>
+</head>
+<body>
+  <div class="general">
+      <div class="col">
+        <p class="p-2 bg-success text-white">REPORTE DE PRODUCTOS</p>
+      </div>
+      <form (ngSubmit)="onSubmit($event)">
+        <button type="submit" class="btn btn-primary btn-lg btn-block" name="Pedfaltante"><i class="fas fa-chart-line"></i>10 PRODUCTOS MAS PEDIDOS EN LISTA DE FALTANTES</button>
+        <button type="submit" class="btn btn-secondary btn-lg btn-block" name="Pedvendido"><i class="fas fa-chart-line"></i>10 PRODUCTOS MAS VENDIDOS</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" name="Procaro"><i class="fas fa-chart-line"></i>PRODUCTO MAS CARO EN INVENTARIO </button>
+        <button type="submit" class="btn btn-secondary  btn-lg btn-block" name="Clientemcompras" data-toggle="modal" data-target="#myModalcli"><i class="fas fa-chart-line"></i>50 CLIENTES CON TOTAL DE COMPRAS EN HERRAJES MÁS ALTAS</button>
+      </form>
+    </div>
+
+  <!-- The Modal clientes-->
+<div class="modal" id="myModalcli">
+<div class="modal-dialog modal-lg" >
+  <div class="modal-content">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h4 class="modal-title">REPORTES</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+        <!-- Modal body -->
+          <div class="modal-body">
+            <form [formGroup]="reportesForm" id="reportesForm">
+              <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr >
+                        <th>Nombre</th>
+                        <th>Total de compras</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let rep of repclientes">
+                          <td>{{rep.nombre}}  {{rep.ape_pat}}  {{rep.ape_mat}}</td>
+                          <td>{{rep.vendido}}</td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">REPORTES</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+          <!-- Modal body -->
+            <div class="modal-body">
+              <form [formGroup]="reportesForm" id="reportesForm">
+                <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr >
+                          <th>Cantidad</th>
+                          <th>Clave de herraje</th>
+                          <th>Nombre</th>
+                          <th>Marca</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let reporte of reportes">
+                            <td>{{reporte.mas}}</td>
+                            <td>{{reporte.id_herraje}}</td>
+                            <td>{{reporte.nombre}}</td>
+                            <td>{{reporte.marca}}</td>
+                          </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

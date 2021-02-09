@@ -1,0 +1,155 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h1>Lista de Faltantes</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)"> </div>
+          <div class="col-sm">
+            <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#myModalfal" >Agregar nuevo Lista</button>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr >
+              <th>Id de lista</th>
+              <th>Fecha</th>
+              <th>Detalles</th>
+            </tr>
+          </thead>
+    
+          <tbody>
+            <tr *ngFor='let lis of listas'>
+              <td>{{lis.id_faltantes}}</td>
+              <td>{{lis.fecha | date:'yyyy/MM/dd'}}</td>
+              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit" (click)="verfaltante(lis)">Ver más</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="myModalfal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+       
+        <div class="modal-header">
+          <h4 class="modal-title">Nueva lista</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+      
+        <div class="modal-body">
+          
+          <form [formGroup]="addfaltantesForm" >
+            <div class="form-group">
+                <label for="id_faltantes">Id faltante</label>
+                <input type="text" class="form-control"  placeholder=" " formControlName="id_faltantes" >
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="id_herraje">Id herraje</label>
+                  <select class="form-control" id="id_herraje" formControlName="id_herraje">
+                    <option *ngFor="let producto of productos; let i = index" [value]="productos[i].id_herraje">
+                      {{productos[i].id_herraje}}
+                    </option>
+                  </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="Fecha">Fecha</label>
+                <input type="date" class="form-control" id="fecha" placeholder="" formControlName="fecha" >
+            </div>
+            <div class="form-group col-md-4">
+              <label for="cantidad">Cantidad</label>
+              <input type="text" class="form-control"  placeholder=" " formControlName="cantidad" >
+            </div>
+            </div>
+              <div class="form-group ">
+                <label for="id_proveedor">Proveedor</label>
+                <select class="form-control" id="id_proveedor" formControlName="id_proveedor">
+                    <option *ngFor="let proveedor of proveedores; let i = index" [value]="proveedores[i].id_proveedor">
+                      {{proveedores[i].nombre}}  {{proveedores[i].ape_pat}}  {{proveedores[i].ape_mat}}  
+                    </option>
+                  </select>
+            </div>
+           
+          </form>
+
+        </div>
+       
+        <div class="modal-footer">
+          <button type="button" (click)=" newfaltante()"  class="btn btn-danger" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="modal" id="edit">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Lista</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="faltantesForm" id="faltantesForm">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="id_faltantes">Id de lista</label>
+              <input type="text" class="form-control"  placeholder=" " formControlName="id_faltantes" readonly>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="Fecha">Fecha</label>
+            <input type="text" class="form-control" id="fecha" placeholder="" formControlName="fecha" readonly>
+        </div>
+        </div>
+          <div class="table-responsive">
+            <table class="table table-bordered" id="table_productos" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th># de Producto</th>
+                  <th>Clave del herraje</th>
+                  <th>Nombre del herraje</th>
+                  <th>Marca del herraje</th>
+                  <th>Cantidad</th>
+                  <th>Proveedor</th>
+                  <th>Apellido Paterno</th>
+                  <th>Apellido Materno</th>
+                  <th>ID Proveedor</th>
+                  <th>Detalles</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let faltante of fal">
+                  <td>{{faltante.id_producto}}</td>
+                  <td>{{faltante.id_herraje}}</td>
+                  <td>{{faltante.nom_herraje}}</td>
+                  <td>{{faltante.marca}}</td>
+                  <td>{{faltante.cantidad}}</td>
+                  <td>{{faltante.nombre}}</td>
+                  <td>{{faltante.ape_pat}}</td>
+                  <td>{{faltante.ape_mat}}</td>
+                  <td>{{faltante.id_proveedor}}</td>
+                  <td><button type="button" (click)=" borrarprod()" class="btn btn-warning" >Borrar Producto</button></td>
+                </tr>
+                <tr>
+              </tbody>
+            </table>
+          </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)=" borrar()"   class="btn btn-danger" data-dismiss="modal">Eliminar Lista</button>
+        
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,21 @@
+.div-fecha{
+    text-align: center;
+}
+
+.general{
+    background-color: #DEEBEC;
+}
+
+.btn{
+    border-radius: 50px;
+    margin-block-end: 50px;
+    margin-block-start: 50px;
+    margin-top: 100px;
+    padding-bottom: 20px;
+}
+
+.bg-success{
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}

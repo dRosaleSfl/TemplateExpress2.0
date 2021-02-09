@@ -1,0 +1,148 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h1>Lista de Precios</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)"> </div>
+        <div class="col-sm">
+          <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#NEW" >Agregar nuevo Precio</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr >
+            <th>Id de lista</th>
+            <th>Clave del herraje</th>
+            <th>Nombre del herraje</th>
+            <th>Marca</th>
+            <th>Precio</th>
+            <th>Proveedor</th>
+            <th>Detalles</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr *ngFor='let producto of precioos'>
+            <td>{{producto.id_listaprecios}}</td>
+            <td>{{producto.id_herraje}}</td>
+            <td>{{producto.nom_herraje}}</td>
+            <td>{{producto.marca}}</td>
+            <td>{{producto.precio_compra}}</td>
+            <td>{{producto.nombre}}  {{producto.ape_pat}}  {{producto.ape_mat}}</td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit" (click)="verproducto(producto)">Ver mas</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+  <div class="modal" id="NEW">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+       
+        <div class="modal-header">
+          <h4 class="modal-title">Nuevo Precio</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+      
+        <div class="modal-body">
+          
+          <form [formGroup]="preciooos" >
+          <!-- <div class="form-group">
+              <label for="id_listaprecios">Id de lista</label>
+              <input type="text" class="form-control"  placeholder=" " formControlName="id_listaprecios" readonly>
+          </div>--> 
+              <div class="form-group">
+                  <label for="id_herraje">Clave del herraje</label>
+              <select class="form-control" id="id_herraje" formControlName="id_herraje">
+                <option *ngFor="let producto of productos; let i = index" [value]="productos[i].id_herraje">
+                  {{productos[i].id_herraje}}
+                </option>
+              </select>
+              <!--<input type="text" class="form-control"  placeholder="" formControlName="id_herraje" >-->
+              </div>
+                <div class="form-group ">
+                  <label for="id_proveedor">Proveedor</label>
+                  <select class="form-control" id="id_proveedor" formControlName="id_proveedor">
+                    <option *ngFor="let proveedor of proveedores; let i = index" [value]="proveedores[i].id_proveedor">
+                      {{proveedores[i].nombre}}  {{proveedores[i].ape_pat}}  {{proveedores[i].ape_mat}}  
+                  </select>
+                  <!--<input type="text" class="form-control"  placeholder="" formControlName="id_proveedor" >-->
+                </div>
+              <div class="form-group">
+                  <label for="precio_compra">Precio</label>
+                  <input type="text" class="form-control"  placeholder=" " formControlName="precio_compra">
+              </div>
+          </form>
+
+        </div>
+       
+        <div class="modal-footer">
+          <button type="button" (click)=" newprecio()"  class="btn btn-danger" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal" id="edit">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Precio</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="preciooos1" id="inventarioForm">
+            <div class="form-group">
+              <label for="id_listaprecios">Id de lista</label>
+              <input type="text" class="form-control"  placeholder=" " formControlName="id_listaprecios" readonly>
+          </div>
+            <div class="form-group">
+              <label for="id_herraje">Clave del herraje</label>
+              <input type="text" class="form-control"  placeholder="" formControlName="id_herraje" readonly>
+          </div>
+          <div class="form-group">
+            <label for="nom_herraje">Nombre herraje</label>
+            <input type="text" class="form-control"  placeholder="" formControlName="nom_herraje" readonly>
+        </div>
+        <div class="form-group">
+          <label for="marca">Marca del herraje</label>
+          <input type="text" class="form-control"  placeholder="" formControlName="marca" readonly>
+      </div>
+      <div class="form-row">
+          <div class="form-group col-md-4">
+              <label for="nombre">Nombre del Proveedor</label>
+              <input type="text" class="form-control"  placeholder="" formControlName="nombre" readonly>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="ape_pat">Apellido Paterno</label>
+            <input type="text" class="form-control"  placeholder="" formControlName="ape_pat" readonly>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="ape_mat">Apellido Materno</label>
+            <input type="text" class="form-control"  placeholder="" formControlName="ape_mat" readonly>
+          </div>
+        </div> 
+          <div class="form-group">
+              <label for="precio_compra">Precio</label>
+              <input type="text" class="form-control"  placeholder=" " formControlName="precio_compra">
+          </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)=" editar()"  class="btn btn-danger" data-dismiss="modal">Editar</button>
+          <button type="button" (click)=" borrar()"  class="btn btn-danger" data-dismiss="modal">Borrar</button>
+        
+        </div>
+      </div>
+    </div>
+  </div>

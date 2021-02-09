@@ -1,0 +1,194 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h1>Ganancias</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)"> </div>
+          <div class="col-sm">
+            <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#NEW" >Nuevo registro</button>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr >
+              <th>Numero de nota</th>
+              <th>Tipo de pago</th>
+              <th>Cliente</th>
+              <th>Cantidad</th>
+              <th>Concepto</th>
+              <th>Estatus</th>
+              <th>Recibió</th>
+              <th>Detalles</th>
+            </tr>
+          </thead>
+    
+          <tbody>
+            <tr *ngFor='let gan of ganancias'>
+              <td>{{gan.num_nota}}</td>
+              <td>{{gan.tipo_pago}}</td>
+              <td>{{gan.nombre}}  {{gan.ape_pat}}  {{gan.ape_mat}}</td>
+              <td>{{gan.cantidad}}</td>
+              <td>{{gan.concepto}}</td>
+              <td>{{gan.status}}</td>
+              <td>{{gan.recibio}}</td>
+              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit" (click)="verganancia(gan)">Ver mas</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div class="modal" id="NEW">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Nuevo Registro</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          
+          <form [formGroup]="gananciaForm" id="gananciaForm">
+              <div class="form-group">
+                  <label for="num_nota">Numero de nota</label>
+                  <input type="text" class="form-control"  placeholder="" formControlName="num_nota">
+              </div>
+                <div class="form-group ">
+                    <label for="id_cliente">Cliente</label>
+                    <select class="form-control" id="id_cliente" formControlName="id_cliente">
+                      <option *ngFor="let cliente of clientes; let i = index" [value]="clientes[i].id_cliente">
+                        {{clientes[i].nombre}}  {{clientes[i].ape_pat}}  {{clientes[i].ape_mat}}  
+                      </option>
+                    </select>
+                </div>
+              <div class="form-group">
+                  <label for="tipo_pago">Tipo de pago</label>
+                  <select class="form-control" id="tipo_pago" formControlName="tipo_pago">
+                    <option>Efectivo </option>
+                    <option>Tarjeta de crédito</option>
+                    <option>Tarjeta de débito</option>
+                    <option>Transferencia</option>
+                    <option>Cheque</option>
+                  </select>
+              </div>
+              <div class="form-group ">
+                <label for="cantidad">Cantidad</label>
+                <input type="text" class="form-control"  placeholder="" formControlName="cantidad">
+              </div>
+              <div class="form-group ">
+                <label for="conceto">Concepto</label>
+                <input type="text" class="form-control"  placeholder="" formControlName="concepto">
+              </div>
+                  <div class="form-group ">
+                    <label for="status">Estatus</label>
+                    <select class="form-control" id="status" formControlName="status">
+                        <option>Entregado</option>
+                        <option>No entregado</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="recibio">Recibió</label>
+                    <select class="form-control" id="recibio" formControlName="recibio">
+                        <option>Gaby</option>
+                        <option>Edgar</option>
+                        <option>Juanita</option>
+                        <option>Vero</option>
+                        <option>Alondra</option>
+                        <option>Gustavo</option>
+                      </select>
+                  </div>
+          </form>
+
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" (click)=" newganancia()" class="btn btn-danger" data-dismiss="modal">Guardar</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- The Modal Editar-->
+  <div class="modal" id="edit">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Editar Registro</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editForm" id="editForm">
+            <div class="form-group">
+              <label for="id_ganancias">Id ganancias</label>
+              <input type="text" class="form-control"  placeholder=" " formControlName="id_ganancias" readonly>
+          </div>
+            <div class="form-group">
+              <label for="num_nota">Numero de nota</label>
+              <input type="text" class="form-control"  placeholder=" " formControlName="num_nota">
+          </div>
+        <div class="form-row">
+              <label for="id_cliente">Cliente</label>
+              <select class="form-control" id="id_cliente" formControlName="id_cliente">
+                <option *ngFor="let cliente of clientes; let i = index" [value]="clientes[i].id_cliente">
+                  {{clientes[i].nombre}}  {{clientes[i].ape_pat}}  {{clientes[i].ape_mat}} 
+                </option>
+              </select>
+    </div>
+    <div class="form-row">
+          <div class="form-group col-md-6">
+              <label for="tipo_pago">Tipo de Pago</label>
+              <select class="form-control" id="tipo_pago" formControlName="tipo_pago">
+                <option>Efectivo </option>
+                <option>Tarjeta de crédito</option>
+                <option>Tarjeta de débito</option>
+                <option>Transferencia</option>
+                <option>Cheque</option>
+              </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="cantidad">Cantidad</label>
+            <input type="text" class="form-control"  placeholder="" formControlName="cantidad">
+          </div>
+        </div> 
+          <div class="form-group">
+            <label for="concepto">Concepto</label>
+            <input type="text" class="form-control"  placeholder="" formControlName="concepto">
+          </div>
+       
+        <div class="form-group ">
+          <label for="status">Estatus</label>
+          <select class="form-control" id="status" formControlName="status">
+            <option>Entregado</option>
+            <option>No entregado</option>
+          </select>
+        </div>
+          <div class="form-group">
+              <label for="recibio">Recibió</label>
+              <select class="form-control" id="recibio" formControlName="recibio">
+                <option>Gaby</option>
+                <option>Edgar</option>
+                <option>Juanita</option>
+                <option>Vero</option>
+                <option>Alondra</option>
+                <option>Gustavo</option>
+              </select>
+          </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button"  class="btn btn-danger" data-dismiss="modal" (click)="editar()">Editar</button>
+          <button type="button"  class="btn btn-danger" data-dismiss="modal" (click)="borrar()">Borrar</button>
+        
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,178 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h1>Inventario</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)"> </div>
+        <div class="col-sm">
+          <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#NEW" >Agregar nuevo Producto</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr >
+            <th>Id</th>
+            <th>Clave del herraje</th>
+            <th>Nombre</th>
+            <th>Marca</th>
+            <th>Precio con vidrio</th>
+            <th>Precio sin vidrio</th>
+            <th>Existencias</th>
+            <th>Minimos en stock</th>
+            <th>Detalles</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr *ngFor='let producto of inventario'>
+            <td>{{producto.id_inventario}}</td>
+            <td>{{producto.id_herraje}}</td>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.marca}}</td>
+            <td>{{producto.preciocvidrio}}</td>
+            <td>{{producto.preciosvidrio}}</td>
+            <td>{{producto.existencias}}</td>
+            <td>{{producto.min}}</td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="verproducto(producto)">Ver mas</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+  <!-- The Modal -->
+  <div class="modal" id="NEW">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Nuevo Herraje</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          
+          <form [formGroup]="inventarioForm" id="inventarioForm">
+              <div class="form-group">
+                  <label for="id_herraje">Clave del herraje</label>
+                  <input type="text" class="form-control"  placeholder="" formControlName="id_herraje">
+              </div>
+              <div class="form-group">
+                  <label for="nombre_herraje">Nombre</label>
+                  <input type="text" class="form-control"  placeholder="" formControlName="nombre">
+              </div>
+              
+              <div class="form-group">
+                  <label for="marca_herraje">Marca</label>
+                  <input type="text" class="form-control"  placeholder=" " formControlName="marca">
+              </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="preciocvidrio">Precio con vidrio</label>
+                    <input type="text" class="form-control"placeholder="" formControlName="preciocvidrio">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="preciosvidrio">Precio sin vidrio</label>
+                    <input type="text" class="form-control"  placeholder="" formControlName="preciosvidrio">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="existencias">Exisencias</label>
+                    <input type="text" class="form-control"  placeholder="" formControlName="existencias">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="min_stock">Minimos en stock</label>
+                    <input type="text" class="form-control" placeholder="" formControlName="min">
+                  </div>
+                </div>
+          </form>
+
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" (click)=" newproducto()"  class="btn btn-danger" data-dismiss="modal">Guardar</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+<!-- The Modal -->
+          <div class="modal" id="myModal">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Información del herraje</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                  
+                  <form [formGroup]="inventarioForm1" id="inventarioForm1">
+                      <div class="form-group">
+                          <label for="id_herraje">Clave del herraje</label>
+                          <input type="text" class="form-control" placeholder="" formControlName="id_herraje">
+                      </div>
+                      <div class="form-group">
+                          <label for="nombre_herraje">Nombre</label>
+                          <input type="text" class="form-control"  placeholder="" formControlName="nombre">
+                      </div>
+                      
+                      <div class="form-group">
+                          <label for="marca_herraje">Marca</label>
+                          <input type="text" class="form-control"  placeholder=" " formControlName="marca">
+                      </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="preciocvidrio">Precio con vidrio</label>
+                            <input type="text" class="form-control" placeholder="" formControlName="preciocvidrio">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="preciosvidrio">Precio sin vidrio</label>
+                            <input type="text" class="form-control"  placeholder="" formControlName="preciosvidrio">
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="existencias">Exisencias</label>
+                            <input type="text" class="form-control"  placeholder="" formControlName="existencias">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="min_stock">Minimos en stock</label>
+                            <input type="text" class="form-control" placeholder="" formControlName="min">
+                          </div>
+                        </div>
+                  </form>
+
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" (click)="borrar()"  class="btn btn-danger" data-dismiss="modal">borrar</button>
+                  <button type="button" (click)="editar()" class="btn btn-danger" data-dismiss="modal">editar</button>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+

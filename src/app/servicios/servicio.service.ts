@@ -274,7 +274,7 @@ getprecios(){
 
     deleteprod(faltante:any){
       let id1 = faltante.id_producto;
-     return this.httpClient.get(`http://localhost:3000/dprod?id_producto=${id1}`);
+     return this.httpClient.get(`http://localhost:3000/dprod?id1=${id1}`);
     }
 //-------------------Ganancias-----
 getganancias(){

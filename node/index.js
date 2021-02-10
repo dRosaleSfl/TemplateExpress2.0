@@ -1044,7 +1044,7 @@ app.get('/dfaltante', (req, res) => {
   //eliminar un producto de lista
 //lista
 app.get('/dprod', (req, res) => {
-  var id1 = [req.query.id_producto];
+  var id1 = [req.query.id1];
   const query = `delete from faltantes where id_producto='${id1}'`;
   connect.query(query, (err, result) => {
     if (err) {

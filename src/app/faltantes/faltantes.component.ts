@@ -133,15 +133,22 @@ export class FaltantesComponent implements OnInit {
       Swal.fire('Lista Eliminada Exitosamente');
    }
 
-   borrarprod(){
-     console.log(this.faltantesForm.value);
-    /*console.log(this.faltantesForm.value);
+   borrarprod(item:any){
+    console.log(item.id_producto);
+    let prodId;
+     prodId = item.id_producto;
+    this.faltantesservicio.deleteprod(item).subscribe(
+      res=>{
+      console.log(res);
+   /*  console.log(this.faltantesForm.value);
       this.faltantesservicio.deleteprod(this.faltantesForm.value).subscribe(
         res => {
           console.log(res); 
         }
-      );
-      Swal.fire('Lista Eliminada Exitosamente');*/
+      );*/
+     
+      }); 
+      Swal.fire('Lista Eliminada Exitosamente');
    }
 
 

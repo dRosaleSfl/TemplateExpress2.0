@@ -14,9 +14,9 @@ app.use(function (req, res, next) {
 const mysql = require('mysql');
 const connect = mysql.createConnection({
   host: 'localhost',
-  user: 'usuariovero',
-  password: '190398',
-  database: "templaexpress",
+  user: 'root',
+  password: '123',
+  database: "teempla",
 });
 //-------------login-------------------------
 app.get('/user',(req,res)=>{

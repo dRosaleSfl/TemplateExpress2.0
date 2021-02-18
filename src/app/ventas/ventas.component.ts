@@ -131,6 +131,7 @@ export class VentasComponent implements OnInit {
   }
 
   modalinventario() {
+    this.carrito = [];
 
     this.ventaservicio.getinventario().subscribe(
       res => {

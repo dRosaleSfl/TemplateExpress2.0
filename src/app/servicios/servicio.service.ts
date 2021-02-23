@@ -398,7 +398,10 @@ getganancias(){
     return this.httpClient.post(`http://localhost:3000/addventa?inv=${inventario}`, venta);
   }
 
-
+  deleteped(producto:any){
+    let id1 = producto.id_pedido;
+   return this.httpClient.get(`http://localhost:3000/dped?id_pedido=${id1}`);
+  }
 
   /* deleteVenta(venta:any){
     let id = venta.id_venta;

@@ -1605,6 +1605,21 @@ app.get('/d', async (req, res) => {
   })
 })
 
+ //eliminar un producto dela venta
+ app.get('/dped', (req, res) => {
+  var id1 = [req.query.id_pedido];
+  const query = `delete from pedido where id_pedido='${id1}'`;
+  connect.query(query, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+      res.end();
+    }
+  });
+})
+
+//--------------------------------
 
 app.listen(3000, (err, res) => {
   if (err) {

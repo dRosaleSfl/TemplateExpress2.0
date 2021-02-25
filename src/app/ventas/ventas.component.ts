@@ -111,12 +111,15 @@ export class VentasComponent implements OnInit {
           });
 
           // Pedidos
+          console.log(res[0].id_pedido);
           var pedidosObj = [];
-          res[0].id_pedido.split(',').forEach(element => {
-            this.ventaservicio.getPedido(element).subscribe(res3 => {
+
+            this.ventaservicio.getPedido(res[0].id_pedido).subscribe(res3 => {
+              console.log(res3[0]);
               pedidosObj.push(res3[0]);
+              
             });
-          });
+         ;
 
           this.ventaForm.patchValue({
             pedidos: pedidosObj
@@ -129,7 +132,6 @@ export class VentasComponent implements OnInit {
     this.abrirNota = false;
     $("#myModal").modal("show");
   }
-
   modalinventario() {
     this.carrito = [];
 

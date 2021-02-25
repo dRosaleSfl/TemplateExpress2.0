@@ -347,8 +347,12 @@ getganancias(){
   getreportea() {
     return this.httpClient.get('http://localhost:3000/getanual');
   }
-  getreportes(f_rep: any) {
-    return this.httpClient.get(`http://localhost:3000/getsemanal?f_rep=${f_rep}`);
+  getreportes(fechaaa) {
+     let fecha=fechaaa;
+    console.log("servicio");
+    console.log(fecha);
+    console.log(fechaaa+"servicio chido chido");
+    return this.httpClient.get(`http://localhost:3000/getsemanal?f_rep=${fecha}`);
   }
   mvendido() {
     return this.httpClient.get('http://localhost:3000/masvendido');

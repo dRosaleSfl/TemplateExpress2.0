@@ -10,53 +10,9 @@
       <div class="col">
         <p class="p-2 bg-success text-white">REPORTE DE VENTAS</p>
       </div>
-        <button type="submit" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModals"><i class="fas fa-file-signature"></i>REPORTE DE VENTAS SEMANALES</button>
-        <button type="submit" class="btn btn-secondary btn-lg btn-block" (click)="Repmensual()" ><i class="fas fa-file-signature"></i>REPORTE DE VENTAS MENSUALES</button>
-        <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="Repanual()" ><i class="fas fa-file-signature"></i>REPORTE DE VENTAS ANUALES</button>
-     
+        <button type="submit" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModals"><i class="fas fa-file-signature"></i>REPORTE DE VENTAS </button>
     </div>
-
-  <!-- The Modal -->
-<div class="modal" id="myModal">
-<div class="modal-dialog modal-lg" >
-  <div class="modal-content">
-    <!-- Modal Header -->
-    <div class="modal-header">
-      <h4 class="modal-title">REPORTES</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-        <!-- Modal body -->
-          <div class="modal-body">
-            <form [formGroup]="reportesForm" id="reportesForm">
-              
-              <div class="table-responsive">
-                  <table class="table">
-                    
-                    <thead>
-                      <tr >
-                        <th>Fecha</th>
-                        <th>Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let reporte of reportes">
-                          <td>{{reporte.nfecha}}</td>
-                          <td>{{reporte.total}}</td>
-                        </tr>
-                    </tbody>
-                  </table>
-                </div>
-                
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
+  <!--modal de semanas-->
 <div class="modal" id="myModals">
   <div class="modal-dialog modal-lg" >
     <div class="modal-content">
@@ -67,13 +23,17 @@
         </div>
           <!-- Modal body -->
             <div class="modal-body">
-              <form [formGroup]="reportesemForm" id="reportesemForm">
-                <label>INGRESA FECHA A CONSULTAR PARA REPORTE SEMANAL:</label>
-                <input type="date" class="formControlName" formControlName="f_rep" id="f_rep" placeholder="aaaammdd">
-                <button type="button" class="btn btn-danger"  (click)="Repsemanal(f_rep)" >Calcular</button>
+              <form >
+                <label>INGRESA FECHA A CONSULTAR PARA REPORTE:</label>
+                <select id="temporada" name="TEMPORADA">
+                  <option>Semana</option>
+                  <option>Mes</option>
+                  <option>Año</option>
+                  </select>
+                <input type="date" class="formControlName"  id="f_rep" placeholder="aaaammdd">
+                <button type="button" class="btn btn-danger"  (click)="Repsemanal()" >Calcular</button>
                 <div class="table-responsive">
                     <table class="table">
-                     
                       <thead>
                         <tr >
                           <th>Fecha</th>
@@ -81,14 +41,24 @@
                         </tr>
                       </thead>
                       <tbody>
-                          <tr *ngFor="let reporte of reportes">
-                            <td>{{reporte.nfecha}}</td>
-                            <td>{{reporte.total}}</td>
+                          <tr >
+                            <td>{{f_rep}}</td>
+                            <td>{{total}}</td>
                           </tr>
+                          <tr *ngFor="let mees of mes" >
+                            <td>{{mees.nfecha}}</td>
+                            <td>{{mees.total}}</td>
+                           
+                          </tr>
+                          <tr *ngFor="let anio of aanio">
+                            <td>{{anio.nfecha}}</td>
+                            <td>{{anio.total}}</td>
+                          
+                          </tr>
+
                       </tbody>
                     </table>
                   </div>
-              
             <!-- Modal footer -->
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -98,3 +68,5 @@
       </div>
     </div>
   </div>
+   
+</body>

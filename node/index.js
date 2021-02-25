@@ -1151,23 +1151,29 @@ app.get('/dganancia', async (req, res) => {
 
 //-----------Reportes----------------
 app.get('/getsemanal', async (req, res) => {
-  var f_rep = [req.query.f_rep];
-  // console.log(f_rep);
-  const query = `call Pvs('${f_rep}');`;
-  connect.query(query, (err, row) => {
+ var f_rep = req.query.f_rep;
+ console.log("holaaa");
+  console.log(req.query);
+  console.log(f_rep);
+ const query = `call Pvs("${f_rep}");`;
+  connect.query(query, (err, result) => {
     if (err) {
-      throw err;
+      //throw err;
     } else {
-      res.send(row);
+      res.send(result);
       res.end();
+     
     }
-  });
+    console.log(result);
+  })
+
 })
 app.get('/getmensual', async (req, res) => {
+  var f_rep = req.query.f_rep;
   connect.query(`call Pvm();`, (err, result) => {
     //console.log(result);
     if (err) {
-      throw err;
+      //throw err;
     } else {
       res.send(result);
       res.end();
@@ -1175,6 +1181,7 @@ app.get('/getmensual', async (req, res) => {
   });
 })
 app.get('/getanual', async (req, res) => {
+  var f_rep = req.query.f_rep;
   connect.query(`call Pva();`, (err, result) => {
     //console.log(result);
     if (err) {
@@ -1403,14 +1410,15 @@ app.post('/addventa', (req, res) => {
         } else {
 
           // Agregar la venta
-          var ids = '';
-          for (let i = 0; i < pedidos.length; i++) {
+          var ids= result1[0].ultimoId;
+          console.log(result1);
+         /* for (let i = 0; i < pedidos.length; i++) {
             ids += result1[0].ultimoId + i;
 
             if (i < pedidos.length - 1) {
               ids += ','
             }
-          }
+          }*/
 
           const query = `insert into ventas (fecha,id_cliente,id_pedido,subtotal,total,anticipo,abono,saldo,id_empleado,status) values ('${fecha}','${id_cliente}','${ids}','${subtotal}','${total}','${anticipo}','${abono}','${saldo}','${id_empleado}','${status}')`;
           connect.query(query, (err, result) => {

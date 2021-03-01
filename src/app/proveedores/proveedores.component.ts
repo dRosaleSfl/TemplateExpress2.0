@@ -9,6 +9,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./proveedores.component.css']
 })
 export class ProveedoresComponent implements OnInit {
+  tipo;
   proveedorForm;
   proveedores;
   mproveedor;
@@ -59,6 +60,7 @@ export class ProveedoresComponent implements OnInit {
  }
 
   ngOnInit(): void {
+    this.tipo = sessionStorage.getItem("tipo");
     this.getproveedor();
   }
   

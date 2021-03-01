@@ -8,6 +8,7 @@ import { InventarioComponent } from './inventario/inventario.component';
 import { VentasComponent } from './ventas/ventas.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'general', component: GeneralComponent},
 ];

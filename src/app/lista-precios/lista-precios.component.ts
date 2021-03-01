@@ -9,6 +9,7 @@ import { ServicioService } from '../servicios/servicio.service';
   styleUrls: ['./lista-precios.component.css']
 })
 export class ListaPreciosComponent implements OnInit {
+  tipo;
  precioos;
   buscarprecioos;
   preciooos: any;
@@ -42,6 +43,7 @@ export class ListaPreciosComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.tipo = sessionStorage.getItem("tipo");
     this.precios();
     this.getproveedor();
     this.getproducto();

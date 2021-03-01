@@ -9,6 +9,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./empleados.component.css']
 })
 export class EmpleadosComponent implements OnInit {
+  tipo;
   empleados;
   empleadoForm;
   mempleados;
@@ -57,6 +58,7 @@ export class EmpleadosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tipo = sessionStorage.getItem("tipo");
     this.getempleado();
   }
   getempleado(){

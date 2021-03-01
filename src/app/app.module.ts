@@ -22,6 +22,7 @@ import { ChartsModule } from 'ng2-charts';
 import { NavComponent } from './nav/nav.component';
 import { FaltantesComponent } from './faltantes/faltantes.component';
 import { GananciasComponent } from './ganancias/ganancias.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { GananciasComponent } from './ganancias/ganancias.component';
     NavComponent,
     FaltantesComponent,
     GananciasComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,

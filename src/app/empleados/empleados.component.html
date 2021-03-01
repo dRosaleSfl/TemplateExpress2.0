@@ -6,7 +6,7 @@
         <div class="col-sm">
           <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)"> </div>
         <div class="col-sm">
-          <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#myModalnew" >Agregar nuevo Empleado</button>
+          <button *ngIf="this.tipo === '1'" type="button"  class="btn btn-primary" data-toggle="modal" data-target="#myModalnew" >Agregar nuevo Empleado</button>
         </div>
         <div class="col-sm">
           <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#caliz" >Agenda</button>
@@ -118,7 +118,7 @@
             </form>
             </div>
             <!-- Modal footer -->
-            <div class="modal-footer">
+            <div *ngIf="this.tipo === '1'" class="modal-footer">
               <button type="button" (click)="borrar()" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
               <button type="button" (click)="editar()" class="btn btn-danger" >Editar</button>
             </div>

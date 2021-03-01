@@ -9,6 +9,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./inventario.component.css']
 })
 export class InventarioComponent implements OnInit {
+  tipo;
   inventario;
   producto;
   id_inventario;
@@ -47,7 +48,13 @@ export class InventarioComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tipo = sessionStorage.getItem("tipo");
+    console.log("inventario tipo: ");
+    console.log(this.tipo);
     this.getinventario();
+    if(this.tipo === 0) {
+      this.inventarioForm1.get("id_inventario").disable();
+    }
   }
 
   getinventario(){

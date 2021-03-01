@@ -11,7 +11,8 @@ export class GeneralComponent implements OnInit {
 
   usaurio2:any;
   constructor(public router: ActivatedRoute,private servicio:ServicioService) {}
-  bandera:boolean=false;
+  usr;
+  tipo;
    public boolean = true;
     inv:boolean=false;
     ven:boolean=false;
@@ -26,7 +27,10 @@ export class GeneralComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.bandera =this.servicio.usuario1;
+    this.usr = sessionStorage.getItem("usrname");
+    this.tipo = sessionStorage.getItem("tipo");
+    console.log("Tipo: ");
+    console.log(this.tipo);
   }
 
   vista(elemento:string){
@@ -169,6 +173,7 @@ export class GeneralComponent implements OnInit {
       
     logout(){
       this.servicio.bandera();
+      sessionStorage.clear();
     }
 
 }

@@ -15,6 +15,7 @@ declare var $: any;
 })
 export class VentasComponent implements OnInit {
 
+  tipo;
   // Forms
   ventaForm: FormGroup;
 
@@ -55,6 +56,7 @@ export class VentasComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tipo = sessionStorage.getItem("tipo");
     this.getcliente();
     this.getempleados();
     this.getventa();

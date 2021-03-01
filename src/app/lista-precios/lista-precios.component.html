@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-sm">
           <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)"> </div>
-        <div class="col-sm">
+        <div *ngIf="this.tipo === '1'" class="col-sm">
           <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#NEW" >Agregar nuevo Precio</button>
         </div>
       </div>
@@ -104,32 +104,33 @@
           <form [formGroup]="preciooos1" id="inventarioForm">
             <div class="form-group">
               <label for="id_listaprecios">Id de lista</label>
-              <input type="text" class="form-control"  placeholder=" " formControlName="id_listaprecios" readonly>
+              <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder=" " formControlName="id_listaprecios" >
+              <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder=" " formControlName="id_listaprecios" >
           </div>
             <div class="form-group">
               <label for="id_herraje">Clave del herraje</label>
-              <input type="text" class="form-control"  placeholder="" formControlName="id_herraje" readonly>
+              <input type="text" class="form-control"  placeholder="" formControlName="id_herraje" >
           </div>
           <div class="form-group">
             <label for="nom_herraje">Nombre herraje</label>
-            <input type="text" class="form-control"  placeholder="" formControlName="nom_herraje" readonly>
+            <input type="text" class="form-control"  placeholder="" formControlName="nom_herraje" >
         </div>
         <div class="form-group">
           <label for="marca">Marca del herraje</label>
-          <input type="text" class="form-control"  placeholder="" formControlName="marca" readonly>
+          <input type="text" class="form-control"  placeholder="" formControlName="marca" >
       </div>
       <div class="form-row">
           <div class="form-group col-md-4">
               <label for="nombre">Nombre del Proveedor</label>
-              <input type="text" class="form-control"  placeholder="" formControlName="nombre" readonly>
+              <input type="text" class="form-control"  placeholder="" formControlName="nombre" >
           </div>
           <div class="form-group col-md-4">
             <label for="ape_pat">Apellido Paterno</label>
-            <input type="text" class="form-control"  placeholder="" formControlName="ape_pat" readonly>
+            <input type="text" class="form-control"  placeholder="" formControlName="ape_pat" >
           </div>
           <div class="form-group col-md-4">
             <label for="ape_mat">Apellido Materno</label>
-            <input type="text" class="form-control"  placeholder="" formControlName="ape_mat" readonly>
+            <input type="text" class="form-control"  placeholder="" formControlName="ape_mat" >
           </div>
         </div> 
           <div class="form-group">
@@ -138,7 +139,7 @@
           </div>
           </form>
         </div>
-        <div class="modal-footer">
+        <div *ngIf="this.tipo === '1'" class="modal-footer">
           <button type="button" (click)=" editar()"  class="btn btn-danger" data-dismiss="modal">Editar</button>
           <button type="button" (click)=" borrar()"  class="btn btn-danger" data-dismiss="modal">Borrar</button>
         

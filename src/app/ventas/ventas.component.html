@@ -58,21 +58,21 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="id_ventas">Id de venta</label>
-              <input type="text" class="form-control" id="id_ventas" placeholder="" formControlName="id_ventas">
+              <input type="text" class="form-control" id="id_ventas" placeholder="" formControlName="id_ventas" required>
             </div>
             <div class="form-group col-md-4">
               <label for="Fecha">Fecha</label>
-              <input type="text" class="form-control" id="fecha" placeholder="" formControlName="fecha">
+              <input type="text" class="form-control" id="fecha" placeholder="" formControlName="fecha" required>
             </div>
             <div class="form-group">
               <label for="id_cliente">Nombre o Razon social del cliente</label>
               <label for="id_cliente">Nombre o Razon social del cliente</label>
-              <select *ngIf="this.tipo === '1'" class="form-control" id="razon_social" formControlName="id_cliente">
-                <option *ngFor="let cliente of clientes; let i = index" [value]="clientes[i].id_cliente">
+              <select *ngIf="this.tipo === '1'" class="form-control" id="razon_social" formControlName="id_cliente" required>
+                <option *ngFor="let cliente of clientes; let i = index" [value]="clientes[i].id_cliente" >
                   {{clientes[i].ape_pat}} {{clientes[i].ape_mat}} {{clientes[i].nombre}}
                 </option>
               </select>
-              <select *ngIf="this.tipo != '1'" class="form-control" id="razon_social" formControlName="id_cliente" disabled="true">
+              <select *ngIf="this.tipo != '1'" class="form-control" id="razon_social" formControlName="id_cliente" disabled="true" required>
                 <option *ngFor="let cliente of clientes; let i = index" [value]="clientes[i].id_cliente">
                   {{clientes[i].ape_pat}} {{clientes[i].ape_mat}} {{clientes[i].nombre}}
                 </option>
@@ -118,17 +118,17 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="anticipo">Anticipo</label>
-              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="anticipo" placeholder="" formControlName="anticipo">
+              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="anticipo" placeholder="" formControlName="anticipo" required>
               <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="anticipo" placeholder="" formControlName="anticipo" disabled="true">
             </div>
             <div class="form-group col-md-4">
               <label for="abono">Abono</label>
-              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="abono" placeholder="" formControlName="abono">
+              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="abono" placeholder="" formControlName="abono" required>
               <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="abono" placeholder="" formControlName="abono" disabled="true">
             </div>
             <div class="form-group col-md-4">
               <label for="saldo">Saldo</label>
-              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="saldo" placeholder="" formControlName="saldo">
+              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="saldo" placeholder="" formControlName="saldo" required>
               <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="saldo" placeholder="" formControlName="saldo" disabled="true">
             </div>
           </div>
@@ -148,7 +148,7 @@
             </div>
             <div class="form-group col-md-6">
               <label for="status">Estatus del pedido</label>
-              <input *ngIf="this.tipo != '0'" type="text" class="form-control" id="status" placeholder="" formControlName="status">
+              <input *ngIf="this.tipo != '0'" type="text" class="form-control" id="status" placeholder="" formControlName="status" required>
               <input *ngIf="this.tipo === '0'" type="text" class="form-control" id="status" placeholder="" formControlName="status" disabled="true">
             </div>
           </div>

@@ -148,36 +148,36 @@
               <div class="form-row">
                 <div class="form-group col-md-4">
                   <label for="nombre_proveedor">Nombre o Razón social</label>
-                  <input type="text" formControlName="nombre_proveedor" class="form-control" placeholder="" >
+                  <input type="text" formControlName="nombre_proveedor" class="form-control" placeholder="" required>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="nombre_proveedor">Apellido Paterno</label>
-                  <input type="text" formControlName="ape_pat" class="form-control" placeholder="" >
+                  <input type="text" formControlName="ape_pat" class="form-control" placeholder="" required>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="nombre_proveedor">Apellido Materno</label>
-                  <input type="text" formControlName="ape_mat" class="form-control" placeholder="" >
+                  <input type="text" formControlName="ape_mat" class="form-control" placeholder="" required>
                 </div>
               </div>
               
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="tipo">Tipo</label>
-                  <input type="text" formControlName="tipo" class="form-control" placeholder="">
+                  <input type="text" formControlName="tipo" class="form-control" placeholder="" required>
                   </div>
               <div class="form-group col-md-6">
                 <label for="rfc">RFC</label>
-                <input type="text" formControlName="rfc" class="form-control" placeholder="">
+                <input type="text" formControlName="rfc" class="form-control" placeholder="" required>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="correo">Correo</label>
-                <input type="text" formControlName="correo" class="form-control" placeholder="" >
+                <input type="text" formControlName="correo" class="form-control" placeholder="" required >
                 </div>
                 <div class="form-group col-md-6">
                 <label for="telefono">Telefono</label>
-                <input type="text" formControlName="telefono" class="form-control" placeholder="">
+                <input type="text" formControlName="telefono" class="form-control" placeholder="" required>
                 </div>
             </div>
               <label for="id_direccion">Direccion</label>
@@ -193,10 +193,10 @@
                     </thead>
                     <tbody>
                       <tr> 
-                        <td><input placeholder="" formControlName="calle" class="form-control"></td>
-                        <td><input placeholder="" formControlName="num_int" class="form-control"></td>
-                        <td><input placeholder="" formControlName="num_ext" class="form-control"></td>
-                        <td><input placeholder="" formControlName="colonia" class="form-control"></td>
+                        <td><input placeholder="" formControlName="calle" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="num_int" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="num_ext" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="colonia" class="form-control" required></td>
                       </tr>
                       <tr>
                     </tbody>
@@ -210,10 +210,10 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><input placeholder="" formControlName="cp" class="form-control"></td>
-                        <td><input placeholder="" formControlName="ciudad" class="form-control"></td>
-                        <td><input placeholder="" formControlName="estado" class="form-control"></td>
-                        <td><input placeholder="" formControlName="pais" class="form-control"></td>
+                        <td><input placeholder="" formControlName="cp" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="ciudad" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="estado" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="pais" class="form-control" required></td>
                       </tr>
                       <tr>
                     </tbody>

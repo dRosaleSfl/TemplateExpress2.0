@@ -10,7 +10,6 @@
         </div>
         <div class="col-sm">
           <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#caliz" >Agenda</button>
-  
         </div>
       </div>
     </div> </div>
@@ -51,29 +50,35 @@
                 <div class="form-row">
                   <div class="form-group col-md-4">
                     <label for="nomre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" formControlName="nombre_empleado"placeholder="" >
+                    <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="nombre" formControlName="nombre_empleado"placeholder="" >
+                    <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="nombre" formControlName="nombre_empleado"placeholder="" disabled="true">
                   </div>
                   <div class="form-group col-md-4">
                     <label for="ape_pat">Apellido paterno</label>
-                    <input type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat">
+                    <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat">
+                    <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat" disabled="true">
                   </div>
                   <div class="form-group col-md-4">
                     <label for="ape_mat">Apellido materno</label>
-                    <input type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat">
+                    <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat">
+                    <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat" disabled="true">
                   </div>
                 </div>
               <div class="form-row">
                 <div class="form-group col-md-4">
                   <label for="puesto">Puesto</label>
-                  <input type="text" class="form-control"  placeholder=""  formControlName="puesto">
+                  <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder=""  formControlName="puesto">
+                  <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder=""  formControlName="puesto" disabled="true">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="telefono">Telefono</label>
-                  <input type="text" class="form-control"  placeholder="" formControlName="telefono">
+                  <input *ngIf="this.tipo === '1'"  type="text" class="form-control"  placeholder="" formControlName="telefono">
+                  <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="telefono" disabled="true">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="nombre_usuario">Nombre usuario</label>
-                  <input type="text" class="form-control" placeholder="" formControlName="nombre_usuario" >
+                  <input *ngIf="this.tipo === '1'"  type="text" class="form-control" placeholder="" formControlName="nombre_usuario" >
+                  <input *ngIf="this.tipo != '1'" type="text" class="form-control" placeholder="" formControlName="nombre_usuario" disabled="true">
                 </div>
               </div>
               <label for="id_direccion">Direccion</label>
@@ -89,10 +94,22 @@
                   </thead>
                   <tbody>
                     <tr> 
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="calle" ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="num_int" ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="num_ext" ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="colonia" ></td>
+                      <td> 
+                        <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="calle" >
+                        <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="calle" disabled="true">
+                      </td>
+                      <td> 
+                        <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="num_int" >
+                        <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="num_int" disabled="true">
+                      </td>
+                      <td> 
+                        <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="num_ext" >
+                        <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="num_ext" disabled="true">
+                      </td>
+                      <td> 
+                        <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="colonia" >
+                        <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="colonia" disabled="true">
+                      </td>
                     </tr>
                     <tr>
                   </tbody>
@@ -106,10 +123,22 @@
                   </thead>
                   <tbody>
                     <tr> 
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="cp" ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="ciudad" ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="estado" ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="pais" ></td>
+                      <td> 
+                        <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="cp" >
+                        <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="cp" disabled="true">
+                      </td>
+                      <td> 
+                        <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="ciudad"> 
+                        <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="ciudad" disabled="true">
+                      </td>
+                      <td> 
+                        <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="estado" >
+                        <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="estado" disabled="true">
+                      </td>
+                      <td> 
+                        <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="pais" >
+                        <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="pais" disabled="true">
+                      </td>
                     </tr>
                     <tr>
                   </tbody>

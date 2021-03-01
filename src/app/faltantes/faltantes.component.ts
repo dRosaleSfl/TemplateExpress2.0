@@ -3,13 +3,14 @@ import { ServicioService } from '../servicios/servicio.service';
 import { FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
 
-@Component({
+@Component({ 
   selector: 'app-faltantes',
   templateUrl: './faltantes.component.html',
   styleUrls: ['./faltantes.component.css']
 })
 export class FaltantesComponent implements OnInit {
   faltantes;
+  tipo;
   listas;
   faltantesBusqueda;
   faltantesForm;
@@ -19,6 +20,7 @@ export class FaltantesComponent implements OnInit {
   proveedores;
 
   constructor(private faltantesservicio: ServicioService,private formBuilder: FormBuilder) {
+    this.tipo=sessionStorage.getItem("tipo");
     this.faltantesForm = this.formBuilder.group({
       id_producto:'',
       id_faltantes:'',

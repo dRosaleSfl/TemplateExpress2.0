@@ -114,7 +114,7 @@
       <div id="collapseganancias" class="collapse show" aria-labelledby="headingganancias" data-parent="#accordionSidebar">
         <div >
          <!-- <h6 class="collapse-header">Op</h6> -->
-          <a class="btn btn-light btn-lg btn-block" (click)="vista('ganancias')">Ganancias</a><br>
+          <a *ngIf="this.tipo === '1'" class="btn btn-light btn-lg btn-block" (click)="vista('ganancias')">Ganancias</a><br>
         </div>
       </div>
     </li>
@@ -123,7 +123,7 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="nav-item">
+    <div *ngIf="this.tipo === '1'" class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsecomplementos" aria-expanded="true" aria-controls="collapsecomplementos">
         <i class="fas fa-folder-open"></i> Complementos
       </a>
@@ -134,13 +134,13 @@
   <div id="collapseReportes" class="collapse show" aria-labelledby="headingReportes" data-parent="#accordionSidebar">
     <div >
      <!-- <h6 class="collapse-header">Op</h6> -->
-      <a class="btn btn-light btn-lg btn-block" (click)="vista('reportes')">Reportes Ventas</a><br>
+      <a *ngIf="this.tipo === '1'" class="btn btn-light btn-lg btn-block" (click)="vista('reportes')">Reportes Ventas</a><br>
     </div>
   </div>
   <div id="collapseReproducto" class="collapse show" aria-labelledby="headingReproducto" data-parent="#accordionSidebar">
     <div >
      <!-- <h6 class="collapse-header">Op</h6> -->
-      <a class="btn btn-light btn-lg btn-block" (click)="vista('reproducto')">Reportes Productos</a><br>
+      <a *ngIf="this.tipo === '1'" class="btn btn-light btn-lg btn-block" (click)="vista('reproducto')">Reportes Productos</a><br>
     </div>
   </div>
 </li>

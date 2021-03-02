@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import {ServicioService} from "../servicios/servicio.service";
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-inventario',
@@ -25,24 +25,22 @@ export class InventarioComponent implements OnInit {
 
   constructor(private inventarioservicio: ServicioService, private formBuilder: FormBuilder ) { 
     this.inventarioForm = this.formBuilder.group({
-      id_inventario:'',
-      id_herraje:'',
-      nombre:'',
-      marca:'',
-      preciocvidrio:'',
-      preciosvidrio:'',
-      existencias:'',
-      min:''
+      id_herraje:['', Validators.required],
+      nombre:['', Validators.required],
+      marca:['', Validators.required],
+      preciocvidrio:['', Validators.required],
+      preciosvidrio:['', Validators.required],
+      existencias:['', Validators.required],
+      min:['', Validators.required]
     });
     this.inventarioForm1 = this.formBuilder.group({
-      id_inventario:'',
-      id_herraje:'',
-      nombre:'',
-      marca:'',
-      preciocvidrio:'',
-      preciosvidrio:'',
-      existencias:'',
-      min:''
+      id_herraje:['', Validators.required],
+      nombre:['', Validators.required],
+      marca:['', Validators.required],
+      preciocvidrio:['', Validators.required],
+      preciosvidrio:['', Validators.required],
+      existencias:['', Validators.required],
+      min:['', Validators.required]
     });
   }
 
@@ -107,6 +105,7 @@ export class InventarioComponent implements OnInit {
     this.getinventario();
   }
   editar(){
+    if (this.inventarioForm.valid) {
     console.log(this.inventarioForm1.value);
    
     this.inventarioservicio.editproducto(this.inventarioForm1.value).subscribe(
@@ -116,16 +115,27 @@ export class InventarioComponent implements OnInit {
     );
     Swal.fire('Producto Actualizado Exitosamente');
     this.getinventario();
+  }else{
+    Swal.fire('Campos vacíos');
   }
+  }
+
   newproducto(){
+    if (this.inventarioForm.valid) {
     console.log(this.inventarioForm.value);
-    this.inventarioservicio.addproducto(this.inventarioForm.value).subscribe(
+    console.log(this.inventarioForm.valid);
+   /* this.inventarioservicio.addproducto(this.inventarioForm.value).subscribe(
       res => {
         console.log(res); 
       }
-    );
+    );*/
     Swal.fire('Porducto Añadido Exitosamente');
     this.getinventario();
+    }else{
+      Swal.fire('Campos vacíos');
+      console.log(this.inventarioForm.value);
+      console.log(this.inventarioForm.valid);
+    }
   }
 
  

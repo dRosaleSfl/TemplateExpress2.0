@@ -14,8 +14,8 @@ app.use(function (req, res, next) {
 const mysql = require('mysql');
 const connect = mysql.createConnection({
   host: 'localhost',
-  user: 'usuariovero',
-  password: '190398',
+  user: 'root',
+  password: '',
   database: "templaexpress",
 });
 //-------------login-------------------------
@@ -23,11 +23,11 @@ app.get('/user',(req,res)=>{
   console.log(req.query);
   var username=[req.query.username];
   var contra =[req.query.contra];
-  const query = `select puesto,nombre_usuario,contrasena from empleados where nombre_usuario='${username}' and contrasena='${contra}' `;
-  connect.query(query,(err,result)=>{
+  connect.query("select puesto, nombre_usuario, contrasena from empleados where nombre_usuario=? and contrasena=?", [username, contra],(err,result)=>{
       if(err){
          throw err;
       }else{
+        console.log(result);
         res.send(result);
         res.end();
       }

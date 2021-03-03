@@ -15,6 +15,7 @@ declare var $: any;
 })
 export class VentasComponent implements OnInit {
 
+  tipo;
   // Forms
   ventaForm: FormGroup;
 
@@ -54,7 +55,9 @@ export class VentasComponent implements OnInit {
     );
   }
 
+
   ngOnInit(): void {
+    this.tipo = sessionStorage.getItem("tipo");
     this.getcliente();
     this.getempleados();
     this.getventa();
@@ -260,30 +263,20 @@ export class VentasComponent implements OnInit {
   }
 
   agregar() {
-    Swal.fire({
-      title: '¿Desea guardar la nueva venta?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#6C52B7',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, guardar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-
-        //console.log(this.ventaForm.getRawValue()); // Para incluir los controles deshabilitados usar getRawValue()
-
-        // Agregar Venta
-          this.ventaservicio.addVenta(this.ventaForm.getRawValue(), JSON.stringify(this.inventario)).subscribe(res => {
-            if (res.hasOwnProperty('affectedRows')) {
-              Swal.fire('Venta Agregada!', 'Los datos de la venta han sido guardados', 'success');
-              this.getventa();
-            } else {
-              Swal.fire('Error!', 'Ha ocurrido un error', 'error');
-            }
-            $("#myModal").modal("hide");
-          });
-      }
-    });
+    if (this.ventaForm.valid) {
+      console.log(this.ventaForm.value);
+      console.log(this.ventaForm.valid);
+      this.ventaservicio.addVenta(this.ventaForm.value, JSON.stringify(this.inventario)).subscribe(res => {
+        console.log(res);
+      });
+      Swal.fire("Venta agregada exactamente");
+      this.getcliente();
+    }
+    else{
+      Swal.fire("Campos vacios");
+      console.log(this.ventaForm.valid);
+      console.log(this.ventaForm.value);
+    }
   }
 
   editar() {

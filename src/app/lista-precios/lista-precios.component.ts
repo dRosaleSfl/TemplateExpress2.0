@@ -3,12 +3,13 @@ import { FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ServicioService } from '../servicios/servicio.service';
 
-@Component({
+@Component({ 
   selector: 'app-lista-precios',
   templateUrl: './lista-precios.component.html',
   styleUrls: ['./lista-precios.component.css']
 })
 export class ListaPreciosComponent implements OnInit {
+  tipo;
  precioos;
   buscarprecioos;
   preciooos: any;
@@ -42,6 +43,7 @@ export class ListaPreciosComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.tipo = sessionStorage.getItem("tipo");
     this.precios();
     this.getproveedor();
     this.getproducto();

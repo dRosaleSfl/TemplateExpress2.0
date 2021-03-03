@@ -10,6 +10,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./clientes.component.css']
 })
 export class ClientesComponent implements OnInit {
+  tipo = sessionStorage.getItem("tipo");
   clientesCompleto;
   clientForm: any;
   clientes;

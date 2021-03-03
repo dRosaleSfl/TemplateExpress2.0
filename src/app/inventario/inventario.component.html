@@ -1,3 +1,4 @@
+
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h1>Inventario</h1>
@@ -62,7 +63,6 @@
           <form [formGroup]="inventarioForm" id="inventarioForm">
               <div class="form-group">
                   <label for="id_herraje">Clave del herraje</label>
-                  <input type="text" class="form-control"  placeholder="" formControlName="id_herraje">
               </div>
               <div class="form-group">
                   <label for="nombre_herraje">Nombre</label>
@@ -77,7 +77,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="preciocvidrio">Precio con vidrio</label>
-                    <input type="text" class="form-control"placeholder="" formControlName="preciocvidrio">
+                    <input type="text" class="form-control"placeholder="" formControlName="preciocvidrio" >
                   </div>
                   <div class="form-group col-md-6">
                     <label for="preciosvidrio">Precio sin vidrio</label>
@@ -130,44 +130,51 @@
                   <form [formGroup]="inventarioForm1" id="inventarioForm1">
                       <div class="form-group">
                           <label for="id_herraje">Clave del herraje</label>
-                          <input type="text" class="form-control" placeholder="" formControlName="id_herraje">
+                          <input *ngIf="this.tipo != '0'" type="text" class="form-control" placeholder="" formControlName="id_herraje">
+                          <input *ngIf="this.tipo === '0'" type="text" class="form-control" placeholder="" formControlName="id_herraje" disabled="true">
                       </div>
                       <div class="form-group">
                           <label for="nombre_herraje">Nombre</label>
-                          <input type="text" class="form-control"  placeholder="" formControlName="nombre">
+                          <input *ngIf="this.tipo != '0'" type="text" class="form-control"  placeholder="" formControlName="nombre">
+                          <input *ngIf="this.tipo === '0'" type="text" class="form-control"  placeholder="" formControlName="nombre" disabled="true">
                       </div>
                       
                       <div class="form-group">
                           <label for="marca_herraje">Marca</label>
-                          <input type="text" class="form-control"  placeholder=" " formControlName="marca">
+                          <input *ngIf="this.tipo != '0'" type="text" class="form-control"  placeholder=" " formControlName="marca">
+                          <input *ngIf="this.tipo === '0'" type="text" class="form-control"  placeholder=" " formControlName="marca" disabled="true">
                       </div>
 
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="preciocvidrio">Precio con vidrio</label>
-                            <input type="text" class="form-control" placeholder="" formControlName="preciocvidrio">
+                            <input *ngIf="this.tipo != '0'" type="text" class="form-control" placeholder="" formControlName="preciocvidrio">
+                            <input *ngIf="this.tipo === '0'" type="text" class="form-control" placeholder="" formControlName="preciocvidrio" disabled="true">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="preciosvidrio">Precio sin vidrio</label>
-                            <input type="text" class="form-control"  placeholder="" formControlName="preciosvidrio">
+                            <input *ngIf="this.tipo != '0'" type="text" class="form-control"  placeholder="" formControlName="preciosvidrio">
+                            <input *ngIf="this.tipo === '0'" type="text" class="form-control"  placeholder="" formControlName="preciosvidrio" disabled="true">
                           </div>
                         </div>
 
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="existencias">Exisencias</label>
-                            <input type="text" class="form-control"  placeholder="" formControlName="existencias">
+                            <input *ngIf="this.tipo != '0'" type="text" class="form-control"  placeholder="" formControlName="existencias">
+                            <input *ngIf="this.tipo === '0'" type="text" class="form-control"  placeholder="" formControlName="existencias" disabled="true">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="min_stock">Minimos en stock</label>
-                            <input type="text" class="form-control" placeholder="" formControlName="min">
+                            <input *ngIf="this.tipo != '0'" type="text" class="form-control" placeholder="" formControlName="min">
+                            <input *ngIf="this.tipo === '0'" type="text" class="form-control" placeholder="" formControlName="min" disabled="true">
                           </div>
                         </div>
                   </form>
 
                 </div>
                 <!-- Modal footer -->
-                <div class="modal-footer">
+                <div *ngIf="this.tipo != '0'" class="modal-footer">
                   <button type="button" (click)="borrar()"  class="btn btn-danger" data-dismiss="modal">borrar</button>
                   <button type="button" (click)="editar()" class="btn btn-danger" data-dismiss="modal">editar</button>
                 

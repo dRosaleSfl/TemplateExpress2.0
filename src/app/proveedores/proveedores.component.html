@@ -6,7 +6,7 @@
         <div class="col-sm">
           <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)"> </div>
         <div class="col-sm">
-          <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#myModalnew" >Agregar nuevo Proveedor</button>
+          <button *ngIf="this.tipo ==='1'" type="button"  class="btn btn-primary" data-toggle="modal" data-target="#myModalnew" >Agregar nuevo Proveedor</button>
         </div>
         <div class="col-sm">
           <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#caliz" >Agenda</button>
@@ -124,7 +124,7 @@
               </form>
               </div> 
                <!-- Modal footer -->
-          <div class="modal-footer">
+          <div *ngIf="this.tipo ==='1'" class="modal-footer">
             <button type="button" (click)="borrar()" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
             <button type="button" (click)="editar()"class="btn btn-danger" >Editar</button>
           </div>
@@ -148,36 +148,36 @@
               <div class="form-row">
                 <div class="form-group col-md-4">
                   <label for="nombre_proveedor">Nombre o Razón social</label>
-                  <input type="text" formControlName="nombre_proveedor" class="form-control" placeholder="" >
+                  <input type="text" formControlName="nombre_proveedor" class="form-control" placeholder="" required>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="nombre_proveedor">Apellido Paterno</label>
-                  <input type="text" formControlName="ape_pat" class="form-control" placeholder="" >
+                  <input type="text" formControlName="ape_pat" class="form-control" placeholder="" required>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="nombre_proveedor">Apellido Materno</label>
-                  <input type="text" formControlName="ape_mat" class="form-control" placeholder="" >
+                  <input type="text" formControlName="ape_mat" class="form-control" placeholder="" required>
                 </div>
               </div>
               
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="tipo">Tipo</label>
-                  <input type="text" formControlName="tipo" class="form-control" placeholder="">
+                  <input type="text" formControlName="tipo" class="form-control" placeholder="" required>
                   </div>
               <div class="form-group col-md-6">
                 <label for="rfc">RFC</label>
-                <input type="text" formControlName="rfc" class="form-control" placeholder="">
+                <input type="text" formControlName="rfc" class="form-control" placeholder="" required>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="correo">Correo</label>
-                <input type="text" formControlName="correo" class="form-control" placeholder="" >
+                <input type="text" formControlName="correo" class="form-control" placeholder="" required >
                 </div>
                 <div class="form-group col-md-6">
                 <label for="telefono">Telefono</label>
-                <input type="text" formControlName="telefono" class="form-control" placeholder="">
+                <input type="text" formControlName="telefono" class="form-control" placeholder="" required>
                 </div>
             </div>
               <label for="id_direccion">Direccion</label>
@@ -193,10 +193,10 @@
                     </thead>
                     <tbody>
                       <tr> 
-                        <td><input placeholder="" formControlName="calle" class="form-control"></td>
-                        <td><input placeholder="" formControlName="num_int" class="form-control"></td>
-                        <td><input placeholder="" formControlName="num_ext" class="form-control"></td>
-                        <td><input placeholder="" formControlName="colonia" class="form-control"></td>
+                        <td><input placeholder="" formControlName="calle" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="num_int" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="num_ext" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="colonia" class="form-control" required></td>
                       </tr>
                       <tr>
                     </tbody>
@@ -210,10 +210,10 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><input placeholder="" formControlName="cp" class="form-control"></td>
-                        <td><input placeholder="" formControlName="ciudad" class="form-control"></td>
-                        <td><input placeholder="" formControlName="estado" class="form-control"></td>
-                        <td><input placeholder="" formControlName="pais" class="form-control"></td>
+                        <td><input placeholder="" formControlName="cp" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="ciudad" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="estado" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="pais" class="form-control" required></td>
                       </tr>
                       <tr>
                     </tbody>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicioService } from '../servicios/servicio.service';
 import Swal from 'sweetalert2';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-proveedores',
@@ -9,6 +9,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./proveedores.component.css']
 })
 export class ProveedoresComponent implements OnInit {
+  tipo;
   proveedorForm;
   proveedores;
   mproveedor;
@@ -22,20 +23,20 @@ export class ProveedoresComponent implements OnInit {
   constructor(private proveedorservicio: ServicioService, private formBuilder: FormBuilder) {
     this.proveedorForm = this.formBuilder.group({
       nombre_proveedor: '',
-      ape_pat:'',
-      ape_mat:'',
-      rfc:'',
-      tipo: '',
-      telefono: '',
-      correo: '',
-      calle: '',
-      num_int: '',
-      num_ext: '',
-      colonia: '',
-      cp: '',
-      ciudad: '',
-      estado: '',
-      pais: '',
+      ape_pat: ['', Validators.required],
+      ape_mat: ['', Validators.required],
+      rfc: ['', Validators.required],
+      tipo: ['', Validators.required],
+      telefono: ['', Validators.required],
+      correo: ['', Validators.required],
+      calle: ['', Validators.required],
+      num_int: ['', Validators.required],
+      num_ext: ['', Validators.required],
+      colonia:  ['', Validators.required],
+      cp:  ['', Validators.required],
+      ciudad:  ['', Validators.required],
+      estado:  ['', Validators.required],
+      pais:  ['', Validators.required],
     });
    
    this.proveedorForm1 = this.formBuilder.group({
@@ -59,6 +60,7 @@ export class ProveedoresComponent implements OnInit {
  }
 
   ngOnInit(): void {
+    this.tipo = sessionStorage.getItem("tipo");
     this.getproveedor();
   }
   
@@ -115,13 +117,18 @@ export class ProveedoresComponent implements OnInit {
   }
   
   newproveedor(){
-   console.log(this.proveedorForm.value);
-   this.proveedorservicio.addprovedor(this.proveedorForm.value).subscribe(
-    res => {
-      console.log(res); 
-    }
-  );
-  Swal.fire('Proveedor Añadido Exitosamente');
+   if (this.proveedorForm.valid) {
+     this.proveedorservicio.addprovedor(this.proveedorForm.value).subscribe(res => {
+      console.log(res);
+     });
+     Swal.fire("Proveedor agregado exitosamente");
+     this.getproveedor();
+   }
+   else{
+     Swal.fire("Campos Vacios");
+     console.log(this.proveedorForm.valid);
+     console.log(this.proveedorForm.value);
+   }
   }
   borrar(){
     console.log(this.proveedorForm1.value);

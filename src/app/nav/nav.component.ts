@@ -11,12 +11,10 @@ export class NavComponent implements OnInit {
   constructor(private service :ServicioService) { }
   bandera:boolean=false;
   ngOnInit(){
-    console.log(this.bandera);
+  console.log(this.bandera);
    this.service.change.subscribe(bandera=>{
     this. bandera =  bandera;
    });
    console.log(this.bandera);
   }
-  
-
 }

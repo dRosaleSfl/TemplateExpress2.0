@@ -22,53 +22,31 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router, private servicio:ServicioService, private formBuilder: FormBuilder) {
     this.sesion = this.formBuilder.group({
       username: '',
-      contra: '',
-      tipo:1
+      contra: ''
     });
     this.sesionv = this.formBuilder.group({
       username: '',
-      contra: '',
-      tipo:''
+      contra: ''
     });
    }
  
   ngOnInit() {
   }
   login(){
-   // console.log(this.sesion.value);
-    this.servicio.validar(this.sesion.value).subscribe(
-      res => {
-        console.log(res);
-        this.user=res;
-        this.vaaalidar=res;
-        console.log(this.user);
-        console.log(this.vaaalidar[0].nombre_usuario);
-        console.log(this.sesion.value);
-        if(this.vaaalidar[0].nombre_usuario==this.sesion.value.username){
-          Swal.fire('cool');
-          this.login1();
-        }else{
-          Swal.fire('notcool');
-        }
+    this.servicio.validar(this.sesion.value).subscribe(res => {
+      console.log(res);
+      let restxt = JSON.stringify(res[0]);
+      console.log(restxt);
+      if (restxt===undefined){
+        Swal.fire('Usuario y/o Contraseña incorrectos');
       }
-    );
-    
+      else{
+        console.log(res);
+        sessionStorage.setItem("usrname", res[0].nombre_usuario);
+        sessionStorage.setItem("tipo", res[0].puesto);
+        Swal.fire('cool');
+        this.servicio.bandera();
+      }
+    });
   }
-  
-  login1(){
-
-    this.servicio.bandera();
-    //console.log(this.sesion.value);
-    console.log(this.sesion.value.tipo);
-    if(this.sesion.value.tipo==1){
-        console.log("into");
-        this.servicio.usuariooo();
-
-    }
-  }
-  logout(){
-    this.servicio.bandera();
-  
-  }
-
 }

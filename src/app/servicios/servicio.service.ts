@@ -333,11 +333,9 @@ getganancias(){
     this.change1.emit(this.usuario1);
     //return this.usuario1;
   }
-  ////-----------------loooogin validar
+  ////-----------------loooogin validar 
   validar(user:any){
-   let username =user.username;
-   let contra = user.contra;
-   return this.httpClient.get(`http://localhost:3000/user?username=${username}&contra=${contra}`);
+    return this.httpClient.get(`http://localhost:3000/user?username=${user.username}&contra=${user.contra}`);
   }
 
   //Reportes

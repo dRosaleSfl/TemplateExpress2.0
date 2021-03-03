@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-sm">
             <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)"> </div>
-          <div class="col-sm">
+          <div *ngIf="this.tipo != '0'" class="col-sm">
             <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#myModalfal" >Agregar nuevo Lista</button>
           </div>
         </div>
@@ -124,7 +124,7 @@
                   <th>Apellido Paterno</th>
                   <th>Apellido Materno</th>
                   <th>ID Proveedor</th>
-                  <th>Detalles</th>
+                  <th *ngIf="this.tipo != '0'">Detalles</th>
                 </tr>
               </thead>
               <tbody>
@@ -138,7 +138,7 @@
                   <td>{{faltante.ape_pat}}</td>
                   <td>{{faltante.ape_mat}}</td>
                   <td>{{faltante.id_proveedor}}</td>
-                  <td><button type="button" (click)=" borrarprod()" class="btn btn-warning" >Borrar Producto</button></td>
+                  <td *ngIf="this.tipo != '0'"><button type="button" (click)=" borrarprod()" class="btn btn-warning" >Borrar Producto</button></td>
                 </tr>
                 <tr>
               </tbody>
@@ -146,7 +146,7 @@
           </div>
           </form>
         </div>
-        <div class="modal-footer">
+        <div *ngIf="this.tipo != '0'" class="modal-footer" >
           <button type="button" (click)=" borrar()"   class="btn btn-danger" data-dismiss="modal">Eliminar Lista</button>
         
         </div>

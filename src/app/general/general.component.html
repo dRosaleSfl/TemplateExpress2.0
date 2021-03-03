@@ -53,7 +53,7 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li *ngIf="bandera" class="nav-item">
+     <li class="nav-item"> 
       <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseVentas" aria-expanded="true" aria-controls="collapseVentas">
         <i class="fas fa-users"></i>
         <span>Personas</span>
@@ -64,12 +64,14 @@
           <a  class="btn btn-light btn-lg btn-block" (click)="vista('clientes')">Clientes</a><br>
         </div>
       </div>
-      <div id="collapseEmpleados" class="collapse show" aria-labelledby="headingEmpleados" data-parent="#accordionSidebar">
+
+      <div  id="collapseEmpleados" class="collapse show" aria-labelledby="headingEmpleados" data-parent="#accordionSidebar">
         <div >
         <!--  <h6 class="collapse-header">Custom Components:</h6> -->
-          <a class="btn btn-light btn-lg btn-block" (click)="vista('empleados')">Empleados</a><br>
+          <a *ngIf="this.tipo != '0'" class="btn btn-light btn-lg btn-block" (click)="vista('empleados')">Empleados</a><br>
         </div>
       </div>
+
       <div id="collapseProveedores" class="collapse show" aria-labelledby="headingProveedores" data-parent="#accordionSidebar">
         <div >
         <!--  <h6 class="collapse-header">Custom Components:</h6> -->
@@ -112,7 +114,7 @@
       <div id="collapseganancias" class="collapse show" aria-labelledby="headingganancias" data-parent="#accordionSidebar">
         <div >
          <!-- <h6 class="collapse-header">Op</h6> -->
-          <a class="btn btn-light btn-lg btn-block" (click)="vista('ganancias')">Ganancias</a><br>
+          <a *ngIf="this.tipo === '1'" class="btn btn-light btn-lg btn-block" (click)="vista('ganancias')">Ganancias</a><br>
         </div>
       </div>
     </li>
@@ -121,7 +123,7 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="nav-item">
+    <div *ngIf="this.tipo === '1'" class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsecomplementos" aria-expanded="true" aria-controls="collapsecomplementos">
         <i class="fas fa-folder-open"></i> Complementos
       </a>
@@ -132,13 +134,13 @@
   <div id="collapseReportes" class="collapse show" aria-labelledby="headingReportes" data-parent="#accordionSidebar">
     <div >
      <!-- <h6 class="collapse-header">Op</h6> -->
-      <a class="btn btn-light btn-lg btn-block" (click)="vista('reportes')">Reportes Ventas</a><br>
+      <a *ngIf="this.tipo === '1'" class="btn btn-light btn-lg btn-block" (click)="vista('reportes')">Reportes Ventas</a><br>
     </div>
   </div>
   <div id="collapseReproducto" class="collapse show" aria-labelledby="headingReproducto" data-parent="#accordionSidebar">
     <div >
      <!-- <h6 class="collapse-header">Op</h6> -->
-      <a class="btn btn-light btn-lg btn-block" (click)="vista('reproducto')">Reportes Productos</a><br>
+      <a *ngIf="this.tipo === '1'" class="btn btn-light btn-lg btn-block" (click)="vista('reproducto')">Reportes Productos</a><br>
     </div>
   </div>
 </li>
@@ -185,13 +187,14 @@
     </ul>
     <li class="nav-item dropdown no-arrow">
       <a class="nav-link dropdown-toggle"  id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-     <span *ngIf="bandera" class="mr-6 d-none d-lg-inline text-gray-600 large">Administrador</span>
-     <span *ngIf="!bandera" class="mr-6 d-none d-lg-inline text-gray-600 large">Usuario</span>
+      <span *ngIf="this.tipo === '0'" class="mr-6 d-none d-lg-inline text-gray-600 large">{{this.usr}} - Ventas</span>
+      <span *ngIf="this.tipo === '1'" class="mr-6 d-none d-lg-inline text-gray-600 large">{{this.usr}} - Admin</span>
+      <span *ngIf="this.tipo === '2'" class="mr-6 d-none d-lg-inline text-gray-600 large">{{this.usr}} - Almacen</span>
         <img class="img-profile rounded-circle" src="../../assets/img/logo_trans.png">
         <button type="button"  class="btn btn-primary"  (click)="logout()">Cerrar Sesion</button>
-      </a>
+      </a> 
     </li>
-    </nav>
+    </nav> 
     
     
     <!--    - -   -   -   -   - FIN DE TOOL BAR  -    -   -   -   -   -   -   -   -   -   -   -   -        -->  

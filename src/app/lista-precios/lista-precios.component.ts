@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ServicioService } from '../servicios/servicio.service';
 
-@Component({
+@Component({ 
   selector: 'app-lista-precios',
   templateUrl: './lista-precios.component.html',
   styleUrls: ['./lista-precios.component.css']

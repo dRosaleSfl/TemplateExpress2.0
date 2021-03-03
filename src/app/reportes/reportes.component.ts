@@ -18,75 +18,65 @@ export class ReportesComponent implements OnInit {
   repsem;
   abrirDetalles: Boolean;
   abrirGraficas: Boolean;
-  semana: Boolean;
+  //semana: Boolean;
+  total;
+  semana;
+  mes;
+  aanio;
 
-  constructor(private reporteservicio: ServicioService,private formBuilder: FormBuilder) {
-    this.reportesForm = this.formBuilder.group({
-      f_rep: '',
-      total:'',
-      nfecha:''
-    });
-    this.reportesemForm = this.formBuilder.group({
-      f_rep: '',
-      total:'',
-      nfecha:''
-    });
+  constructor(private reporteservicio: ServicioService) {
    }
-
-  ngOnInit(): void {
-    this.abrirDetalles = true;
+  ngOnInit(): void { 
   }
-
-  /*abrirsemanal(item:any){
-    console.log("aqui si")
-    this.abrirGraficas = false;
-   
-    $("#myModals").modal("show");
-  }
-
-  onSubmit(event) {
-    if (event.submitter.name == "Repmensual") {
-      this.Repmensual();
-    } else if (event.submitter.name == "Repanual") {
-      this.Repanual();
-    } else if (event.submitter.name == "Repsemanal") {
-      this.Repsemanal('f_rep');
-    } 
-  }*/
-
-  Repsemanal(f_rep){
+  Repsemanal(){
     console.log("si entre");
-    this.reporteservicio.getreportes(f_rep).subscribe(
-      res => {
-        console.log(res);
-        this.repsem = res[0];
-      //  $("#myModals").modal("show");
-  });
+    var date = new Date($('#f_rep').val());
+   // console.log(date);
+    var d=date.getDate()+1;
+    var m= date.getMonth()+1;
+    var a= date.getUTCFullYear();
+    var fechita=a+"-"+m+"-"+d
+    console.log(fechita);
+    var valor = $('#temporada').val();
+    switch(valor){
+      case 'Semana':
+        this.reporteservicio.getreportes(fechita).subscribe(
+          res => {
+            console.log(res[0][0].total);
+            this.f_rep=fechita;
+            this.total=res[0][0].total;
+            
+           // this.repsem = res[0];
+           //console.log()
+      });
+        console.log("-------->"+valor);
+        break;
+       case 'Mes':
+        console.log("-------->"+valor);
+        this.reporteservicio.getreporte().subscribe(
+          res => {
+            console.log("mes: ");
+            console.log(res[0]);
+            this.mes=res[0];
+            console.log(this.mes[0]);
+
+      });
+         break;
+       case 'Año':
+        this.reporteservicio.getreportea().subscribe(
+          res => {
+            console.log(res[0]);
+            this.aanio=res[0];
+      });
+        console.log("-------->"+valor);
+        
+
+         break;   
+    }
+  
 }
   
-  Repmensual(){
-    this.reporteservicio.getreporte().subscribe(
-      res => {
-        console.log(res);
-        this.reportes = res[0];
-      }
-    );
-    this.abrirDetalles = false;
-    this.abrirGraficas = true;
-    $("#myModal").modal("show");
-  }
 
-  Repanual(){
-    this.reporteservicio.getreportea().subscribe(
-      res => {
-        console.log(res);
-        this.reportes = res[0];
-      }
-    );
-    this.abrirDetalles = false;
-    this.abrirGraficas = false;
-    $("#myModal").modal("show");
-  }
 
 
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
 import {ServicioService} from '../servicios/servicio.service';
 import Swal from 'sweetalert2';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-clientes',

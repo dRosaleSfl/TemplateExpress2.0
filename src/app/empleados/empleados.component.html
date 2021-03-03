@@ -50,6 +50,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-4">
                     <label for="nomre">Nombre</label>
+<<<<<<< HEAD
                     <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="nombre" formControlName="nombre_empleado"placeholder="" >
                     <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="nombre" formControlName="nombre_empleado"placeholder="" disabled="true">
                   </div>
@@ -62,11 +63,23 @@
                     <label for="ape_mat">Apellido materno</label>
                     <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat">
                     <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat" disabled="true">
+=======
+                    <input type="text" class="form-control" id="nombre" formControlName="nombre_empleado"placeholder=""  required >
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="ape_pat">Apellido paterno</label>
+                    <input type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat" required >
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="ape_mat">Apellido materno</label>
+                    <input type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat" required >
+>>>>>>> hash
                   </div>
                 </div>
               <div class="form-row">
                 <div class="form-group col-md-4">
                   <label for="puesto">Puesto</label>
+<<<<<<< HEAD
                   <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder=""  formControlName="puesto">
                   <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder=""  formControlName="puesto" disabled="true">
                 </div>
@@ -79,6 +92,17 @@
                   <label for="nombre_usuario">Nombre usuario</label>
                   <input *ngIf="this.tipo === '1'"  type="text" class="form-control" placeholder="" formControlName="nombre_usuario" >
                   <input *ngIf="this.tipo != '1'" type="text" class="form-control" placeholder="" formControlName="nombre_usuario" disabled="true">
+=======
+                  <input type="text" class="form-control"  placeholder=""  formControlName="puesto" required >
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="telefono">Telefono</label>
+                  <input type="text" class="form-control"  placeholder="" formControlName="telefono" required >
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="nombre_usuario">Nombre usuario</label>
+                  <input type="text" class="form-control" placeholder="" formControlName="nombre_usuario"  required >
+>>>>>>> hash
                 </div>
               </div>
               <label for="id_direccion">Direccion</label>
@@ -94,6 +118,7 @@
                   </thead>
                   <tbody>
                     <tr> 
+<<<<<<< HEAD
                       <td> 
                         <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="calle" >
                         <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="calle" disabled="true">
@@ -110,6 +135,12 @@
                         <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="colonia" >
                         <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="colonia" disabled="true">
                       </td>
+=======
+                      <td> <input type="text" class="form-control"  placeholder="" formControlName="calle" required  ></td>
+                      <td> <input type="text" class="form-control"  placeholder="" formControlName="num_int"  required ></td>
+                      <td> <input type="text" class="form-control"  placeholder="" formControlName="num_ext" required  ></td>
+                      <td> <input type="text" class="form-control"  placeholder="" formControlName="colonia" required  ></td>
+>>>>>>> hash
                     </tr>
                     <tr>
                   </tbody>
@@ -123,6 +154,7 @@
                   </thead>
                   <tbody>
                     <tr> 
+<<<<<<< HEAD
                       <td> 
                         <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="cp" >
                         <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="cp" disabled="true">
@@ -139,6 +171,12 @@
                         <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="pais" >
                         <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="pais" disabled="true">
                       </td>
+=======
+                      <td> <input type="text" class="form-control"  placeholder="" formControlName="cp"  required ></td>
+                      <td> <input type="text" class="form-control"  placeholder="" formControlName="ciudad"  required ></td>
+                      <td> <input type="text" class="form-control"  placeholder="" formControlName="estado" required  ></td>
+                      <td> <input type="text" class="form-control"  placeholder="" formControlName="pais" required  ></td>
+>>>>>>> hash
                     </tr>
                     <tr>
                   </tbody>
@@ -170,35 +208,35 @@
                   <div class="form-row">
                     <div class="form-group col-md-4">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control" formControlName="nombre_empleado" placeholder="" >
+                      <input type="text" class="form-control" formControlName="nombre_empleado" placeholder="" required >
                     </div>
                     <div class="form-group col-md-4">
                       <label for="ape_pat">Apellido paterno</label>
-                      <input type="text" class="form-control" formControlName="ape_pat" placeholder="" >
+                      <input type="text" class="form-control" formControlName="ape_pat" placeholder="" required >
                     </div>
                     <div class="form-group col-md-4">
                       <label for="ape_mat">Apellido materno</label>
-                      <input type="text" class="form-control" formControlName="ape_mat" placeholder="" >
+                      <input type="text" class="form-control" formControlName="ape_mat" placeholder="" required >
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="telefono">Telefono</label>
-                      <input type="text" class="form-control" id="telefono" formControlName="telefono" placeholder="" >
+                      <input type="text" class="form-control" id="telefono" formControlName="telefono" placeholder="" required >
                     </div>
                     <div class="form-group col-md-6">
                       <label for="puesto">Puesto</label>
-                      <input type="text" class="form-control" id="puesto" placeholder="" formControlName="puesto">
+                      <input type="text" class="form-control" id="puesto" placeholder="" formControlName="puesto" required >
                     </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombre_usuario">nombre_usuario</label>
-                    <input type="text" class="form-control" id="nombre_usuario" placeholder="" formControlName="nombre_usuario">
+                    <input type="text" class="form-control" id="nombre_usuario" placeholder="" formControlName="nombre_usuario" required >
                   </div>
                   <div class="form-group col-md-6">
                     <label for="contrasena">Contraseña</label>
-                    <input type="text" class="form-control" id="contrasena" placeholder="" formControlName="contrasena">
+                    <input type="text" class="form-control" id="contrasena" placeholder="" formControlName="contrasena" required >
                   </div>
                 </div>
                   <label for="id_direccion">Direccion</label>
@@ -214,10 +252,10 @@
                         </thead>
                         <tbody>
                           <tr> 
-                            <td><input placeholder="" id="calle" class="form-control" formControlName="calle" ></td>
-                            <td><input placeholder="" id="agregar_num_int" class="form-control" formControlName="num_int"></td>
-                            <td><input laceholder="" id="agregar_num_ext" class="form-control" formControlName="num_ext"></td>
-                            <td><input placeholder="" id="agregar_colonia" class="form-control" formControlName="colonia"></td>
+                            <td><input placeholder="" id="calle" class="form-control" formControlName="calle" required  ></td>
+                            <td><input placeholder="" id="agregar_num_int" class="form-control" formControlName="num_int" required ></td>
+                            <td><input laceholder="" id="agregar_num_ext" class="form-control" formControlName="num_ext" required ></td>
+                            <td><input placeholder="" id="agregar_colonia" class="form-control" formControlName="colonia" required ></td>
                           </tr>
                           <tr>
                         </tbody>
@@ -231,10 +269,10 @@
                         </thead>
                         <tbody>
                           <tr> 
-                            <td><input placeholder="" id="agregar_cp" class="form-control" formControlName="cp"></td>
-                            <td><input placeholder="" id="agregar_cuidad" class="form-control" formControlName="ciudad"></td>
-                            <td><input placeholder="" id="agregar_estado" class="form-control" formControlName="estado"></td>
-                            <td><input placeholder="" id="agregar_pais" class="form-control" formControlName="pais"></td>
+                            <td><input placeholder="" id="agregar_cp" class="form-control" formControlName="cp" required ></td>
+                            <td><input placeholder="" id="agregar_cuidad" class="form-control" formControlName="ciudad" required ></td>
+                            <td><input placeholder="" id="agregar_estado" class="form-control" formControlName="estado" required ></td>
+                            <td><input placeholder="" id="agregar_pais" class="form-control" formControlName="pais" required ></td>
                           </tr>
                           <tr>
                         </tbody>

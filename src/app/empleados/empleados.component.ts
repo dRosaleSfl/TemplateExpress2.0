@@ -1,7 +1,7 @@
 import { ServicioService } from './../servicios/servicio.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-empleados',
@@ -21,39 +21,39 @@ export class EmpleadosComponent implements OnInit {
   public indice1 = false;
   constructor(private empleadoservicio:ServicioService, private formBuilder: FormBuilder ) { 
     this.empleadoForm = this.formBuilder.group({
-      nombre_empleado:'',
-      ape_pat:'',
-      ape_mat:'',
-      puesto:'',
-      telefono:'',
-      calle:'',
-      num_int:'',
-      num_ext:'',
-      colonia:'',
-      cp:'',
-      ciudad:'',
-      estado:'',
-      pais:'',
-      nombre_usuario:'',
-      contrasena:''
+      nombre_empleado:['',Validators.required],
+      ape_pat:['',Validators.required],
+      ape_mat:['',Validators.required],
+      puesto:['',Validators.required],
+      telefono:['',Validators.required],
+      calle:['',Validators.required],
+      num_int:['',Validators.required],
+      num_ext:['',Validators.required],
+      colonia:['',Validators.required],
+      cp:['',Validators.required],
+      ciudad:['',Validators.required],
+      estado:['',Validators.required],
+      pais:['',Validators.required],
+      nombre_usuario:['',Validators.required],
+      contrasena:['',Validators.required]
     });
     this.empleadoForm1 = this.formBuilder.group({
-      id_empleado:'',
-      nombre_empleado:'',
-      ape_pat:'',
-      ape_mat:'',
-      puesto:'',
-      telefono:'',
-      calle:'',
-      num_int:'',
-      num_ext:'',
-      colonia:'',
-      cp:'',
-      ciudad:'',
-      estado:'',
-      pais:'',
-      nombre_usuario:'',
-      contrasena:''
+      id_empleado:['',Validators.required],
+      nombre_empleado:['',Validators.required],
+      ape_pat:['',Validators.required],
+      ape_mat:['',Validators.required],
+      puesto:['',Validators.required],
+      telefono:['',Validators.required],
+      calle:['',Validators.required],
+      num_int:['',Validators.required],
+      num_ext:['',Validators.required],
+      colonia:['',Validators.required],
+      cp:['',Validators.required],
+      ciudad:['',Validators.required],
+      estado:['',Validators.required],
+      pais:['',Validators.required],
+      nombre_usuario:['',Validators.required],
+      contrasena:['',Validators.required]
     });
   }
 
@@ -113,13 +113,18 @@ export class EmpleadosComponent implements OnInit {
   }
 
   newempleado(){
-    console.log(this.empleadoForm.value);
-    this.empleadoservicio.addempleado(this.empleadoForm.value).subscribe(
-      res => {
-        console.log(res); 
-      }
-    );
-    Swal.fire('Empleado Añadido Exitosamente');
+ if(this.empleadoForm.valid){
+  console.log(this.empleadoForm.value);
+  this.empleadoservicio.addempleado(this.empleadoForm.value).subscribe(
+    res => {
+      console.log(res); 
+    }
+  );
+  Swal.fire('Empleado Añadido Exitosamente');
+ }else{
+  Swal.fire('Campos Vacios');
+ }
+  
   }
    borrar(){
       console.log(this.empleadoForm1.value);
@@ -131,13 +136,20 @@ export class EmpleadosComponent implements OnInit {
       Swal.fire('Empleado Eliminado Exitosamente');
    }
    editar(){
-    console.log(this.empleadoForm1.value);
-    this.empleadoservicio.editempleado(this.empleadoForm1.value).subscribe(
-      res => {
-        console.log(res); 
-      }
-    );
-    Swal.fire('Empleado Actualizado Exitosamente');
+    if(this.empleadoForm.valid){
+      console.log(this.empleadoForm1.value);
+      console.log(this.empleadoForm1.value);
+      this.empleadoservicio.editempleado(this.empleadoForm1.value).subscribe(
+        res => {
+          console.log(res); 
+        }
+      );
+      Swal.fire('Empleado Actualizado Exitosamente');
+     }else{
+      Swal.fire('Campos Vacios');
+     }
+
+   
  }
  
  

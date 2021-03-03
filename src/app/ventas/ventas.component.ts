@@ -168,7 +168,7 @@ export class VentasComponent implements OnInit {
         id_cliente: 1,
         pedidos: this.carrito,
         subtotal: subtotal,
-        total: subtotal + (subtotal * 0.16),
+        total: 0,//subtotal + (subtotal * 0.16)
         anticipo: 0,
         abono: 0,
         saldo: 0,
@@ -334,6 +334,20 @@ export class VentasComponent implements OnInit {
       }
     });
   }
+
+
+  borraruno(item:any){
+    console.log(item.id_pedido);
+    let pedId;
+    pedId = item.id_pedido;
+      this.ventaservicio.deleteped(item).subscribe(
+        res => {
+          console.log(res); 
+        }
+      );
+      Swal.fire('Herraje Eliminado Exitosamente');
+   }
+   
 
 
   applyFilter(filterValue: string) {

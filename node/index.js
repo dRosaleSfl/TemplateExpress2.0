@@ -1044,7 +1044,7 @@ app.get('/dfaltante', (req, res) => {
   //eliminar un producto de lista
 //lista
 app.get('/dprod', (req, res) => {
-  var id1 = [req.query.id_producto];
+  var id1 = [req.query.id1];
   const query = `delete from faltantes where id_producto='${id1}'`;
   connect.query(query, (err, result) => {
     if (err) {
@@ -1613,6 +1613,21 @@ app.get('/d', async (req, res) => {
   })
 })
 
+ //eliminar un producto dela venta
+ app.get('/dped', (req, res) => {
+  var id1 = [req.query.id_pedido];
+  const query = `delete from pedido where id_pedido='${id1}'`;
+  connect.query(query, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+      res.end();
+    }
+  });
+})
+
+//--------------------------------
 
 app.listen(3000, (err, res) => {
   if (err) {

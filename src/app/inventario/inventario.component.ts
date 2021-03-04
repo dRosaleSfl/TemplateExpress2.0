@@ -131,11 +131,11 @@ export class InventarioComponent implements OnInit {
     if (this.inventarioForm.valid) {
     console.log(this.inventarioForm.value);
     console.log(this.inventarioForm.valid);
-   /* this.inventarioservicio.addproducto(this.inventarioForm.value).subscribe(
+    this.inventarioservicio.addproducto(this.inventarioForm.value).subscribe(
       res => {
         console.log(res); 
       }
-    );*/
+    );
     Swal.fire('Porducto Añadido Exitosamente');
     this.getinventario();
     }else{

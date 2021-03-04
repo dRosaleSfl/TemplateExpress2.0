@@ -41,20 +41,25 @@
                         </tr>
                       </thead>
                       <tbody>
-                          <tr >
-                            <td>{{f_rep}}</td>
-                            <td>{{total}}</td>
+                          <tr  >
+                            <td *ngIf="tipo === 1">{{f_rep}}</td>
+                            <td *ngIf="tipo === 1">{{total}}</td>
                           </tr>
-                          <tr *ngFor="let mees of mes" >
-                            <td>{{mees.nfecha}}</td>
-                            <td>{{mees.total}}</td>
-                           
-                          </tr>
-                          <tr *ngFor="let anio of aanio">
-                            <td>{{anio.nfecha}}</td>
-                            <td>{{anio.total}}</td>
+                         
+                            <tr *ngFor="let mees of mes"  >
+                              <td *ngIf="tipo === 2">{{mees.nfecha}}</td>
+                              <td *ngIf="tipo === 2">{{mees.total}}</td>
+                             
+                            </tr>
+                         
+                        
+                          <tr *ngFor="let anio of aanio"  >
+                            <td *ngIf="tipo === 3">{{anio.nfecha}}</td>
+                            <td *ngIf="tipo === 3">{{anio.total}}</td>
                           
                           </tr>
+                       
+                         
 
                       </tbody>
                     </table>

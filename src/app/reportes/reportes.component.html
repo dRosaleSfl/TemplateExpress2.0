@@ -12,6 +12,10 @@
       </div>
         <button type="submit" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModals"><i class="fas fa-file-signature"></i>REPORTE DE VENTAS </button>
     </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#gananciamodal"><i class="fas fa-file-signature"></i>REPORTE DE GANANCIA DIARIA </button>
+    </div>
   <!--modal de semanas-->
 <div class="modal" id="myModals">
   <div class="modal-dialog modal-lg" >
@@ -58,6 +62,48 @@
 
                       </tbody>
                     </table>
+                  </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!--modal de Ganancia-->
+<div class="modal" id="gananciamodal">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">REPORTE DIARIO DE GANANCIA</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+          <!-- Modal body -->
+            <div class="modal-body">
+              <form >
+                <label>INGRESA FECHA A CONSULTAR PARA REPORTE:</label>
+                <input type="date" class="formControlName"  id="daily" placeholder="aaaammdd">
+                <button type="button" class="btn btn-danger"  (click)="Repdiario()" >Calcular</button>
+                <div class="table-responsive">
+                    <table *ngIf="repst === 1" class="table">
+                      <thead>
+                        <tr >
+                          <th>Fecha</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr >
+                            <td>{{diariof}}</td>
+                            <td>{{diarioc}}</td>
+                          </tr>
+                      </tbody>
+                    </table>
+                    <p *ngIf="repst === 2"> No hay ganancias registradas ese dia </p> 
                   </div>
             <!-- Modal footer -->
             <div class="modal-footer">

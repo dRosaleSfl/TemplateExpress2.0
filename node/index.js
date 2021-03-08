@@ -15,7 +15,8 @@ const mysql = require('mysql');
 const connect = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'gjsggv160305',
+  password: '',
+//  password: 'gjsggv160305',
   database: "templaexpress",
 });
 //-------------login-------------------------
@@ -1059,7 +1060,7 @@ app.get('/dprod', (req, res) => {
 //----------Gananacias--------------
 ///ver ganancias
 app.get('/ganancias', (req, res) => {
-  const query = 'select a.id_ganancias, a.num_nota,a.tipo_pago,a.cantidad,a.id_cliente,a.concepto,a.status,a.recibio,b.nombre,b.ape_pat,b.ape_mat from ganancias a, clientes b where a.id_cliente=b.id_cliente;';
+  const query = 'select a.id_ganancias, a.num_nota,a.tipo_pago,a.cantidad,a.id_cliente,a.concepto,a.status,a.recibio, a.fecha, b.nombre,b.ape_pat,b.ape_mat from ganancias a, clientes b where a.id_cliente=b.id_cliente;';
   connect.query(query, (err, result) => {
     if (err) {
       throw err;
@@ -1080,7 +1081,8 @@ app.get('/newganancias', (req, res) => {
   var status = [req.query.status];
   var recibio = [req.query.recibio];
   var id1 = [req.query.id1];
-  const query = `insert into ganancias(num_nota,tipo_pago,cantidad,concepto,status,recibio,id_cliente) values ('${num_nota}',"${tipo_pago}",'${cantidad}',"${concepto}","${status}","${recibio}",'${id1}') `;
+  var fecha = [req.query.fecha]
+  const query = `insert into ganancias(num_nota,tipo_pago,cantidad,concepto,status,recibio, fecha, id_cliente) values ('${num_nota}',"${tipo_pago}",'${cantidad}',"${concepto}","${status}","${recibio}", "${fecha}", '${id1}') `;
   connect.query(query, (err, result) => {
       if (err) {
         throw err;
@@ -1096,7 +1098,7 @@ app.get('/ganancia', async (req, res) => {
   console.log(req.query.id);
   var id = [req.query.id];
   console.log(id);
-  const query = `select a.num_nota,a.tipo_pago,a.cantidad,a.id_cliente,a.concepto,a.status,a.recibio,b.nombre,b.ape_pat,b.ape_mat from ganancias a, clientes b where a.id_cliente=b.id_cliente and a.id_ganancias='${id}' `;
+  const query = `select a.num_nota,a.tipo_pago,a.cantidad,a.id_cliente,a.concepto,a.status,a.recibio,a.fecha, b.nombre,b.ape_pat,b.ape_mat from ganancias a, clientes b where a.id_cliente=b.id_cliente and a.id_ganancias='${id}' `;
   connect.query(query, (err, result) => {
     if (err) {
       throw err;
@@ -1118,10 +1120,11 @@ app.get('/upadateganancia', async (req, res) => {
   var concepto = [req.query.concepto];
   var status = [req.query.status];
   var recibio = [req.query.recibio];
+  var fecha = [req.query.fecha];
   var id_cliente = [req.query.id_cliente];
   console.log(id);
 
-  const query = `update ganancias set id_ganancias='${id}', num_nota='${num_nota}', tipo_pago="${tipo_pago}", cantidad='${cantidad}', concepto="${concepto}",status="${status}", recibio="${recibio}", id_cliente='${id_cliente}' where id_ganancias='${id}' `;
+  const query = `update ganancias set id_ganancias='${id}', num_nota='${num_nota}', tipo_pago="${tipo_pago}", cantidad='${cantidad}', concepto="${concepto}",status="${status}", recibio="${recibio}", id_cliente='${id_cliente}', fecha='${fecha}' where id_ganancias='${id}' `;
   connect.query(query, (err, result) => {
     if (err) {
       throw err;
@@ -1147,6 +1150,23 @@ app.get('/dganancia', async (req, res) => {
       res.end();
     }
   });
+})
+
+/*Conseguir ganancias de un dia*/
+
+app.get('/gananciasdiarias', async (req, res) => {
+  console.log(req.query);
+  var fecha = [req.query.id];
+  const query = `select sum(cantidad) as diario from ganancias where fecha='${fecha}';`;
+  console.log(query);
+  connect.query(query, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+      res.end;
+    }
+  })
 })
 
 //-----------Reportes----------------

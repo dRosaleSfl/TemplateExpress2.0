@@ -106,15 +106,17 @@
                 <tr>
               </tbody>
             </table>
-          </div>
+          </div> 
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="subtotal">Subtotal</label>
-              <input type="text" class="form-control" id="subtotal" placeholder="" formControlName="subtotal">
+              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="subtotal" placeholder="" formControlName="subtotal">
+              <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="subtotal" placeholder="" formControlName="subtotal" disabled="true">
             </div>
             <div class="form-group col-md-6">
               <label for="total">Total</label>
-              <input type="text" class="form-control" id="total" placeholder="" formControlName="total">
+              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="total" placeholder="" formControlName="total">
+              <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="subtotal" placeholder="" formControlName="subtotal" disabled="true">
             </div>
           </div>
           <div class="form-row">

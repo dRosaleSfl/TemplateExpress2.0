@@ -290,7 +290,8 @@ getganancias(){
     let status = ganancia.status;
     let recibio = ganancia.recibio;
     let id1 = ganancia.id_cliente;
-    return this.httpClient.get(`http://localhost:3000/newganancias?id=${id}&num_nota=${num_nota}&tipo_pago=${tipo_pago}&cantidad=${cantidad}&concepto=${concepto}&status=${status}&recibio=${recibio}&id1=${id1}`);
+    let fecha = ganancia.fecha;
+    return this.httpClient.get(`http://localhost:3000/newganancias?id=${id}&num_nota=${num_nota}&tipo_pago=${tipo_pago}&cantidad=${cantidad}&concepto=${concepto}&status=${status}&recibio=${recibio}&fecha=${fecha}&id1=${id1}`);
    }
 
    getganancia(id:string){
@@ -309,14 +310,20 @@ getganancias(){
     let concepto = gan.concepto;
     let status = gan.status;
     let recibio = gan.recibio;
+    let fecha = gan.fecha;
     console.log(gan);
-   return this.httpClient.get(`http://localhost:3000/upadateganancia?id=${id}&num_nota=${num_nota}&nombre_cliente=${nombre_cliente}&ape_pat=${ape_pat}&ape_mat=${ape_mat}&id_cliente=${id_cliente}&tipo_pago=${tipo_pago}&cantidad=${cantidad}&concepto=${concepto}&status=${status}&recibio=${recibio}`);
+   return this.httpClient.get(`http://localhost:3000/upadateganancia?id=${id}&num_nota=${num_nota}&nombre_cliente=${nombre_cliente}&ape_pat=${ape_pat}&ape_mat=${ape_mat}&id_cliente=${id_cliente}&tipo_pago=${tipo_pago}&cantidad=${cantidad}&concepto=${concepto}&status=${status}&recibio=${recibio}&fecha=${fecha}`);
   }
   
   deleteganancia(gan:any){
     let id = gan.id_ganancias;
     console.log(id);
    return this.httpClient.get(`http://localhost:3000/dganancia?id=${id}`);
+  }
+
+  //Reporte diario
+  gananciadiaria(fecha){
+    return this.httpClient.get(`http://localhost:3000/gananciasdiarias?id=${fecha}`)
   }
 
   ///----------------cambio de pantasha

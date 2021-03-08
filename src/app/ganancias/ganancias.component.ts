@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import {ServicioService} from "../servicios/servicio.service";
 import { FormBuilder } from '@angular/forms';
+import { templateJitUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-ganancias',
@@ -38,6 +39,7 @@ export class GananciasComponent implements OnInit {
       ganancias:'',
       id_cliente:'',
       recibio:'',
+      fecha: '',
       nombre:'',
       ape_pat:'',
       ape_mat:''
@@ -51,6 +53,7 @@ export class GananciasComponent implements OnInit {
       status:'',
       id_cliente:'',
       recibio:'',
+      fecha: '',
       nombre:'',
       ape_pat:'',
       ape_mat:''
@@ -72,8 +75,16 @@ export class GananciasComponent implements OnInit {
 
 
   getganancias(){
+    let temp: String;
     this.gananciasservicio.getganancias().subscribe(
       res =>{
+        let objtemp = res;
+        console.log(res);
+        for(let i=0; i<Object.keys(objtemp).length; i++) {
+          temp = res[i].fecha;
+          console.log(temp);
+          res[i].fecha = temp.substring(0,10);
+        }
         console.log(res);
         this.ganancias = res;
         this.gananciasBusqueda = res;
@@ -85,15 +96,16 @@ export class GananciasComponent implements OnInit {
   newganancia(){
     this.gananciasservicio.addGanancias(this.gananciaForm.value).subscribe(
       res => {
-        console.log(res); 
-      this.gananciasservicio.getclient(res[0].id_cliente).subscribe(res1 => {
-      console.log(res1); 
-        this.gananciaForm.patchValue({
-          id_cliente: res1[0].id_cliente
-     
-    });
-  });
-  
+        console.log("newganancia res: ");
+        console.log(res);
+/* 
+        this.gananciasservicio.getclient(res[0].id_cliente).subscribe(res1 => {
+          console.log("newganancia res1: ");
+          console.log(res1); 
+          this.gananciaForm.patchValue({
+            id_cliente: res1[0].id_cliente
+          });
+        }); */
       Swal.fire('Registro añadido exitosamente');
    });
   }
@@ -120,11 +132,15 @@ export class GananciasComponent implements OnInit {
   verganancia(item:any){
     console.log(item.id_ganancias);
     let gananciaId;
+    let temp:String;
+    let fecha;
     gananciaId = item.id_ganancias;
     console.log(gananciaId);
     this.gananciasservicio.getganancia(gananciaId).subscribe(res=>{
-      console.log(res);
       this.gan = res;
+      temp = this.gan[0].fecha;
+      fecha = temp.substring(0,10);
+      console.log(fecha);
       this.editForm.setValue({
         id_ganancias:gananciaId,
         num_nota:this.gan[0].num_nota,
@@ -134,6 +150,7 @@ export class GananciasComponent implements OnInit {
         status:this.gan[0].status,
         id_cliente:this.gan[0].id_cliente,
         recibio:this.gan[0].recibio,
+        fecha: fecha,
         nombre:this.gan[0].nombre,
         ape_pat:this.gan[0].ape_pat,
         ape_mat:this.gan[0].ape_mat
@@ -147,6 +164,7 @@ export class GananciasComponent implements OnInit {
    
     this.gananciasservicio.editganancia(this.editForm.value).subscribe(
       res => {
+        console.log("editar res: ");
         console.log(res); 
       }
     );

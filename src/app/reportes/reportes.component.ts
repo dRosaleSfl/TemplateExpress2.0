@@ -23,11 +23,30 @@ export class ReportesComponent implements OnInit {
   semana;
   mes;
   aanio;
+  repst = 0;
+  diariof;
+  diarioc;
 
   constructor(private reporteservicio: ServicioService) {
    }
   ngOnInit(): void { 
+    
   }
+
+  Repdiario() {
+    this.diariof = $('#daily').val();
+    this.reporteservicio.gananciadiaria(this.diariof).subscribe(res => {
+      console.log(res);
+      if (res[0].diario === null){
+        this.repst = 2;
+      }
+      else {
+        this.diarioc = res[0].diario;
+        this.repst = 1;
+      }
+    });
+  }
+
   Repsemanal(){
     console.log("si entre");
     var date = new Date($('#f_rep').val());

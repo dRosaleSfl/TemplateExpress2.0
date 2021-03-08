@@ -24,6 +24,7 @@
               <th>Concepto</th>
               <th>Estatus</th>
               <th>Recibió</th>
+              <th>Fecha</th>
               <th>Detalles</th>
             </tr>
           </thead>
@@ -37,6 +38,7 @@
               <td>{{gan.concepto}}</td>
               <td>{{gan.status}}</td>
               <td>{{gan.recibio}}</td>
+              <td>{{gan.fecha}}</td>
               <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit" (click)="verganancia(gan)">Ver mas</button></td>
             </tr>
           </tbody>
@@ -106,6 +108,11 @@
                         <option>Gustavo</option>
                       </select>
                   </div>
+                  <div>
+                    <div>
+                      <input type="date" value="" formControlName="fecha">
+                    </div>
+                  </div>
           </form>
 
         </div>
@@ -163,7 +170,7 @@
             <label for="concepto">Concepto</label>
             <input type="text" class="form-control"  placeholder="" formControlName="concepto">
           </div>
-       
+     
         <div class="form-group ">
           <label for="status">Estatus</label>
           <select class="form-control" id="status" formControlName="status">
@@ -171,17 +178,23 @@
             <option>No entregado</option>
           </select>
         </div>
-          <div class="form-group">
-              <label for="recibio">Recibió</label>
-              <select class="form-control" id="recibio" formControlName="recibio">
-                <option>Gaby</option>
-                <option>Edgar</option>
-                <option>Juanita</option>
-                <option>Vero</option>
-                <option>Alondra</option>
-                <option>Gustavo</option>
-              </select>
-          </div>
+        
+        <div class="form-group">
+            <label for="recibio">Recibió</label>
+            <select class="form-control" id="recibio" formControlName="recibio">
+              <option>Gaby</option>
+              <option>Edgar</option>
+              <option>Juanita</option>
+              <option>Vero</option>
+              <option>Alondra</option>
+              <option>Gustavo</option>
+            </select>
+        </div>
+
+        <div>
+          <label for="fecha">Fecha</label>
+          <input type="date" id="fecha" value="" formControlName="fecha">
+        </div>
           </form>
         </div>
         <div class="modal-footer">

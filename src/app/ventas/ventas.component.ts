@@ -30,6 +30,8 @@ export class VentasComponent implements OnInit {
   // Ventas
   ventas;
   ventasBusqueda;
+  var1;
+  otrabusqueda;
 
   // Carrito
   carrito = [];
@@ -141,6 +143,7 @@ export class VentasComponent implements OnInit {
     this.ventaservicio.getinventario().subscribe(
       res => {
         this.inventario = res;
+        this.otrabusqueda = res;
       }
     );
 
@@ -148,6 +151,7 @@ export class VentasComponent implements OnInit {
     this.abrirDetalles = false;
     $("#myModal").modal("hide");
     $("#myModal").modal("show");
+
   }
 
   modalVenta() {
@@ -183,6 +187,9 @@ export class VentasComponent implements OnInit {
   }
 
   async agregarAlCarrito(producto) {
+   
+
+
 
     const { value: tipo } = await Swal.fire({
       title: 'Seleccione un tipo',
@@ -249,12 +256,14 @@ export class VentasComponent implements OnInit {
   agregarCarrito(producto, tipoProducto) {
 
     this.carrito.push({
+      
       id_herraje: producto.id_herraje,
       nombre: producto.nombre,
       marca: producto.marca,
       cantidad: 1,
       tipo_precio: tipoProducto,
       precio_unitario: tipoProducto === 0 ? producto.preciocvidrio : producto.preciosvidrio
+
     });
 
     Swal.fire('Agregado al Carrito!', producto.marca + ' - ' + producto.nombre, 'success');
@@ -361,6 +370,22 @@ export class VentasComponent implements OnInit {
         venta.ape_pat.toLowerCase().includes(filterValueLower) ||
         venta.ape_mat.toLowerCase().includes(filterValueLower) ||
         venta.nombre.toLowerCase().includes(filterValueLower) 
+      );
+    }
+  }
+
+
+  aFilter(filterValue: string) {
+    let filterValueLower = filterValue.toLowerCase();
+    if (filterValue === '') {
+      this.inventario = this.otrabusqueda;
+    } else {
+      console.log(this.otrabusqueda);
+      this.inventario = this.otrabusqueda.filter((var1: {id_herraje: string; nombre: string; marca: string; }) =>
+       // console.log(var1) ;
+      var1.id_herraje.toLowerCase().includes(filterValueLower)  ||
+      var1.nombre.toLowerCase().includes(filterValueLower) ||
+      var1.marca.toLowerCase().includes(filterValueLower) 
       );
     }
   }

@@ -35,6 +35,7 @@ export class InventarioComponent implements OnInit {
       min:['', Validators.required]
     });
     this.inventarioForm1 = this.formBuilder.group({
+      id_inventario:'',
       id_herraje:['', Validators.required],
       nombre:['', Validators.required],
       marca:['', Validators.required],
@@ -110,11 +111,15 @@ export class InventarioComponent implements OnInit {
     );
     Swal.fire('Producto Eliminado Exitosamente');
     this.getinventario();
+    
   }
   editar(){
-    if (this.inventarioForm.valid) {
+   var  agregar = new Number($('#agregar').val());
+    console.log(agregar);
+    if (this.inventarioForm1.valid) {
+    this.inventarioForm1.value.existencias= this.inventarioForm1.value.existencias+agregar;
+    console.log(this.inventarioForm1.value.existencias);
     console.log(this.inventarioForm1.value);
-   
     this.inventarioservicio.editproducto(this.inventarioForm1.value).subscribe(
       res => {
         console.log(res); 

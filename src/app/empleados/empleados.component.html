@@ -170,35 +170,35 @@
                   <div class="form-row">
                     <div class="form-group col-md-4">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control" formControlName="nombre_empleado" placeholder="" >
+                      <input type="text" class="form-control" formControlName="nombre_empleado" placeholder="" required >
                     </div>
                     <div class="form-group col-md-4">
                       <label for="ape_pat">Apellido paterno</label>
-                      <input type="text" class="form-control" formControlName="ape_pat" placeholder="" >
+                      <input type="text" class="form-control" formControlName="ape_pat" placeholder="" required >
                     </div>
                     <div class="form-group col-md-4">
                       <label for="ape_mat">Apellido materno</label>
-                      <input type="text" class="form-control" formControlName="ape_mat" placeholder="" >
+                      <input type="text" class="form-control" formControlName="ape_mat" placeholder="" required >
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="telefono">Telefono</label>
-                      <input type="text" class="form-control" id="telefono" formControlName="telefono" placeholder="" >
+                      <input type="text" class="form-control" id="telefono" formControlName="telefono" placeholder="" required >
                     </div>
                     <div class="form-group col-md-6">
                       <label for="puesto">Puesto</label>
-                      <input type="text" class="form-control" id="puesto" placeholder="" formControlName="puesto">
+                      <input type="text" class="form-control" id="puesto" placeholder="" formControlName="puesto" required >
                     </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombre_usuario">nombre_usuario</label>
-                    <input type="text" class="form-control" id="nombre_usuario" placeholder="" formControlName="nombre_usuario">
+                    <input type="text" class="form-control" id="nombre_usuario" placeholder="" formControlName="nombre_usuario" required >
                   </div>
                   <div class="form-group col-md-6">
                     <label for="contrasena">Contraseña</label>
-                    <input type="text" class="form-control" id="contrasena" placeholder="" formControlName="contrasena">
+                    <input type="text" class="form-control" id="contrasena" placeholder="" formControlName="contrasena" required >
                   </div>
                 </div>
                   <label for="id_direccion">Direccion</label>
@@ -214,10 +214,10 @@
                         </thead>
                         <tbody>
                           <tr> 
-                            <td><input placeholder="" id="calle" class="form-control" formControlName="calle" ></td>
-                            <td><input placeholder="" id="agregar_num_int" class="form-control" formControlName="num_int"></td>
-                            <td><input laceholder="" id="agregar_num_ext" class="form-control" formControlName="num_ext"></td>
-                            <td><input placeholder="" id="agregar_colonia" class="form-control" formControlName="colonia"></td>
+                            <td><input placeholder="" id="calle" class="form-control" formControlName="calle" required  ></td>
+                            <td><input placeholder="" id="agregar_num_int" class="form-control" formControlName="num_int" required ></td>
+                            <td><input laceholder="" id="agregar_num_ext" class="form-control" formControlName="num_ext" required ></td>
+                            <td><input placeholder="" id="agregar_colonia" class="form-control" formControlName="colonia" required ></td>
                           </tr>
                           <tr>
                         </tbody>
@@ -231,10 +231,10 @@
                         </thead>
                         <tbody>
                           <tr> 
-                            <td><input placeholder="" id="agregar_cp" class="form-control" formControlName="cp"></td>
-                            <td><input placeholder="" id="agregar_cuidad" class="form-control" formControlName="ciudad"></td>
-                            <td><input placeholder="" id="agregar_estado" class="form-control" formControlName="estado"></td>
-                            <td><input placeholder="" id="agregar_pais" class="form-control" formControlName="pais"></td>
+                            <td><input placeholder="" id="agregar_cp" class="form-control" formControlName="cp" required ></td>
+                            <td><input placeholder="" id="agregar_cuidad" class="form-control" formControlName="ciudad" required ></td>
+                            <td><input placeholder="" id="agregar_estado" class="form-control" formControlName="estado" required ></td>
+                            <td><input placeholder="" id="agregar_pais" class="form-control" formControlName="pais" required ></td>
                           </tr>
                           <tr>
                         </tbody>

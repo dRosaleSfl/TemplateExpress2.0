@@ -16,6 +16,7 @@ const connect = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
+//  password: 'gjsggv160305',
   database: "templaexpress",
 });
 //-------------login-------------------------
@@ -1044,7 +1045,7 @@ app.get('/dfaltante', (req, res) => {
   //eliminar un producto de lista
 //lista
 app.get('/dprod', (req, res) => {
-  var id1 = [req.query.id_producto];
+  var id1 = [req.query.id1];
   const query = `delete from faltantes where id_producto='${id1}'`;
   connect.query(query, (err, result) => {
     if (err) {
@@ -1059,7 +1060,7 @@ app.get('/dprod', (req, res) => {
 //----------Gananacias--------------
 ///ver ganancias
 app.get('/ganancias', (req, res) => {
-  const query = 'select a.id_ganancias, a.num_nota,a.tipo_pago,a.cantidad,a.id_cliente,a.concepto,a.status,a.recibio,b.nombre,b.ape_pat,b.ape_mat from ganancias a, clientes b where a.id_cliente=b.id_cliente;';
+  const query = 'select a.id_ganancias, a.num_nota,a.tipo_pago,a.cantidad,a.id_cliente,a.concepto,a.status,a.recibio, a.fecha, b.nombre,b.ape_pat,b.ape_mat from ganancias a, clientes b where a.id_cliente=b.id_cliente;';
   connect.query(query, (err, result) => {
     if (err) {
       throw err;
@@ -1080,7 +1081,8 @@ app.get('/newganancias', (req, res) => {
   var status = [req.query.status];
   var recibio = [req.query.recibio];
   var id1 = [req.query.id1];
-  const query = `insert into ganancias(num_nota,tipo_pago,cantidad,concepto,status,recibio,id_cliente) values ('${num_nota}',"${tipo_pago}",'${cantidad}',"${concepto}","${status}","${recibio}",'${id1}') `;
+  var fecha = [req.query.fecha]
+  const query = `insert into ganancias(num_nota,tipo_pago,cantidad,concepto,status,recibio, fecha, id_cliente) values ('${num_nota}',"${tipo_pago}",'${cantidad}',"${concepto}","${status}","${recibio}", "${fecha}", '${id1}') `;
   connect.query(query, (err, result) => {
       if (err) {
         throw err;
@@ -1096,7 +1098,7 @@ app.get('/ganancia', async (req, res) => {
   console.log(req.query.id);
   var id = [req.query.id];
   console.log(id);
-  const query = `select a.num_nota,a.tipo_pago,a.cantidad,a.id_cliente,a.concepto,a.status,a.recibio,b.nombre,b.ape_pat,b.ape_mat from ganancias a, clientes b where a.id_cliente=b.id_cliente and a.id_ganancias='${id}' `;
+  const query = `select a.num_nota,a.tipo_pago,a.cantidad,a.id_cliente,a.concepto,a.status,a.recibio,a.fecha, b.nombre,b.ape_pat,b.ape_mat from ganancias a, clientes b where a.id_cliente=b.id_cliente and a.id_ganancias='${id}' `;
   connect.query(query, (err, result) => {
     if (err) {
       throw err;
@@ -1118,10 +1120,11 @@ app.get('/upadateganancia', async (req, res) => {
   var concepto = [req.query.concepto];
   var status = [req.query.status];
   var recibio = [req.query.recibio];
+  var fecha = [req.query.fecha];
   var id_cliente = [req.query.id_cliente];
   console.log(id);
 
-  const query = `update ganancias set id_ganancias='${id}', num_nota='${num_nota}', tipo_pago="${tipo_pago}", cantidad='${cantidad}', concepto="${concepto}",status="${status}", recibio="${recibio}", id_cliente='${id_cliente}' where id_ganancias='${id}' `;
+  const query = `update ganancias set id_ganancias='${id}', num_nota='${num_nota}', tipo_pago="${tipo_pago}", cantidad='${cantidad}', concepto="${concepto}",status="${status}", recibio="${recibio}", id_cliente='${id_cliente}', fecha='${fecha}' where id_ganancias='${id}' `;
   connect.query(query, (err, result) => {
     if (err) {
       throw err;
@@ -1149,25 +1152,48 @@ app.get('/dganancia', async (req, res) => {
   });
 })
 
-//-----------Reportes----------------
-app.get('/getsemanal', async (req, res) => {
-  var f_rep = [req.query.f_rep];
-  // console.log(f_rep);
-  const query = `call Pvs('${f_rep}');`;
-  connect.query(query, (err, row) => {
+/*Conseguir ganancias de un dia*/
+
+app.get('/gananciasdiarias', async (req, res) => {
+  console.log(req.query);
+  var fecha = [req.query.id];
+  const query = `select sum(cantidad) as diario from ganancias where fecha='${fecha}';`;
+  console.log(query);
+  connect.query(query, (err, result) => {
     if (err) {
       throw err;
     } else {
-      res.send(row);
-      res.end();
+      res.send(result);
+      res.end;
     }
-  });
+  })
+})
+
+//-----------Reportes----------------
+app.get('/getsemanal', async (req, res) => {
+ var f_rep = req.query.f_rep;
+ console.log("holaaa");
+  console.log(req.query);
+  console.log(f_rep);
+ const query = `call Pvs("${f_rep}");`;
+  connect.query(query, (err, result) => {
+    if (err) {
+      //throw err;
+    } else {
+      res.send(result);
+      res.end();
+     
+    }
+    console.log(result);
+  })
+
 })
 app.get('/getmensual', async (req, res) => {
+  var f_rep = req.query.f_rep;
   connect.query(`call Pvm();`, (err, result) => {
     //console.log(result);
     if (err) {
-      throw err;
+      //throw err;
     } else {
       res.send(result);
       res.end();
@@ -1175,6 +1201,7 @@ app.get('/getmensual', async (req, res) => {
   });
 })
 app.get('/getanual', async (req, res) => {
+  var f_rep = req.query.f_rep;
   connect.query(`call Pva();`, (err, result) => {
     //console.log(result);
     if (err) {
@@ -1403,14 +1430,15 @@ app.post('/addventa', (req, res) => {
         } else {
 
           // Agregar la venta
-          var ids = '';
-          for (let i = 0; i < pedidos.length; i++) {
+          var ids= result1[0].ultimoId;
+          console.log(result1);
+         /* for (let i = 0; i < pedidos.length; i++) {
             ids += result1[0].ultimoId + i;
 
             if (i < pedidos.length - 1) {
               ids += ','
             }
-          }
+          }*/
 
           const query = `insert into ventas (fecha,id_cliente,id_pedido,subtotal,total,anticipo,abono,saldo,id_empleado,status) values ('${fecha}','${id_cliente}','${ids}','${subtotal}','${total}','${anticipo}','${abono}','${saldo}','${id_empleado}','${status}')`;
           connect.query(query, (err, result) => {
@@ -1605,6 +1633,21 @@ app.get('/d', async (req, res) => {
   })
 })
 
+ //eliminar un producto dela venta
+ app.get('/dped', (req, res) => {
+  var id1 = [req.query.id_pedido];
+  const query = `delete from pedido where id_pedido='${id1}'`;
+  connect.query(query, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+      res.end();
+    }
+  });
+})
+
+//--------------------------------
 
 app.listen(3000, (err, res) => {
   if (err) {

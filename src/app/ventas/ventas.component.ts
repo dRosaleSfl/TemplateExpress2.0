@@ -44,8 +44,8 @@ export class VentasComponent implements OnInit {
         fecha: [{ value: '', disabled: true }],
         id_cliente: [{ value: '', disabled: false }],
         pedidos: [{ value: [], disabled: false }],
-        subtotal: [{ value: '', disabled: true }],
-        total: [{ value: '', disabled: true }],
+        subtotal: [{ value: '', disabled: false }],
+        total: [{ value: '', disabled: false }],
         anticipo: [{ value: '', disabled: false }],
         abono: [{ value: '', disabled: false }],
         saldo: [{ value: '', disabled: false }],
@@ -114,12 +114,15 @@ export class VentasComponent implements OnInit {
           });
 
           // Pedidos
+          console.log(res[0].id_pedido);
           var pedidosObj = [];
-          res[0].id_pedido.split(',').forEach(element => {
-            this.ventaservicio.getPedido(element).subscribe(res3 => {
+
+            this.ventaservicio.getPedido(res[0].id_pedido).subscribe(res3 => {
+              console.log(res3[0]);
               pedidosObj.push(res3[0]);
+              
             });
-          });
+         ;
 
           this.ventaForm.patchValue({
             pedidos: pedidosObj
@@ -132,8 +135,8 @@ export class VentasComponent implements OnInit {
     this.abrirNota = false;
     $("#myModal").modal("show");
   }
-
   modalinventario() {
+    this.carrito = [];
 
     this.ventaservicio.getinventario().subscribe(
       res => {
@@ -165,7 +168,7 @@ export class VentasComponent implements OnInit {
         id_cliente: 1,
         pedidos: this.carrito,
         subtotal: subtotal,
-        total: subtotal + (subtotal * 0.16),
+        total: 0,//subtotal + (subtotal * 0.16)
         anticipo: 0,
         abono: 0,
         saldo: 0,
@@ -331,6 +334,20 @@ export class VentasComponent implements OnInit {
       }
     });
   }
+
+
+  borraruno(item:any){
+    console.log(item.id_pedido);
+    let pedId;
+    pedId = item.id_pedido;
+      this.ventaservicio.deleteped(item).subscribe(
+        res => {
+          console.log(res); 
+        }
+      );
+      Swal.fire('Herraje Eliminado Exitosamente');
+   }
+   
 
 
   applyFilter(filterValue: string) {

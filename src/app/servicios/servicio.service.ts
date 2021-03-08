@@ -274,7 +274,7 @@ getprecios(){
 
     deleteprod(faltante:any){
       let id1 = faltante.id_producto;
-     return this.httpClient.get(`http://localhost:3000/dprod?id_producto=${id1}`);
+     return this.httpClient.get(`http://localhost:3000/dprod?id1=${id1}`);
     }
 //-------------------Ganancias-----
 getganancias(){
@@ -290,7 +290,8 @@ getganancias(){
     let status = ganancia.status;
     let recibio = ganancia.recibio;
     let id1 = ganancia.id_cliente;
-    return this.httpClient.get(`http://localhost:3000/newganancias?id=${id}&num_nota=${num_nota}&tipo_pago=${tipo_pago}&cantidad=${cantidad}&concepto=${concepto}&status=${status}&recibio=${recibio}&id1=${id1}`);
+    let fecha = ganancia.fecha;
+    return this.httpClient.get(`http://localhost:3000/newganancias?id=${id}&num_nota=${num_nota}&tipo_pago=${tipo_pago}&cantidad=${cantidad}&concepto=${concepto}&status=${status}&recibio=${recibio}&fecha=${fecha}&id1=${id1}`);
    }
 
    getganancia(id:string){
@@ -309,14 +310,20 @@ getganancias(){
     let concepto = gan.concepto;
     let status = gan.status;
     let recibio = gan.recibio;
+    let fecha = gan.fecha;
     console.log(gan);
-   return this.httpClient.get(`http://localhost:3000/upadateganancia?id=${id}&num_nota=${num_nota}&nombre_cliente=${nombre_cliente}&ape_pat=${ape_pat}&ape_mat=${ape_mat}&id_cliente=${id_cliente}&tipo_pago=${tipo_pago}&cantidad=${cantidad}&concepto=${concepto}&status=${status}&recibio=${recibio}`);
+   return this.httpClient.get(`http://localhost:3000/upadateganancia?id=${id}&num_nota=${num_nota}&nombre_cliente=${nombre_cliente}&ape_pat=${ape_pat}&ape_mat=${ape_mat}&id_cliente=${id_cliente}&tipo_pago=${tipo_pago}&cantidad=${cantidad}&concepto=${concepto}&status=${status}&recibio=${recibio}&fecha=${fecha}`);
   }
   
   deleteganancia(gan:any){
     let id = gan.id_ganancias;
     console.log(id);
    return this.httpClient.get(`http://localhost:3000/dganancia?id=${id}`);
+  }
+
+  //Reporte diario
+  gananciadiaria(fecha){
+    return this.httpClient.get(`http://localhost:3000/gananciasdiarias?id=${fecha}`)
   }
 
   ///----------------cambio de pantasha
@@ -345,8 +352,12 @@ getganancias(){
   getreportea() {
     return this.httpClient.get('http://localhost:3000/getanual');
   }
-  getreportes(f_rep: any) {
-    return this.httpClient.get(`http://localhost:3000/getsemanal?f_rep=${f_rep}`);
+  getreportes(fechaaa) {
+     let fecha=fechaaa;
+    console.log("servicio");
+    console.log(fecha);
+    console.log(fechaaa+"servicio chido chido");
+    return this.httpClient.get(`http://localhost:3000/getsemanal?f_rep=${fecha}`);
   }
   mvendido() {
     return this.httpClient.get('http://localhost:3000/masvendido');
@@ -396,7 +407,10 @@ getganancias(){
     return this.httpClient.post(`http://localhost:3000/addventa?inv=${inventario}`, venta);
   }
 
-
+  deleteped(producto:any){
+    let id1 = producto.id_pedido;
+   return this.httpClient.get(`http://localhost:3000/dped?id_pedido=${id1}`);
+  }
 
   /* deleteVenta(venta:any){
     let id = venta.id_venta;

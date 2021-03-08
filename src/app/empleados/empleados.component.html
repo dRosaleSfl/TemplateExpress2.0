@@ -50,7 +50,6 @@
                 <div class="form-row">
                   <div class="form-group col-md-4">
                     <label for="nomre">Nombre</label>
-<<<<<<< HEAD
                     <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="nombre" formControlName="nombre_empleado"placeholder="" >
                     <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="nombre" formControlName="nombre_empleado"placeholder="" disabled="true">
                   </div>
@@ -63,26 +62,18 @@
                     <label for="ape_mat">Apellido materno</label>
                     <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat">
                     <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat" disabled="true">
-=======
-                    <input type="text" class="form-control" id="nombre" formControlName="nombre_empleado"placeholder=""  required >
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="ape_pat">Apellido paterno</label>
-                    <input type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat" required >
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="ape_mat">Apellido materno</label>
-                    <input type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat" required >
->>>>>>> hash
                   </div>
                 </div>
               <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group">
                   <label for="puesto">Puesto</label>
-<<<<<<< HEAD
-                  <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder=""  formControlName="puesto">
-                  <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder=""  formControlName="puesto" disabled="true">
-                </div>
+                  <select class="form-control" id="puesto" formControlName="puesto" *ngIf="this.tipo === '1'">  
+                    <option  value="0">Vendedor</option>
+                    <option  value="1">Administrador</option>
+                    <option  value="2">Encargado de almacen</option>
+                    <option  value="3">Operador</option>
+                  </select>
+              </div>
                 <div class="form-group col-md-4">
                   <label for="telefono">Telefono</label>
                   <input *ngIf="this.tipo === '1'"  type="text" class="form-control"  placeholder="" formControlName="telefono">
@@ -92,17 +83,6 @@
                   <label for="nombre_usuario">Nombre usuario</label>
                   <input *ngIf="this.tipo === '1'"  type="text" class="form-control" placeholder="" formControlName="nombre_usuario" >
                   <input *ngIf="this.tipo != '1'" type="text" class="form-control" placeholder="" formControlName="nombre_usuario" disabled="true">
-=======
-                  <input type="text" class="form-control"  placeholder=""  formControlName="puesto" required >
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="telefono">Telefono</label>
-                  <input type="text" class="form-control"  placeholder="" formControlName="telefono" required >
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="nombre_usuario">Nombre usuario</label>
-                  <input type="text" class="form-control" placeholder="" formControlName="nombre_usuario"  required >
->>>>>>> hash
                 </div>
               </div>
               <label for="id_direccion">Direccion</label>
@@ -118,7 +98,6 @@
                   </thead>
                   <tbody>
                     <tr> 
-<<<<<<< HEAD
                       <td> 
                         <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="calle" >
                         <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="calle" disabled="true">
@@ -135,12 +114,6 @@
                         <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="colonia" >
                         <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="colonia" disabled="true">
                       </td>
-=======
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="calle" required  ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="num_int"  required ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="num_ext" required  ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="colonia" required  ></td>
->>>>>>> hash
                     </tr>
                     <tr>
                   </tbody>
@@ -154,7 +127,6 @@
                   </thead>
                   <tbody>
                     <tr> 
-<<<<<<< HEAD
                       <td> 
                         <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="cp" >
                         <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="cp" disabled="true">
@@ -171,12 +143,6 @@
                         <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="pais" >
                         <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="pais" disabled="true">
                       </td>
-=======
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="cp"  required ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="ciudad"  required ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="estado" required  ></td>
-                      <td> <input type="text" class="form-control"  placeholder="" formControlName="pais" required  ></td>
->>>>>>> hash
                     </tr>
                     <tr>
                   </tbody>
@@ -224,10 +190,15 @@
                       <label for="telefono">Telefono</label>
                       <input type="text" class="form-control" id="telefono" formControlName="telefono" placeholder="" required >
                     </div>
-                    <div class="form-group col-md-6">
+                  <div class="form-group">
                       <label for="puesto">Puesto</label>
-                      <input type="text" class="form-control" id="puesto" placeholder="" formControlName="puesto" required >
-                    </div>
+                      <select class="form-control" id="puesto" formControlName="puesto" *ngIf="this.tipo === '1'">  
+                        <option  value="0">Vendedor</option>
+                        <option  value="1">Administrador</option>
+                        <option  value="2">Encargado de almacen</option>
+                        <option  value="3">Operador</option>
+                      </select>
+                  </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">

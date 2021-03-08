@@ -44,8 +44,8 @@ export class VentasComponent implements OnInit {
         fecha: [{ value: '', disabled: true }],
         id_cliente: [{ value: '', disabled: false }],
         pedidos: [{ value: [], disabled: false }],
-        subtotal: [{ value: '', disabled: true }],
-        total: [{ value: '', disabled: true }],
+        subtotal: [{ value: '', disabled: false}],
+        total: [{ value: '', disabled: false}],
         anticipo: [{ value: '', disabled: false }],
         abono: [{ value: '', disabled: false }],
         saldo: [{ value: '', disabled: false }],
@@ -58,6 +58,7 @@ export class VentasComponent implements OnInit {
 
   ngOnInit(): void {
     this.tipo = sessionStorage.getItem("tipo");
+    console.log(this.tipo);
     this.getcliente();
     this.getempleados();
     this.getventa();

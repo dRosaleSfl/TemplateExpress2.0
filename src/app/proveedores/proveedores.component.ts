@@ -26,7 +26,7 @@ export class ProveedoresComponent implements OnInit {
       ape_pat: ['', Validators.required],
       ape_mat: ['', Validators.required],
       rfc: ['', Validators.required],
-      tipo: ['', Validators.required],
+      tipo: '',
       telefono: ['', Validators.required],
       correo: ['', Validators.required],
       calle: ['', Validators.required],

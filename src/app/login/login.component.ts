@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
         sessionStorage.setItem("usrname", res[0].nombre_usuario);
         sessionStorage.setItem("tipo", res[0].puesto);
-        Swal.fire('cool');
+        Swal.fire('Usted ha ingresado');
         this.servicio.bandera();
       }
     });

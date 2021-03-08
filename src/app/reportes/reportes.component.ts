@@ -26,6 +26,7 @@ export class ReportesComponent implements OnInit {
   repst = 0;
   diariof;
   diarioc;
+  tipo;
 
   constructor(private reporteservicio: ServicioService) {
    }
@@ -59,6 +60,7 @@ export class ReportesComponent implements OnInit {
     var valor = $('#temporada').val();
     switch(valor){
       case 'Semana':
+        this.tipo =1;
         this.reporteservicio.getreportes(fechita).subscribe(
           res => {
             console.log(res[0][0].total);
@@ -69,6 +71,8 @@ export class ReportesComponent implements OnInit {
            //console.log()
       });
         console.log("-------->"+valor);
+        console.log(this.tipo);
+     
         break;
        case 'Mes':
         console.log("-------->"+valor);
@@ -80,6 +84,7 @@ export class ReportesComponent implements OnInit {
             console.log(this.mes[0]);
 
       });
+      this.tipo =2;
          break;
        case 'Año':
         this.reporteservicio.getreportea().subscribe(
@@ -89,7 +94,7 @@ export class ReportesComponent implements OnInit {
       });
         console.log("-------->"+valor);
         
-
+        this.tipo =3;
          break;   
     }
   

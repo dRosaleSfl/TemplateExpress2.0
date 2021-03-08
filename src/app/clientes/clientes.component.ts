@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
 import {ServicioService} from '../servicios/servicio.service';
 import Swal from 'sweetalert2';
-import { FormBuilder} from '@angular/forms';
+import { FormBuilder,Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-clientes',
@@ -24,39 +24,39 @@ export class ClientesComponent implements OnInit {
   public indice1 = false;
   constructor(private clienteservicio: ServicioService, private formBuilder: FormBuilder) {
     this.clientForm = this.formBuilder.group({
-      nombre_cliente: '',
-      ape_pat: '',
-      ape_mat: '',
-      tipo: '',
-      correo: '',
-      calle: '',
-      num_int: '',
-      num_ext: '',
-      colonia: '',
-      cp: '',
-      ciudad: '',
-      estado: '',
-      pais: '',
-      telefono: '',
-      rfc: ''
+      nombre_cliente: ['',Validators.required],
+      ape_pat:['',Validators.required],
+      ape_mat: ['',Validators.required],
+      tipo: ['',Validators.required],
+      correo: ['',Validators.required],
+      calle: ['',Validators.required],
+      num_int: ['',Validators.required],
+      num_ext: ['',Validators.required],
+      colonia: ['',Validators.required],
+      cp: ['',Validators.required],
+      ciudad: ['',Validators.required],
+      estado: ['',Validators.required],
+      pais: ['',Validators.required],
+      telefono: ['',Validators.required],
+      rfc: ['',Validators.required]
     });
     this.addclientForm = this.formBuilder.group({
-      id_cliente: '',
-      nombre_cliente: '',
-      ape_pat: '',
-      ape_mat: '',
-      tipo: '',
-      correo: '',
-      calle: '',
-      num_int: '',
-      num_ext: '',
-      colonia: '',
-      cp: '',
-      ciudad: '',
-      estado: '',
-      pais: '',
-      telefono: '',
-      rfc: ''
+      id_cliente: ['',Validators.required],
+      nombre_cliente: ['',Validators.required],
+      ape_pat: ['',Validators.required],
+      ape_mat:['',Validators.required],
+      tipo: ['',Validators.required],
+      correo: ['',Validators.required],
+      calle: ['',Validators.required],
+      num_int: ['',Validators.required],
+      num_ext: ['',Validators.required],
+      colonia: ['',Validators.required],
+      cp: ['',Validators.required],
+      ciudad: ['',Validators.required],
+      estado: ['',Validators.required],
+      pais: ['',Validators.required],
+      telefono: ['',Validators.required],
+      rfc: ['',Validators.required]
     });
    }
   
@@ -122,16 +122,20 @@ export class ClientesComponent implements OnInit {
     );
   }
   editar() {
-    console.log(this.addclientForm.value);
-   this.clienteservicio.ediclient(this.addclientForm.value).subscribe(
-      res => {
-        console.log(res); 
-      }
-    );
-    Swal.fire('Cliente Actualizado Exitosamente');
+    if(this.addclientForm.valid){
+      console.log(this.addclientForm.value);
+      this.clienteservicio.ediclient(this.addclientForm.value).subscribe(
+        res => {
+          console.log(res); 
+        }
+      );
+      Swal.fire('Cliente Actualizado Exitosamente');
+     }else{
+      Swal.fire('Campos Vacios');
+     }
     this.getcliente();
-
   }
+  
   borrar(){
     console.log(this.addclientForm.value);
     this.clienteservicio.deleteClient(this.addclientForm.value).subscribe(
@@ -150,14 +154,16 @@ export class ClientesComponent implements OnInit {
 
  
   newcliente(){
-    this.clienteservicio.addClient(this.clientForm.value).subscribe(
-      res => {
-        console.log(res); 
-      }
-    ); 
-    Swal.fire('Cliente Agreado Exitosamente');
-    this.getcliente();
+    if(this.clientForm.valid){
+      console.log(this.clientForm.value);
+      this.clienteservicio.addClient(this.clientForm.value).subscribe(
+        res => {
+          console.log(res); 
+        }
+      );
+      Swal.fire('Cliente Agreado Exitosamente');
+     }else{
+      Swal.fire('Campos Vacios');
+     }
   }
-
 }
- 

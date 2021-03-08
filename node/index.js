@@ -14,8 +14,8 @@ app.use(function (req, res, next) {
 const mysql = require('mysql');
 const connect = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: 'gjsggv160305',
+  user: 'usuariovero',
+  password: '190398',
   database: "templaexpress",
 });
 //-------------login-------------------------
@@ -1204,7 +1204,7 @@ app.get('/masvendido', async (req, res) => {
   });
 })
 app.get('/maspedido', async (req, res) => {
-  connect.query(`select sum(a.cantidad) as mas, a.id_herraje, b.nombre, b.marca from faltantes a, inventario b where a.id_herraje=b.id_herraje group by b.nombre order by mas desc limit 10;s`, (err, result) => {
+  connect.query(`select sum(a.cantidad) as mas, a.id_herraje, b.nombre, b.marca from faltantes a, inventario b where a.id_herraje=b.id_herraje group by b.nombre order by mas desc limit 10;`, (err, result) => {
     //console.log(result);
     if (err) {
       throw err;

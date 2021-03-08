@@ -63,9 +63,12 @@
                   </div>
                 </div>
                   <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="id_proveedor">Tipo</label>
-                      <input type="text" class="form-control" placeholder="" formControlName="tipo" >
+                    <div class="form-group">
+                      <label for="tipo">Tipo</label>
+                      <select class="form-control" id="tipo" formControlName="tipo" *ngIf="this.tipo === '1'">  
+                        <option  value="0">Fisica</option>
+                        <option  value="1">Moral</option>
+                      </select>
                     </div>
                   <div class="form-group col-md-6">
                     <label for="puesto">RFC</label>
@@ -74,11 +77,11 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="id_proveedor">Correo</label>
-                    <input type="text" class="form-control" id="id_proveedor" placeholder="" formControlName="correo">
+                    <label for="correo">Correo</label>
+                    <input type="text" class="form-control" id="correo" placeholder="" formControlName="correo">
                     </div>
                     <div class="form-group col-md-6">
-                    <label for="puesto">Telefono</label>
+                    <label for="telefono">Telefono</label>
                     <input type="text" class="form-control"  placeholder="" formControlName="telefono">
                     </div>
                 </div>
@@ -162,9 +165,14 @@
               
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="tipo">Tipo</label>
-                  <input type="text" formControlName="tipo" class="form-control" placeholder="" required>
+                  <div class="form-group">
+                    <label for="tipo">Tipo</label>
+                    <select class="form-control" id="tipo" formControlName="tipo" *ngIf="this.tipo === '1'">  
+                      <option  value="0">Fisica</option>
+                      <option  value="1">Moral</option>
+                    </select>
                   </div>
+                </div>
               <div class="form-group col-md-6">
                 <label for="rfc">RFC</label>
                 <input type="text" formControlName="rfc" class="form-control" placeholder="" required>

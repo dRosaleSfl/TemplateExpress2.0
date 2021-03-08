@@ -24,7 +24,7 @@ export class EmpleadosComponent implements OnInit {
       nombre_empleado:['',Validators.required],
       ape_pat:['',Validators.required],
       ape_mat:['',Validators.required],
-      puesto:['',Validators.required],
+      puesto:'',
       telefono:['',Validators.required],
       calle:['',Validators.required],
       num_int:['',Validators.required],
@@ -136,7 +136,7 @@ export class EmpleadosComponent implements OnInit {
       Swal.fire('Empleado Eliminado Exitosamente');
    }
    editar(){
-    if(this.empleadoForm.valid){
+    if(this.empleadoForm1.valid){
       console.log(this.empleadoForm1.value);
       console.log(this.empleadoForm1.value);
       this.empleadoservicio.editempleado(this.empleadoForm1.value).subscribe(

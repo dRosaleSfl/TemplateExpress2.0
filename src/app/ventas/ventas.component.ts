@@ -43,11 +43,7 @@ export class VentasComponent implements OnInit {
     this.ventaForm = this.formBuilder.group(
       {
         id_ventas: [{ value: '', disabled: true }],
-<<<<<<< HEAD
         fecha: [{ value: '', disabled: false }],
-=======
-        fecha: '',
->>>>>>> origin/beta2.0hash
         id_cliente: [{ value: '', disabled: false }],
         pedidos: [{ value: [], disabled: false }],
         subtotal: [{ value: '', disabled: false}],

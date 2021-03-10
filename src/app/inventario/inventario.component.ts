@@ -70,8 +70,8 @@ export class InventarioComponent implements OnInit {
     if (filterValue === '') {
       this.inventario = this.buscarproducto;
     } else {
-      this.inventario = this.buscarproducto.filter((producto: { id_herraje: string | string[]; nombre: string; marca: string; }) =>
-      producto.id_herraje.toString().includes(filterValueLower) ||
+      this.inventario = this.buscarproducto.filter((producto: { id_herraje: string; nombre: string; marca: string; }) =>
+      producto.id_herraje.toLowerCase().includes(filterValueLower) ||
       producto.nombre.toLowerCase().includes(filterValueLower) ||
       producto.marca.toLowerCase().includes(filterValueLower) 
       );

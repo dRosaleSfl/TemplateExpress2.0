@@ -169,7 +169,7 @@
 
 <!--    - -   -   -   -   - TOOL BAR  -    -   -   -   -   -   -   -   -   -   -   -   -        -->  
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-6 static-top shadow">
 
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -178,22 +178,26 @@
     
     
     <!-- Topbar Navbar -->
-    <ul class="navbar-nav ml-auto">
+   
   
-      <div class="topbar-divider d-none d-sm-block"></div>
+      <div class="topbar-divider d-none d-lg-block mx-auto" ></div>
     
       <!-- Nav Item - User Information -->
       
-    </ul>
-    <li class="nav-item dropdown no-arrow">
+    <ul class="nav-item dropdown no-arrow ">
       <a class="nav-link dropdown-toggle"  id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span *ngIf="this.tipo === '0'" class="mr-6 d-none d-lg-inline text-gray-600 large">{{this.usr}} - Ventas</span>
-      <span *ngIf="this.tipo === '1'" class="mr-6 d-none d-lg-inline text-gray-600 large">{{this.usr}} - Admin</span>
-      <span *ngIf="this.tipo === '2'" class="mr-6 d-none d-lg-inline text-gray-600 large">{{this.usr}} - Almacen</span>
-        <img class="img-profile rounded-circle" src="../../assets/img/logo_trans.png">
-        <button type="button"  class="btn btn-primary"  (click)="logout()">Cerrar Sesion</button>
-      </a> 
-    </li>
+      <span *ngIf="this.tipo === '0'" class="mr-4 d-none d-lg-inline text-gray-600 large">{{this.usr}} - Ventas</span>
+      <span *ngIf="this.tipo === '1'" class="mr-4 d-none d-lg-inline text-gray-600 large">{{this.usr}} - Admin</span>
+      <span *ngIf="this.tipo === '2'" class="mr-4 d-none d-lg-inline text-gray-600 large">{{this.usr}} - Almacen</span>
+    </a> 
+  </ul>
+    <ul class="nav-item1 dropdown no-arrow  ">
+        <img class="img-profile rounded-circle mr-4" src="../../assets/img/logo_trans.png" height="70px" >
+      </ul>
+    <ul class="nav-item2 dropdown no-arrow ">
+        <button type="button"  class="btn btn-primary mr-auto "  (click)="logout()" >Cerrar Sesion</button>
+      </ul>
+   
     </nav> 
     
     

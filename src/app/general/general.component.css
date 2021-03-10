@@ -4145,8 +4145,8 @@ input[type="button"].btn-block {
 .navbar-nav {
   display: flex;
   flex-direction: column;
-  padding-left: 0;
-  margin-bottom: 0;
+  padding-left: 100;
+  margin-bottom: 100;
   list-style: none;
 }
 
@@ -10167,10 +10167,13 @@ a:focus {
 }
 
 .topbar .topbar-divider {
-  width: 0;
-  border-right: 1px solid #e3e6f0;
+  /* width: 0;
+ border-right: 10px solid #e3e6f0;*/
   height: calc(4rem - 2rem);
   margin: auto 1rem;
+  padding-right: 20px !important;
+  padding-inline-end: 10px;
+  margin-right: 10px !important;;
 }
 
 .topbar .nav-item .nav-link {

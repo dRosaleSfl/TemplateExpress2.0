@@ -75,8 +75,12 @@
                   </div>
                   <div class="form-group">
                     <label for="tipo">Tipo</label>
-                    <input *ngIf="this.tipo === '1'" type="text"pattern="[0-9]*" class="form-control" id="tipo" placeholder=""  formControlName="tipo">
-                    <input *ngIf="this.tipo != '1'" type="text"  pattern="[0-9]*" class="form-control" id="tipo" placeholder=""  formControlName="tipo" disabled="true">
+                  
+
+                    <input *ngIf="this.tipo === '1' && tcliente "   type="text" class="form-control" id="tipo" placeholder="Moral"  value="Moral">
+                    <input *ngIf="this.tipo === '1' && !tcliente "   type="text" class="form-control" id="tipo" placeholder="Fisico" value="Fisico" >
+                    <input *ngIf="this.tipo != '1' && tcliente"  type="text"   class="form-control" id="tipo" placeholder="Moral" value="Moral" disabled="true">
+                    <input *ngIf="this.tipo != '1' && !tcliente"  type="text"   class="form-control" id="tipo" placeholder="Fisico"  value="Fisico "disabled="true">
                   </div>
                 </div>
                 <div class="form-row">
@@ -156,14 +160,10 @@
                   </div>
                   <!-- Modal footer -->
               <div class="modal-footer">
-<<<<<<< HEAD
+
                 <p *ngIf="this.tipo === '0'" style="color: red;">Si desea editar los valores contactese con un admin</p> <!--No se ve y no se porque-->
-=======
-                <p *ngif="this.tipo === '0'" style="color: red;">Si desea editar los valores contactese con un admin</p> <!--No se ve y no se porque-->
-<<<<<<< HEAD
->>>>>>> origin/betakarla
-=======
->>>>>>> origin/betahash2
+
+
                 <button *ngIf="this.tipo === '1'" type="button" (click)="borrar()" class="btn btn-danger" >Eliminar</button> 
                 <button *ngIf="this.tipo === '1'" type="button" (click)="editar()" class="btn btn-danger" >Editar</button>
             </div>
@@ -203,14 +203,12 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="tipo">Tipo</label>
-<<<<<<< HEAD
+
                 <select class="form-control" id="tipo" formControlName="tipo" *ngIf="this.tipo === '1'">  
                   <option  value="0">Fisica</option>
                   <option  value="1">Moral</option>
                 </select>
-=======
-                <input type="text" formControlName="tipo" class="form-control" placeholder=""  required >
->>>>>>> origin/betahash2
+
               </div>
               <div class="form-group col-md-6">
                 <label for="rfc">Rfc</label>

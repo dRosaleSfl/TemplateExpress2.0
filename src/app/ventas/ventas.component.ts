@@ -43,7 +43,7 @@ export class VentasComponent implements OnInit {
     this.ventaForm = this.formBuilder.group(
       {
         id_ventas: [{ value: '', disabled: true }],
-        fecha: [{ value: '', disabled: true }],
+        fecha: '',
         id_cliente: [{ value: '', disabled: false }],
         pedidos: [{ value: [], disabled: false }],
         subtotal: [{ value: '', disabled: false}],
@@ -276,6 +276,8 @@ export class VentasComponent implements OnInit {
   }
 
   agregar() {
+    console.log(this.ventaForm.value);
+    console.log(this.ventaForm.value.fecha);
     if (this.ventaForm.valid) {
       console.log(this.ventaForm.value);
       console.log(this.ventaForm.valid);

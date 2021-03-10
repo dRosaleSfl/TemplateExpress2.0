@@ -99,7 +99,8 @@
                   <td>{{producto.nombre}}</td>
                   <td>{{producto.marca}}</td>
                   <td>{{producto.cantidad}}</td>
-                  <td>{{producto.tipo_precio}}</td>
+                  <td *ngIf="producto.tipo_precio=='1'">S/Vidrio</td>
+                  <td *ngIf="producto.tipo_precio=='0'">C/Vidrio</td>
                   <td>{{producto.precio_unitario}}</td>
                   <td *ngIf="abrirDetalles"><button type="button" (click)=" borraruno(producto)" class="btn btn-warning" >Borrar Producto</button></td>
                 </tr>

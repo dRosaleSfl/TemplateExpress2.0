@@ -22,6 +22,7 @@ export class ClientesComponent implements OnInit {
   public copia1 = false;
   public indice = true;
   public indice1 = false;
+  tcliente=false;
   constructor(private clienteservicio: ServicioService, private formBuilder: FormBuilder) {
     this.clientForm = this.formBuilder.group({
       nombre_cliente: ['',Validators.required],
@@ -93,6 +94,7 @@ export class ClientesComponent implements OnInit {
 
  
   vercliente(item: any) {
+
     let clienteId;
     clienteId = item.id_cliente;
     console.log(clienteId);
@@ -118,6 +120,12 @@ export class ClientesComponent implements OnInit {
       rfc: this.mcliente[0].rfc
      });
       console.log(this.addclientForm.value);
+      if(this.addclientForm.value.tipo=="1"){
+      this.tcliente=true;
+      }else{
+        this.tcliente=false;
+      }
+
     }
     );
   }

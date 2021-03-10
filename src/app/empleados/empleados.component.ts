@@ -19,6 +19,7 @@ export class EmpleadosComponent implements OnInit {
   public copia1 = false;
   public indice = true;
   public indice1 = false;
+  puesto;
   constructor(private empleadoservicio:ServicioService, private formBuilder: FormBuilder ) { 
     this.empleadoForm = this.formBuilder.group({
       nombre_empleado:['',Validators.required],
@@ -108,7 +109,22 @@ export class EmpleadosComponent implements OnInit {
       nombre_usuario:this.mempleados[0].nombre_usuario,
       contrasena:this.mempleados[0].contrasena
      });
-    }
+     console.log(this.empleadoForm1.value.puesto);
+     switch(this.empleadoForm1.value.puesto){
+       case "0":
+         this.puesto="Vendedor";
+         break;
+       case "1":
+        this.puesto="Administrador";
+          break;
+       case "2":
+        this.puesto="Encargado de Almacen";
+            break;
+       case "3":
+        this.puesto="Operador";
+              break;
+     }
+    } 
     );
   }
 

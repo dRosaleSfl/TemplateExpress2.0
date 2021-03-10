@@ -19,6 +19,7 @@ export class ProveedoresComponent implements OnInit {
   public copia1 = false;
   public indice = true;
   public indice1 = false;
+  tproveedor: boolean;
 
   constructor(private proveedorservicio: ServicioService, private formBuilder: FormBuilder) {
     this.proveedorForm = this.formBuilder.group({
@@ -111,7 +112,11 @@ export class ProveedoresComponent implements OnInit {
         estado: this.mproveedor[0].estado,
         pais: this.mproveedor[0].pais,
       });
-
+      if(this.proveedorForm1.value.tipo=="1"){
+        this.tproveedor=true;
+        }else{
+          this.tproveedor=false;
+        }
     }
     );
   }

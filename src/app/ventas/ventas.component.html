@@ -7,7 +7,7 @@
       <div class="col-md-auto">
         <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)">
       </div>
-      <div class="col col-lg-2">
+      <div *ngIf="this.tipo != '2'" class="col col-lg-2">
         <button type="button" class="btn btn-info" (click)="modalinventario()">Nueva Venta</button>
       </div>
     </div>
@@ -62,17 +62,26 @@
             </div>
             <div class="form-group col-md-4">
               <label for="Fecha">Fecha</label>
-              <input type="text" class="form-control" id="fecha" placeholder="" formControlName="fecha" required>
+              <input *ngIf="abrirDetalles && this.tipo === '1'" type="text" class="form-control" id="fecha" placeholder="" formControlName="fecha" required>
+              <input *ngIf="abrirDetalles && this.tipo != '1'" type="text" class="form-control" id="fecha" placeholder="" formControlName="fecha" disabled="true" required>
+              <input *ngIf="abrirNota" type="text" class="form-control" id="fecha" placeholder="" formControlName="fecha" required>
             </div>
             <div class="form-group">
+
               <label for="id_cliente">Nombre o Razon social del cliente</label>
-              <label for="id_cliente">Nombre o Razon social del cliente</label>
-              <select *ngIf="this.tipo === '1'" class="form-control" id="razon_social" formControlName="id_cliente" >
+              <select *ngIf="abrirDetalles && this.tipo === '1'" class="form-control" id="razon_social" formControlName="id_cliente" required>
                 <option *ngFor="let cliente of clientes; let i = index" [value]="clientes[i].id_cliente" >
                   {{clientes[i].ape_pat}} {{clientes[i].ape_mat}} {{clientes[i].nombre}}
                 </option>
               </select>
-              <select *ngIf="this.tipo != '1'" class="form-control" id="razon_social" formControlName="id_cliente" disabled="true" >
+
+              <select *ngIf="abrirDetalles && this.tipo != '1'" class="form-control" id="razon_social" formControlName="id_cliente" disabled="true" required>
+                <option *ngFor="let cliente of clientes; let i = index" [value]="clientes[i].id_cliente">
+                  {{clientes[i].ape_pat}} {{clientes[i].ape_mat}} {{clientes[i].nombre}}
+                </option>
+              </select>
+
+              <select *ngIf="abrirNota" class="form-control" id="razon_social" formControlName="id_cliente" >
                 <option *ngFor="let cliente of clientes; let i = index" [value]="clientes[i].id_cliente">
                   {{clientes[i].ape_pat}} {{clientes[i].ape_mat}} {{clientes[i].nombre}}
                 </option>
@@ -90,7 +99,7 @@
                   <th>Cantidad</th>
                   <th>Tipo precio</th>
                   <th>Precio unitario</th>
-                  <th *ngIf="abrirDetalles"> Detalles</th>
+                  <th *ngIf="abrirDetalles && this.tipo === '1'"> Detalles</th>
                 </tr>
               </thead>
               <tbody>
@@ -101,7 +110,7 @@
                   <td>{{producto.cantidad}}</td>
                   <td>{{producto.tipo_precio}}</td>
                   <td>{{producto.precio_unitario}}</td>
-                  <td *ngIf="abrirDetalles"><button type="button" (click)=" borraruno(producto)" class="btn btn-warning" >Borrar Producto</button></td>
+                  <td *ngIf="abrirDetalles && this.tipo === '1'"><button type="button" (click)=" borraruno(producto)" class="btn btn-warning" >Borrar Producto</button></td>
                 </tr>
                 <tr>
               </tbody>
@@ -110,13 +119,13 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="subtotal">Subtotal</label>
-              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="subtotal" placeholder="" formControlName="subtotal">
-              <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="subtotal" placeholder="" formControlName="subtotal" disabled="true">
+              <input type="text" class="form-control" id="subtotal" placeholder="" formControlName="subtotal" disabled="true">
             </div>
             <div class="form-group col-md-6">
               <label for="total">Total</label>
-              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="total" placeholder="" formControlName="total" required>
-              <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="total" placeholder="" formControlName="total" disabled="true" >
+              <input *ngIf="abrirDetalles && this.tipo === '1'" type="text" class="form-control" id="total" placeholder="" formControlName="total" required>
+              <input *ngIf="abrirDetalles && this.tipo != '1'" type="text" class="form-control" id="total" placeholder="" formControlName="total" disabled="true" required>
+              <input *ngIf="abrirNota" type="text" class="form-control" id="total" placeholder="" formControlName="total" required>
               <!--<input type="text" class="form-control" id="total" placeholder="" formControlName="total">
               <input type="text" class="form-control" id="total" placeholder="" formControlName="total">-->
             </div>
@@ -124,46 +133,74 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="anticipo">Anticipo</label>
-              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="anticipo" placeholder="" formControlName="anticipo" required>
-              <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="anticipo" placeholder="" formControlName="anticipo">
+              <input *ngIf="abrirDetalles && this.tipo === '1'" type="text" class="form-control" id="anticipo" placeholder="" formControlName="anticipo" required>
+              <input *ngIf="abrirDetalles && this.tipo != '1'" type="text" class="form-control" id="anticipo" placeholder="" formControlName="anticipo" disabled="true" required>
+              <input *ngIf="abrirNota" type="text" class="form-control" id="anticipo" placeholder="" formControlName="anticipo" required>
             </div>
             <div class="form-group col-md-4">
               <label for="abono">Abono</label>
-              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="abono" placeholder="" formControlName="abono" required>
-              <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="abono" placeholder="" formControlName="abono">
+              <input *ngIf="abrirDetalles && this.tipo === '1'" type="text" class="form-control" id="abono" placeholder="" formControlName="abono" required>
+              <input *ngIf="abrirDetalles && this.tipo != '1'" type="text" class="form-control" id="abono" placeholder="" formControlName="abono" disabled="true" required>
+              <input *ngIf="abrirNota" type="text" class="form-control" id="abono" placeholder="" formControlName="abono" required>
             </div>
             <div class="form-group col-md-4">
               <label for="saldo">Saldo</label>
-              <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="saldo" placeholder="" formControlName="saldo" required>
-              <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="saldo" placeholder="" formControlName="saldo">
+              <input *ngIf="abrirDetalles && this.tipo === '1'" type="text" class="form-control" id="saldo" placeholder="" formControlName="saldo" required>
+              <input *ngIf="abrirDetalles && this.tipo != '1'" type="text" class="form-control" id="saldo" placeholder="" formControlName="saldo" disabled="true" required>
+              <input *ngIf="abrirNota" type="text" class="form-control" id="saldo" placeholder="" formControlName="saldo" required required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="id_empleado">Nombre del empleado que atendió</label>
-              <select *ngIf="this.tipo === '1'" class="form-control" id="id_empleado" formControlName="id_empleado">
+              <select *ngIf="abrirDetalles && this.tipo === '1'" class="form-control" id="id_empleado" formControlName="id_empleado">
                 <option *ngFor="let empleado of empleados; let i = index" [value]="empleados[i].id_empleado">
                   {{empleados[i].ape_pat}} {{empleados[i].ape_mat}} {{empleados[i].nombre}}
                 </option>
               </select>
-              <select *ngIf="this.tipo != '1'" class="form-control" id="id_empleado" formControlName="id_empleado" disabled="true"> 
+
+              <select *ngIf="abrirDetalles && this.tipo != '1'" class="form-control" id="id_empleado" formControlName="id_empleado" disabled="true" required="true">
+                <option *ngFor="let empleado of empleados; let i = index" [value]="empleados[i].id_empleado">
+                  {{empleados[i].ape_pat}} {{empleados[i].ape_mat}} {{empleados[i].nombre}}
+                </option>
+              </select>
+
+              <select *ngIf="abrirNota" class="form-control" id="id_empleado" formControlName="id_empleado" > 
                 <option *ngFor="let empleado of empleados; let i = index" [value]="empleados[i].id_empleado">
                   {{empleados[i].ape_pat}} {{empleados[i].ape_mat}} {{empleados[i].nombre}}
                 </option>
               </select>
             </div>
             <div class="form-group col-md-6">
-              <label for="status">Estatus del pedido</label>
-              <input *ngIf="this.tipo != '0'" type="text" class="form-control" id="status" placeholder="" formControlName="status" required>
-              <input *ngIf="this.tipo === '0'" type="text" class="form-control" id="status" placeholder="" formControlName="status" disabled="true">
+              <label for="status">Estado del pedido</label>
+              <select *ngIf="abrirDetalles && this.tipo != '0'" class="form-control" id="status" placeholder="" formControlName="status" required>
+                <option [value]=0>Entregado</option>
+                <option [value]=1>No entregado</option>
+              </select>
+
+              <select *ngIf="abrirDetalles && this.tipo === '0'" class="form-control" id="status" placeholder="" formControlName="status" required disabled="true">
+                <option [value]=0>Entregado</option>
+                <option [value]=1>No entregado</option>
+              </select>
+
+              <select *ngIf="abrirNota" class="form-control" id="status" placeholder="" formControlName="status" required>
+                <option [value]=0>Entregado</option>
+                <option [value]=1>No entregado</option>
+              </select>
             </div>
           </div>
           <!-- Modal footer -->
-          <div *ngIf="this.tipo != '0'" class="modal-footer">
-            <button *ngIf="abrirDetalles" type="button" (click)="borrar()" class="btn btn-danger">Eliminar</button>
-            <button *ngIf="abrirDetalles" type="button" (click)="editar()" class="btn btn-primary">Guardar
-              Cambios</button>
-            <button *ngIf="abrirNota" type="button" (click)="agregar()" class="btn btn-primary">Guardar Venta</button>
+          <div *ngIf="abrirDetalles && this.tipo === '1'" class="modal-footer">
+            <button  type="button" (click)="borrar()" class="btn btn-danger">Eliminar</button>
+            <button  type="button" (click)="editar()" class="btn btn-primary">Guardar Cambios</button> 
+          </div>
+
+          <div *ngIf="abrirDetalles && this.tipo === '2'" class="modal-footer">
+            <button  type="button" (click)="editar()" class="btn btn-primary">Guardar Estado</button> 
+          </div>
+
+          <div *ngIf="abrirNota" >
+            <button type="button" (click)="agregar()" class="btn btn-primary">Guardar Venta</button>
           </div>
         </form>
       </div>

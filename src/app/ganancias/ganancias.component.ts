@@ -83,7 +83,13 @@ export class GananciasComponent implements OnInit {
         for(let i=0; i<Object.keys(objtemp).length; i++) {
           temp = res[i].fecha;
           console.log(temp);
-          res[i].fecha = temp.substring(0,10);
+          if (temp === null) {
+            res[i].fecha = "fecha no disponible";
+          }
+          else {
+            res[i].fecha = temp.substring(0,10);
+          }
+          1
         }
         console.log(res);
         this.ganancias = res;

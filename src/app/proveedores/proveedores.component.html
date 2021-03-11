@@ -55,11 +55,11 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label for="nombre_proveedor">Apellido Paterno</label>
-                    <input type="text" formControlName="ape_pat" class="form-control"  placeholder="" pattern="[A-Z|a-z|' ']*" >
+                    <input type="text" formControlName="ape_pat" class="form-control"  placeholder="" pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*" >
                   </div>
                   <div class="form-group col-md-4">
                     <label for="nombre_proveedor">Apellido Materno</label>
-                    <input type="text" formControlName="ape_mat" class="form-control"   placeholder="" pattern="[A-Z|a-z|' ']*" >
+                    <input type="text" formControlName="ape_mat" class="form-control"   placeholder="" pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                   </div>
                 </div>
                   <div class="form-row">
@@ -154,11 +154,11 @@
                 </div>
                 <div class="form-group col-md-4">
                   <label for="nombre_proveedor">Apellido Paterno</label>
-                  <input type="text" formControlName="ape_pat" class="form-control" placeholder="" required pattern="[A-Z|a-z|' ']*">
+                  <input type="text" formControlName="ape_pat" class="form-control" placeholder="" required pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="nombre_proveedor">Apellido Materno</label>
-                  <input type="text" formControlName="ape_mat" class="form-control" placeholder="" required pattern="[A-Z|a-z|' ']*">
+                  <input type="text" formControlName="ape_mat" class="form-control" placeholder="" required pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                 </div>
               </div>
               
@@ -202,7 +202,7 @@
                       <tr> 
                         <td><input placeholder="" formControlName="calle" class="form-control" required ></td>
                         <td><input placeholder="" formControlName="num_int" class="form-control" required></td>
-                        <td><input placeholder="" pattern="[0-9]*" formControlName="num_ext" class="form-control" required></td>
+                        <td><input placeholder="" formControlName="num_ext" class="form-control" required></td>
                         <td><input placeholder="" formControlName="colonia" class="form-control" required ></td>
                       </tr>
                       <tr>

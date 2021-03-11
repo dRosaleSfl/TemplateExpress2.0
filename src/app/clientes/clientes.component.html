@@ -58,13 +58,13 @@
                   </div>
                     <div class="form-group col-md-4">
                     <label for="ape_pat">Apellido paterno</label>
-                    <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat"  pattern="[A-Z|a-z|' ']*">
-                    <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat" disabled="true "  pattern="[A-Z|a-z|' ']*">
+                    <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat"  pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
+                    <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat" disabled="true "  pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                     </div>
                     <div class="form-group col-md-4">
                       <label for="ape_mat">Apellido materno</label>
-                      <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat"   pattern="[A-Z|a-z|' ']*">
-                      <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat" disabled="true"   pattern="[A-Z|a-z|' ']*">
+                      <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat"   pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
+                      <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat" disabled="true"   pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                       </div>
                 </div>
                 <div class="form-row">
@@ -189,15 +189,15 @@
                 <div class="form-row">
                   <div class="form-group col-md-4">
                     <label for="nombre_cliente">Nombre o Razón social</label>
-                    <input type="text" formControlName="nombre_cliente" class="form-control" placeholder=" "  required>
+                    <input type="text" formControlName="nombre_cliente" class="form-control" placeholder=" "  required >
                 </div>
                  <div class="form-group col-md-4">
                     <label for="ape_pat">Apellido paterno</label>
-                    <input type="text" formControlName="ape_pat" class="form-control" placeholder=" "  required  pattern="[A-Z|a-z|' ']*">
+                    <input type="text" formControlName="ape_pat" class="form-control" placeholder=" "  required  pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                 </div>
                   <div class="form-group col-md-4">
                     <label for="ape_mat">Apellido materno</label>
-                    <input type="text" formControlName="ape_mat" class="form-control" placeholder=" "  required   pattern="[A-Z|a-z|' ']*">
+                    <input type="text" formControlName="ape_mat" class="form-control" placeholder=" "  required   pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                 </div>
               </div>
             <div class="form-row">
@@ -255,7 +255,7 @@
                       </thead>
                       <tbody>
                         <tr> 
-                          <td><input placeholder="" formControlName="cp"  class="form-control" required></td>
+                          <td><input placeholder="" formControlName="cp" pattern="[0-9]*" class="form-control" required></td>
                           <td><input placeholder="" formControlName="ciudad" class="form-control" required  ></td>
                           <td><input placeholder="" formControlName="estado" class="form-control" required  ></td>
                           <td><input placeholder="" formControlName="pais" class="form-control" required  ></td>

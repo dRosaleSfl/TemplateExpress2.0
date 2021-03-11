@@ -14,8 +14,8 @@ app.use(function (req, res, next) {
 const mysql = require('mysql');
 const connect = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: '',
+  user: 'usuariovero',
+  password: '190398',
 /*
   user: 'usuariovero',
   password: '190398',
@@ -102,7 +102,7 @@ app.get('/newclient', (req, res) => {
         //  res.end();
       }
       var cp1 = result1[0].id_cp;
-      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}",'${numint}','${numext}',"${colonia}",'${cp1}')`;
+      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}","${numint}","${numext}","${colonia}",'${cp1}')`;
       connect.query(query2, (err, result2) => {
         if (err) {
           // throw err;
@@ -218,6 +218,7 @@ app.get('/client', (req, res) => {
     if (err) {
 
     } else {
+      console.log(result);
       res.send(result);
       // res.status(200).json(result);
       res.end();
@@ -265,7 +266,7 @@ app.get('/updateclient', (req, res) => {
       }
       var direccion = result1[0].id_direccion;
       console.log(direccion)
-      const query2 = `update direccion set calle="${calle}",num_int='${numint}',num_ext='${numext}',colonia="${colonia}" where id_direccion='${direccion}'`;
+      const query2 = `update direccion set calle="${calle}",num_int="${numint}",num_ext="${numext}",colonia="${colonia}" where id_direccion='${direccion}'`;
       connect.query(query2, (err, result2) => {
         if (err) {
           // throw err;
@@ -366,7 +367,7 @@ app.get('/newempleado', async (req, res) => {
         // res.end();
       }
       var cp1 = result1[0].id_cp;
-      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}",'${numint}','${numext}',"${colonia}",'${cp1}')`;
+      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}","${numint}","${numext}","${colonia}",'${cp1}')`;
       connect.query(query2, (err, result2) => {
         if (err) {
           //   throw err;
@@ -506,7 +507,7 @@ app.get('/updateempleado',(req,res)=>{
                     //res.end();
                   }
                   var direccion = result1[0].id_direccion;
-                  const query2 = `update direccion set calle="${calle}",num_int='${numint}',num_ext='${numext}',colonia="${colonia}" where id_direccion='${direccion}'`;
+                  const query2 = `update direccion set calle="${calle}",num_int="${numint}",num_ext="${numext}",colonia="${colonia}" where id_direccion='${direccion}'`;
                   connect.query(query2,(err,result2)=>{
                           if(err){
                             // throw err;
@@ -686,7 +687,7 @@ app.get('/updateproveedor', async (req, res) => {
       }
       var direccion = result1[0].id_direccion;
       console.log(direccion)
-      const query2 = `update direccion set calle="${calle}",num_int='${numint}',num_ext='${numext}',colonia="${colonia}" where id_direccion='${direccion}'`;
+      const query2 = `update direccion set calle="${calle}",num_int="${numint}",num_ext="${numext}",colonia="${colonia}" where id_direccion='${direccion}'`;
       connect.query(query2, (err, result2) => {
         if (err) {
           // throw err;
@@ -755,7 +756,7 @@ app.get('/newproveedor', async (req, res) => {
         //  res.end();
       }
       var cp1 = result1[0].id_cp;
-      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}",'${numint}','${numext}',"${colonia}",'${cp1}')`;
+      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}","${numint}","${numext}","${colonia}",'${cp1}')`;
       connect.query(query2, (err, result2) => {
         if (err) {
           // throw err;

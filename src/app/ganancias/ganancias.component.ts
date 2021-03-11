@@ -121,7 +121,7 @@ export class GananciasComponent implements OnInit {
     if (filterValue === '') {
       this.ganancias= this.gananciasBusqueda;
     } else {
-      this.ganancias = this.gananciasBusqueda.filter((gan: { num_nota: string; tipo_pago: string; nombre: string; ape_pat: string; ape_mat: string; cantidad: string; concepto: string; status: string; recibio: string; }) =>
+      this.ganancias = this.gananciasBusqueda.filter((gan: { num_nota: string; tipo_pago: string; nombre: string; ape_pat: string; ape_mat: string; cantidad: string; concepto: string; status: string; recibio: string; fecha: Date;}) =>
       gan.num_nota.toString().includes(filterValueLower) ||
       gan.tipo_pago.toLowerCase().includes(filterValueLower) ||
       gan.nombre.toLowerCase().includes(filterValueLower) ||
@@ -130,7 +130,8 @@ export class GananciasComponent implements OnInit {
       gan.cantidad.toString().includes(filterValueLower) ||
       gan.concepto.toString().includes(filterValueLower) ||
       gan.status.toLowerCase().includes(filterValueLower) ||
-      gan.recibio.toLowerCase().includes(filterValueLower) 
+      gan.recibio.toLowerCase().includes(filterValueLower) ||
+      gan.fecha.toString().includes(filterValueLower)
       );
     }
   }

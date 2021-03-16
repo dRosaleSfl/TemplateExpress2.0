@@ -404,6 +404,7 @@ getganancias(){
   }
   // AGREGAR VENTA
   addVenta(venta: any, inventario: any) {
+    console.log(inventario);
     return this.httpClient.post(`http://localhost:3000/addventa?inv=${inventario}`, venta);
   }
 

@@ -23,7 +23,7 @@ export class VentasComponent implements OnInit {
   clientes;
   clienteSeleccionado;
   empleados;
-
+  pedidosObj;
   // Inventario
   inventario;
 
@@ -38,6 +38,7 @@ export class VentasComponent implements OnInit {
 
   abrirDetalles: Boolean;
   abrirNota: Boolean;
+  encontrado: boolean;
 
   constructor(private ventaservicio: ServicioService, private formBuilder: FormBuilder, private datePipe: DatePipe) {
     this.ventaForm = this.formBuilder.group(
@@ -93,21 +94,19 @@ export class VentasComponent implements OnInit {
   }
 
   verventas(item: any) {
+  
     this.ventaservicio.getventas(item.id_ventas).subscribe(res => {
-
       // Cliente
       this.ventaservicio.getclient(res[0].id_cliente).subscribe(res1 => {
-
         // Empleado
         this.ventaservicio.getempleado(res[0].id_empleado).subscribe(res2 => {
-
           // Datos del form
           this.ventaForm.patchValue({
             id_ventas: res[0].id_ventas,
             fecha: this.datePipe.transform(res[0].fecha, 'yyyy/MM/dd'),
             id_cliente: res[0].id_cliente,
-            pedidos: [],
             subtotal: res[0].subtotal,
+            pedidos: [],
             total: res[0].total,
             anticipo: res[0].anticipo,
             abono: res[0].abono,
@@ -115,21 +114,18 @@ export class VentasComponent implements OnInit {
             id_empleado: res[0].id_empleado,
             status: res[0].status
           });
-
-          // Pedidos
-          console.log(res[0].id_pedido);
-          var pedidosObj = [];
-
-            this.ventaservicio.getPedido(res[0].id_pedido).subscribe(res3 => {
-              console.log(res3[0]);
-              pedidosObj.push(res3[0]);
+          this.ventaservicio.getPedido(res[0].id_ventas).subscribe(res3 => {
+            console.log("---->")
+              console.log(res3);
+             
+             this.pedidosObj=res3;
               
             });
-         ;
-
-          this.ventaForm.patchValue({
-            pedidos: pedidosObj
+         this.ventaForm.patchValue({
+            pedidos: this.pedidosObj
+            
           });
+          //console.log(this.ventaForm.pedidos.value);
         });
       });
     });
@@ -138,9 +134,9 @@ export class VentasComponent implements OnInit {
     this.abrirNota = false;
     $("#myModal").modal("show");
   }
+
   modalinventario() {
     this.carrito = [];
-
     this.ventaservicio.getinventario().subscribe(
       res => {
         this.inventario = res;
@@ -160,12 +156,10 @@ export class VentasComponent implements OnInit {
     if (this.carrito.length == 0) {
       Swal.fire('El carrito esta vacio!', '', 'error');
     } else {
-
       var subtotal = 0;
       this.carrito.forEach(producto => {
         subtotal += producto.precio_unitario * producto.cantidad;
       });
-
       // Datos del form
       this.ventaForm.patchValue({
         id_ventas: 'Auto',
@@ -188,12 +182,9 @@ export class VentasComponent implements OnInit {
   }
 
   async agregarAlCarrito(producto) {
-   
-
-
-
+  
     const { value: tipo } = await Swal.fire({
-      title: 'Seleccione un tipo',
+      title: 'Seleccione un tipo y Cantidad',
       input: 'select',
       inputOptions: {
         'cvidrio': 'Con vidrio ($' + producto.preciocvidrio + ')',
@@ -202,88 +193,84 @@ export class VentasComponent implements OnInit {
       inputPlaceholder: '',
       showCancelButton: true
     });
-
+    const { value: valor } = await Swal.fire({
+      title: 'Cantidad de Productos',
+      input: 'text',
+      inputPlaceholder: 'Cantidad'
+    });
+    let cantidad:number;
+    this.encontrado=false;
+    cantidad=valor;
+    console.log(cantidad);
     // Se dio clic en cancelar
     if (!tipo) {
       return;
     }
-
     const tipoProducto = tipo === 'cvidrio' ? 0 : 1; // 0 con, 1 sin
-
     // Si el carrito esta vacio
     if (this.carrito.length == 0) {
-      this.agregarCarrito(producto, tipoProducto);
+
+      this.agregarCarrito(producto, tipoProducto,cantidad);
+
     } else {
-
       // Si el carrito no esta vacio
-      var encontrado = false;
-      for (let i = 0; i < this.carrito.length; i++) {
-        if (this.carrito[i].id_herraje === producto.id_herraje &&
-          this.carrito[i].tipo_precio === tipoProducto) {
-
+     for (let i = 0; i < this.carrito.length; i++) {
+       if (this.carrito[i].id_herraje === producto.id_herraje &&
+        this.carrito[i].tipo_precio === tipoProducto) {
+          this.carrito[i].cantidad=+cantidad;
+           this.encontrado = true;
+           this.agregarCarrito(producto, tipoProducto,cantidad);
+           break;
           // Si hay stock disponible (Buscar el mismo id pero con diferente tipo)
-          var cantidadTotal = 0;
-          for (let j = 0; j < this.carrito.length; j++) {
-            if (this.carrito[j].id_herraje === producto.id_herraje && i != j) {
-              cantidadTotal = this.carrito[j].cantidad;
-              break;
-            }
-          }
-
-          cantidadTotal += this.carrito[i].cantidad;
-          if (cantidadTotal < producto.existencias) {
-            this.carrito[i].cantidad++;
-            //console.log(cantidadTotal);
-            Swal.fire('Se modifico el Carrito!', producto.marca + ' - ' + producto.nombre +
-              ' (' + this.carrito[i].cantidad + ' en el carrito)', 'success');
-          } else {
-            // No hay mas stock
-            Swal.fire('No hay stock disponible!', producto.marca + ' - ' + producto.nombre +
-              ' (' + cantidadTotal + ' en el carrito, disponibles: ' + producto.existencias + ')', 'error');
-          }
-
-          encontrado = true;
-          break;
         }
       }
-
-      // Si el producto no se ha agregado antes
-      if (!encontrado) {
-        this.agregarCarrito(producto, tipoProducto);
-      }
+          // cantidadTotal += this.carrito[i].cantidad;
+          //if (cantidad < producto.existencias) {
+            //this.carrito[i].cantidad=+cantidad;
+            //console.log(cantidadTotal);
+            //Swal.fire('Se modifico el Carrito!', producto.marca + ' - ' + producto.nombre +
+             // ' (' + this.carrito[i].cantidad + ' en el carrito)', 'success');
+         // } else {
+            // No hay mas stock
+           // Swal.fire('No hay stock disponible!', producto.marca + ' - ' + producto.nombre +
+             // ' (' + cantidadTotal + ' en el carrito, disponibles: ' + producto.existencias + ')', 'error');
+         // }
+         // break;
+       // }
+     // }
+      if (!this.encontrado) {
+        this.agregarCarrito(producto, tipoProducto, cantidad);
     }
+      }
+       // Si el producto no se ha agregado antes  
   }
-
-  agregarCarrito(producto, tipoProducto) {
-
+  agregarCarrito(producto, tipoProducto,cantidad) {
     this.carrito.push({
-      
       id_herraje: producto.id_herraje,
       nombre: producto.nombre,
       marca: producto.marca,
-      cantidad: 1,
+      cantidad: cantidad,
       tipo_precio: tipoProducto,
       precio_unitario: tipoProducto === 0 ? producto.preciocvidrio : producto.preciosvidrio
-
     });
-
+    console.log(this.carrito);
     Swal.fire('Agregado al Carrito!', producto.marca + ' - ' + producto.nombre, 'success');
   }
-
   vaciarCarrito() {
     this.carrito = [];
     Swal.fire('Se eliminaron los productos del Carrito!', '', 'success');
   }
-
   agregar() {
     console.log(this.ventaForm.value);
     console.log(this.ventaForm.value.fecha);
+    //console.log("--------->"+this.inventario);
+    console.log("------->"+this.carrito);
     if (this.ventaForm.valid) {
       console.log(this.ventaForm.value);
       console.log(this.ventaForm.valid);
-      this.ventaservicio.addVenta(this.ventaForm.value, JSON.stringify(this.inventario)).subscribe(res => {
+     /* this.ventaservicio.addVenta(this.ventaForm.value, JSON.stringify(this.carrito)).subscribe(res => {
         console.log(res);
-      });
+      });*/
       Swal.fire("Venta agregada exactamente");
       this.getcliente();
     }

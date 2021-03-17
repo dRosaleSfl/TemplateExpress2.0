@@ -16,12 +16,14 @@ const mysql = require('mysql');
 const connect = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '123',
+  password: '',
 /*
+  password: '123',
   user: 'usuariovero',
   password: '190398',
-*/
   database: "teempla",
+*/
+  database: 'templaexpress'
 });
 //-------------login-------------------------
 app.get('/user',(req,res)=>{
@@ -1392,7 +1394,7 @@ app.post('/addventa', (req, res) => {
       if (err){
         throw err;
       } else {
-        neoexist = pedido.cantidad - rsl[0].existencias;
+        neoexist = rsl[0].existencias - pedido.cantidad;
         var querrycant = `update inventario set existencias=${neoexist} where id_herraje='${pedido.id_herraje}' and nombre='${pedido.nombre}';`;
         console.log(querrycant);
         //SEGUNDO QUERRY
@@ -1411,7 +1413,7 @@ app.post('/addventa', (req, res) => {
               }
             });
           }
-        });
+        }); 
       } 
     });
   });

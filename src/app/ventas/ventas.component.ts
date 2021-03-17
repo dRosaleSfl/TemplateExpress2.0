@@ -193,56 +193,67 @@ export class VentasComponent implements OnInit {
       inputPlaceholder: '',
       showCancelButton: true
     });
-    const { value: valor } = await Swal.fire({
-      title: 'Cantidad de Productos',
-      input: 'text',
-      inputPlaceholder: 'Cantidad'
-    });
-    let cantidad:number;
-    this.encontrado=false;
-    cantidad=valor;
-    console.log(cantidad);
+   
     // Se dio clic en cancelar
     if (!tipo) {
       return;
-    }
-    const tipoProducto = tipo === 'cvidrio' ? 0 : 1; // 0 con, 1 sin
-    // Si el carrito esta vacio
-    if (this.carrito.length == 0) {
+    } else{
+      const { value: valor } = await Swal.fire({
+        title: 'Cantidad de Productos',
+        input: 'text',
+        inputPlaceholder: 'Cantidad'
+      });
+      let cantidad:number;
+      this.encontrado=false;
+      cantidad=valor;
+      console.log(cantidad);
 
-      this.agregarCarrito(producto, tipoProducto,cantidad);
-
-    } else {
-      // Si el carrito no esta vacio
-     for (let i = 0; i < this.carrito.length; i++) {
-       if (this.carrito[i].id_herraje === producto.id_herraje &&
-        this.carrito[i].tipo_precio === tipoProducto) {
-          this.carrito[i].cantidad=+cantidad;
-           this.encontrado = true;
-           this.agregarCarrito(producto, tipoProducto,cantidad);
-           break;
-          // Si hay stock disponible (Buscar el mismo id pero con diferente tipo)
+     if (cantidad<producto.existencias){
+      const tipoProducto = tipo === 'cvidrio' ? 0 : 1; // 0 con, 1 sin
+      // Si el carrito esta vacio
+      if (this.carrito.length == 0) {
+  
+        this.agregarCarrito(producto, tipoProducto,cantidad);
+  
+      } else {
+        // Si el carrito no esta vacio
+       for (let i = 0; i < this.carrito.length; i++) {
+         if (this.carrito[i].id_herraje === producto.id_herraje &&
+          this.carrito[i].tipo_precio === tipoProducto) {
+            this.carrito[i].cantidad=+cantidad;
+             this.encontrado = true;
+             this.agregarCarrito(producto, tipoProducto,cantidad);
+             break;
+            // Si hay stock disponible (Buscar el mismo id pero con diferente tipo)
+          }
         }
-      }
-          // cantidadTotal += this.carrito[i].cantidad;
-          //if (cantidad < producto.existencias) {
-            //this.carrito[i].cantidad=+cantidad;
-            //console.log(cantidadTotal);
-            //Swal.fire('Se modifico el Carrito!', producto.marca + ' - ' + producto.nombre +
-             // ' (' + this.carrito[i].cantidad + ' en el carrito)', 'success');
-         // } else {
-            // No hay mas stock
-           // Swal.fire('No hay stock disponible!', producto.marca + ' - ' + producto.nombre +
-             // ' (' + cantidadTotal + ' en el carrito, disponibles: ' + producto.existencias + ')', 'error');
+            // cantidadTotal += this.carrito[i].cantidad;
+            //if (cantidad < producto.existencias) {
+              //this.carrito[i].cantidad=+cantidad;
+              //console.log(cantidadTotal);
+              //Swal.fire('Se modifico el Carrito!', producto.marca + ' - ' + producto.nombre +
+               // ' (' + this.carrito[i].cantidad + ' en el carrito)', 'success');
+           // } else {
+              // No hay mas stock
+             // Swal.fire('No hay stock disponible!', producto.marca + ' - ' + producto.nombre +
+               // ' (' + cantidadTotal + ' en el carrito, disponibles: ' + producto.existencias + ')', 'error');
+           // }
+           // break;
          // }
-         // break;
        // }
-     // }
-      if (!this.encontrado) {
-        this.agregarCarrito(producto, tipoProducto, cantidad);
-    }
+        if (!this.encontrado) {
+          this.agregarCarrito(producto, tipoProducto, cantidad);
       }
-       // Si el producto no se ha agregado antes  
+        
+    }
+
+     }else{
+      Swal.fire('No hay stock disponible!', producto.marca + ' - ' + producto.nombre +' (' + cantidad+ ' en el carrito, disponibles: ' + producto.existencias + ')', 'error');
+     }
+
+      
+   
+        }    // Si el producto no se ha agregado antes  
   }
   agregarCarrito(producto, tipoProducto,cantidad) {
     this.carrito.push({
@@ -261,16 +272,19 @@ export class VentasComponent implements OnInit {
     Swal.fire('Se eliminaron los productos del Carrito!', '', 'success');
   }
   agregar() {
+    /*
     console.log(this.ventaForm.value);
     console.log(this.ventaForm.value.fecha);
     //console.log("--------->"+this.inventario);
     console.log("------->"+this.carrito);
+    */
     if (this.ventaForm.valid) {
-      console.log(this.ventaForm.value);
-      console.log(this.ventaForm.valid);
-     /* this.ventaservicio.addVenta(this.ventaForm.value, JSON.stringify(this.carrito)).subscribe(res => {
+ //     console.log(this.ventaForm.value);
+  //    console.log(this.ventaForm.valid);
+     this.ventaservicio.addVenta(this.ventaForm.value, JSON.stringify(this.carrito)).subscribe(res => {
+        console.log("res del ventaservicio: ");
         console.log(res);
-      });*/
+      });
       Swal.fire("Venta agregada exactamente");
       this.getcliente();
     }
@@ -292,18 +306,23 @@ export class VentasComponent implements OnInit {
       confirmButtonText: 'Si, guardar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.ventaservicio.ediventa(this.ventaForm.getRawValue()).subscribe(
-          res => {
-            if (res.hasOwnProperty('affectedRows')) {
-              Swal.fire('Actualizado!', 'Los datos de la venta han sido actualizados', 'success');
-
-              this.getventa();
-            } else {
-              Swal.fire('Error!', 'Ha ocurrido un error', 'error');
-            }
-            $("#myModal").modal("hide");
-          }
-        );
+        if (this.ventaForm.valid) {
+          //     console.log(this.ventaForm.value);
+           //    console.log(this.ventaForm.valid);
+            console.log(this.ventaForm.getRawValue().id_ventas);
+            let id = this.ventaForm.getRawValue().id_ventas;
+              this.ventaservicio.ediventa(this.ventaForm.value,id).subscribe(res => {
+                 console.log("------->hola");
+                 console.log(res);
+               });
+               Swal.fire("Venta editada exactamente");
+               this.getcliente();
+             }
+             else{
+               Swal.fire("Campos vacios");
+               console.log(this.ventaForm.valid);
+               console.log(this.ventaForm.value);
+             }
       }
     });
   }

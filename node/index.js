@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+const sync = require('async')
 const app = express();
 
 //const misrutas = require('./routes/rutas');
@@ -17,10 +18,12 @@ const connect = mysql.createConnection({
   user: 'usuariovero',
   password: '190398',
 /*
+  password: '123',
   user: 'usuariovero',
   password: '190398',
+  database: "teempla",
 */
-  database: "templaexpress",
+  database: 'templaexpress'
 });
 //-------------login-------------------------
 app.get('/user',(req,res)=>{
@@ -1276,7 +1279,7 @@ app.get('/ventas', (req, res) => {
 //MOSTRAR 1 SOLA VENTA
 app.get('/vent', (req, res) => {
   var id = [req.query.id];
-  const query = `select id_ventas, fecha, id_cliente, id_pedido, subtotal, total, anticipo, abono, saldo, id_empleado, status from ventas where id_ventas='${id}';`;
+  const query = `select * from ventas where id_ventas='${id}'`;
   connect.query(query, (err, result) => {
     if (err) {
       throw err;
@@ -1334,7 +1337,7 @@ app.get('/pedido', (req, res) => {
   console.log(req.query.id);
   var id = [req.query.id];
   console.log(id);
-  const query = (`select a.id_pedido, a.id_herraje, b.nombre, b.marca, a.cantidad, a.precio_unitario, a.tipo_precio from pedido a, inventario b where a.id_pedido='${id}' and b.id_herraje=a.id_herraje;`);
+  const query = (`select a.id_pedido,a.id_herraje, a.cantidad, a.precio_unitario,a.tipo_precio,b.nombre, b.marca from  pedido a, inventario b where id_ventas='${id}' and a.id_herraje=b.id_herraje;`);
   connect.query(query, (err, result) => {
     if (err) {
       throw err;
@@ -1346,10 +1349,11 @@ app.get('/pedido', (req, res) => {
 })
 //----API AGREGAR VENTA
 app.post('/addventa', (req, res) => {
-  //console.log(req.body);
+  //pedidos
+  var pedidos = [req.body.pedidos];
+  //variables
   var fecha = [req.body.fecha];
   var id_cliente = [req.body.id_cliente];
-  var pedidos = req.body.pedidos;
   var subtotal = [req.body.subtotal];
   var total = [req.body.total];
   var anticipo = [req.body.anticipo];
@@ -1357,158 +1361,110 @@ app.post('/addventa', (req, res) => {
   var saldo = [req.body.saldo];
   var id_empleado = [req.body.id_empleado];
   var status = [req.body.status];
-  var inventario = JSON.parse([req.query.inv]);
+  var idventa;
 
-  // Pedidos
-  var pedidosFormat = '';
-
-  // Existencias
-  var herrajes = [];
-  var existencias = [];
-  var existenciasFormat = ' ';
-
-  // Pedidos
-  for (let i = 0; i < pedidos.length; i++) {
-
-    // Verificar el id para saber cuantos productos quitar del inventario al agregar la venta
-    if (herrajes.length == 0) {
-      herrajes.push(pedidos[i].id_herraje);
-      existencias.push(pedidos[i].cantidad);
-    } else {
-      var encontrado = false;
-      for (let j = 0; j < herrajes.length; j++) {
-        if (herrajes[j] == pedidos[i].id_herraje && i != j) { // Se encontro otro herraje con el mismo id
-          existencias[j] = existencias[j] + pedidos[i].cantidad;
-          encontrado = true;
-          break;
-        }
-      }
-
-      if (!encontrado) {
-        herrajes.push(pedidos[i].id_herraje);
-        existencias.push(pedidos[i].cantidad);
-      }
-    }
-
-    pedidosFormat = pedidosFormat.concat('(\'')
-      .concat(pedidos[i].id_herraje).concat('\',\'')
-      .concat(pedidos[i].cantidad).concat('\',\'')
-      .concat(pedidos[i].precio_unitario).concat('\',\'')
-      .concat(pedidos[i].tipo_precio).concat('\')');
-
-    if (i < pedidos.length - 1) {
-      pedidosFormat = pedidosFormat.concat(',')
-    }
-  }
-
-  // Existencias
-  for (let i = 0; i < inventario.length; i++) {
-    for (let j = 0; j < herrajes.length; j++) {
-      // Buscar el id para obtener las existencias
-      if (inventario[i].id_herraje == herrajes[j]) {
-        existencias[j] = inventario[i].existencias - existencias[j];
-      }
-    }
-  }
-
-  for (let i = 0; i < herrajes.length; i++) {
-    existenciasFormat += '(\'' + herrajes[i] + '\',\'' + existencias[i] + '\')';
-
-    if (i < herrajes.length - 1) {
-      existenciasFormat += ',';
-    }
-  }
-
-  // Agregar los pedidos
-  const queryPedidos = `insert into pedido (id_herraje,cantidad,precio_unitario,tipo_precio) values ${pedidosFormat}`;
-  connect.query(queryPedidos, (err, result) => {
+  var querryventa = `insert into ventas (fecha, id_cliente, subtotal, total, anticipo, abono, saldo, id_empleado, status) VALUES('${fecha}', ${id_cliente}, ${subtotal}, ${total}, ${anticipo}, ${abono}, ${saldo}, ${id_empleado}, ${status});`;
+  console.log(querryventa);
+  //AÑADIR VENTA
+  connect.query(querryventa, (err, res) => {
     if (err) {
-      throw err;
+      console.log(err);
     } else {
-
-      // Obtener el ultimo id de pedidos
-      const queryUltimoId = `SELECT LAST_INSERT_ID() AS ultimoId`;
-      connect.query(queryUltimoId, (err, result1) => {
-        if (err) {
-          throw err;
-        } else {
-
-          // Agregar la venta
-          var ids= result1[0].ultimoId;
-          console.log(result1);
-         /* for (let i = 0; i < pedidos.length; i++) {
-            ids += result1[0].ultimoId + i;
-
-            if (i < pedidos.length - 1) {
-              ids += ','
-            }
-          }*/
-
-          const query = `insert into ventas (fecha,id_cliente,id_pedido,subtotal,total,anticipo,abono,saldo,id_empleado,status) values ('${fecha}','${id_cliente}','${ids}','${subtotal}','${total}','${anticipo}','${abono}','${saldo}','${id_empleado}','${status}')`;
-          connect.query(query, (err, result) => {
-            if (err) {
-              throw err;
-            } else {
-
-              // Actualizar el inventario
-              const queryInventario = `insert into inventario (id_herraje,existencias) values ${existenciasFormat} ON DUPLICATE KEY UPDATE existencias=values(existencias)`;
-              //console.log(queryInventario);
-              connect.query(queryInventario, (err, result) => {
-                if (err) {
-                  throw err;
-                } else {
-                  res.send(result);
-                  res.end();
-                }
-              });
-            }
-          });
-        }
-      });
+      console.log("venta añadida");
     }
   });
 
-})
+  //CONSEGUIR ID DE LA VENTA RECIEN AGREGADA
+  let querryid = `select max(id_ventas) as id from ventas where id_cliente=${id_cliente}`;
+  connect.query(querryid, (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(querryid);
+//      console.log(res[0].id);
+      idventa = res[0].id;
+    }
+  });
+
+  sync.forEachOf(pedidos[0], function(pedido, i, innercallback)  {
+    var querryexst = `select existencias from inventario where id_herraje='${pedido.id_herraje}' and nombre='${pedido.nombre}';`;
+    var val = i;
+    console.log("querryexst");
+    //PRIMER QUERRY
+    connect.query(querryexst, (err, rsl) => {
+      if (err){
+        throw err;
+      } else {
+        neoexist = rsl[0].existencias - pedido.cantidad;
+        var querrycant = `update inventario set existencias=${neoexist} where id_herraje='${pedido.id_herraje}' and nombre='${pedido.nombre}';`;
+        console.log(querrycant);
+        //SEGUNDO QUERRY
+        connect.query(querrycant, (err, rsl) => {
+          if (err) {
+            throw err;
+          } else {
+            var querryped = `insert into pedido (id_herraje, cantidad, precio_unitario, tipo_precio, id_ventas) VALUES('${pedido.id_herraje}', ${pedido.cantidad}, ${pedido.precio_unitario}, ${pedido.tipo_precio}, ${idventa});`;
+            console.log(querryped);
+            //TERCER QUERRY
+            connect.query(querryped, (err, res) => {
+              if (err){
+                console.log(err);
+              } else {
+                console.log("listo");
+              }
+            });
+          }
+        }); 
+      } 
+    });
+  });
+});
+
 //BORRAR VENTA
 app.get('/deleteventa', async (req, res) => {
   var id = [req.query.id];
 
   // Buscar la venta para traer los pedidos
-  const query = `select * from ventas where id_ventas='${id}'`;
+  const query = `select * from pedido where id_ventas='${id}'`;
   connect.query(query, (err, result) => {
     if (err) {
       throw err;
     } else {
 
+        
       // Eliminar los pedidos
-      const queryPedidos = `delete from pedido where (id_pedido) in (${result[0].id_pedido})`;
+      const queryPedidos = `delete from ventas where (id_ventas) in (${id})`;
       connect.query(queryPedidos, (err, result1) => {
         if (err) {
           throw err;
         } else {
 
-          // Eliminar las ventas
-          const queryVentas = `delete from ventas where id_ventas = ${id}`;
-          connect.query(queryVentas, (err, result2) => {
-            if (err) {
-              throw err;
-            } else {
-              res.send(result2);
-              res.end();
-            }
-          });
+       
         }
+        // Eliminar las ventas
+        const queryVentas = `delete from pedido where id_ventas = ${id}`;
+        connect.query(queryVentas, (err, result2) => {
+          if (err) {
+            throw err;
+          } else {
+            res.send(result2);
+            res.end();
+          }
+          });
       });
+  
     }
   });
-})
+});
 //EDITAR VENTA
 app.post('/updateventa', async (req, res) => {
-  //console.log(req.body);
-  var id = [req.body.id_ventas];
+  console.log("----> no query") 
+  console.log("---- nice"+req.query.id);
+  //pedidos
+  var pedidos = [req.body.pedidos];
+  //variables
   var fecha = [req.body.fecha];
   var id_cliente = [req.body.id_cliente];
-  //var pedidos = req.body.pedidos;
   var subtotal = [req.body.subtotal];
   var total = [req.body.total];
   var anticipo = [req.body.anticipo];
@@ -1516,70 +1472,21 @@ app.post('/updateventa', async (req, res) => {
   var saldo = [req.body.saldo];
   var id_empleado = [req.body.id_empleado];
   var status = [req.body.status];
-
-  const query = `update ventas set fecha='${fecha}',id_cliente='${id_cliente}',subtotal='${subtotal}',total='${total}',
-    anticipo='${anticipo}',abono='${abono}',saldo='${saldo}',id_empleado='${id_empleado}',status='${status}' where id_ventas='${id}'`;
-  connect.query(query, (err, result) => {
+  var idventa =[req.query.id];
+  console.log("--------<>>>"+req.query.id)
+  var querryventa = ` update ventas set fecha='${fecha}', id_cliente=${id_cliente}, subtotal=${subtotal}, total=${total}, anticipo=${anticipo}, abono=${abono}, saldo=${saldo}, id_empleado=${id_empleado}, status=${status}  where id_ventas=${idventa};`;
+  console.log(querryventa);
+  //AÑADIR VENTA
+  connect.query(querryventa, (err, res) => {
     if (err) {
-      throw err;
+      console.log(err);
     } else {
-      res.send(result);
-      res.end();
+      console.log("venta Editada");
     }
-  });
+  })
 })
 
-//NUEVA VENTA
-app.post('/addclient', async (req, res) => {
-  //console.log(req.body);
-  var fecha = [req.body.fecha];
-  var id_cliente = [req.body._cliente];
-  var id_pedido = [req.body.id_pedido];
-  var subtotal = [req.body.subtotal];
-  var total = [req.body.total];
-  var anticipo = [req.body.anticipo];
-  var abono = [req.body.abono];
-  var saldo = [req.body.saldo];
-  var id_empleado = [req.body.id_empleado];
-  var status = [req.body.status];
-  var id_herraje = [req.body.id_herraje];
-  var cantidad = [req.body.cantidad];
-  var precio_unitario = [req.body.precio_unitario];
-  var tipo_precio = [req.body.tipo_precio];
-  var id_herraje = [req.body.id_herraje];
-  var nombre = [req.body.nombre];
-  var marca = [req.body.marca];
-  var preciocvidrio = [req.body.preciocvidrio];
-  var preciosvidrio = [req.body.preciosvidrio];
-  var existencias = [req.body.existencias];
-  var min = [req.body.min];
-  //console.log(id);
-  //console.log(req.params('nombre'));
-  const query = `insert into pedido (id_herraje,cantidad,precio_unitario,tipo_precio) values ('${id_herraje}',"${cantidad}","${precio_unitario}",'${tipo_precio}')`;
-  if (err) {
-    // throw err;
-  } else {
-    //s.send(result2);
-    //>res.end();
-  }
-  const result = await conn.query(query);
-  const query1 = `select * pedido where id_pedido='${id_pedido}'`;
-  const result1 = await conn.query(query1);
-  //const rows = await conn.query(query);
-  var herr = result1[0].id_pedido;
-  const query2 = `insert into ventas (fecha,id_cliente,id_pedido,subtotal,total,anticipo,abono,saldo,id_empleado,status) values 
-  ('${fecha}','${id_cliente}','${id_pedido}','${subtotal}','${total}','${anticipo}','${abono}','${saldo}','${id_empleado}','${status}')`;
-  if (err) {
-    // throw err;
-  } else {
-    //s.send(result2);
-    //>res.end();
-  }
-  const result2 = await conn.query(query2);
-  //AQUI ME PARECE QUE SON LAS DE INVENTARIO QUE NO SÉ HACER :c
-  conn.release();
-  res.status(200).json(result4);
-})
+
 //--------PEdido-------
 //ver un pedido
 app.get('/pedidos', async (req, res) => {
@@ -1658,5 +1565,5 @@ app.listen(3000, (err, res) => {
     console.log('Error al levantar servidor')
     return;
   }
-  console.log('Apis escuchando en el puerto 3000')
+  console.log('Apis escuchando en el puerto 3000');
 })

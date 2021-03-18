@@ -399,11 +399,15 @@ getganancias(){
   deleteventa(id_ventas: any) {
     return this.httpClient.get(`http://localhost:3000/deleteventa?id=${id_ventas}`);
   }
-  ediventa(venta: any) {
-    return this.httpClient.post(`http://localhost:3000/updateventa`, venta);
+  ediventa(venta: any, id:any) {
+    console.log("veeenta---------->")
+    console.log(venta);
+    console.log("id peeeedido"+id);
+    return this.httpClient.post(`http://localhost:3000/updateventa?id=${id}`, venta);
   }
   // AGREGAR VENTA
   addVenta(venta: any, inventario: any) {
+//    console.log(inventario);
     return this.httpClient.post(`http://localhost:3000/addventa?inv=${inventario}`, venta);
   }
 

@@ -1,16 +1,17 @@
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <div class="row">
-      <div class="col">
-        <h2 class="m-0 font-weight-bold text-primary">Ventas</h2>
-      </div>
-      <div class="col-md-auto">
-        <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)">
-      </div>
-      <div *ngIf="this.tipo != '2'" class="col col-lg-2">
-        <button type="button" class="btn btn-info" (click)="modalinventario()">Nueva Venta</button>
-      </div>
+
+    <h1>Ventas</h1>
+    <div class="container">
+      <div class="row"> 
+        <div class="col-sm">
+          <input type="text" class="form-control" placeholder="Buscar&hellip;" (keyup)="applyFilter($event.target.value)">
+        </div>
+          <div  class="col-sm" *ngIf="this.tipo != '2'" class="col col-lg-2">
+            <button type="button" class="btn btn-primary" (click)="modalinventario()">Nueva Venta</button>
+          </div>
     </div>
+  </div>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -103,7 +104,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let producto of (abrirDetalles ? ventaForm.controls['pedidos'].value : carrito)">
+                <tr *ngFor="let producto of (abrirDetalles ? pedidosObj: carrito)">
                   <td>{{producto.id_herraje}}</td>
                   <td>{{producto.nombre}}</td>
                   <td>{{producto.marca}}</td>

@@ -16,14 +16,14 @@ const mysql = require('mysql');
 const connect = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: '123',
 /*
   password: '123',
   user: 'usuariovero',
   password: '190398',
   database: "teempla",
 */
-  database: 'templaexpress'
+  database: 'teempla'
 });
 //-------------login-------------------------
 app.get('/user',(req,res)=>{
@@ -1546,15 +1546,58 @@ app.get('/d', async (req, res) => {
  //eliminar un producto dela venta
  app.get('/dped', (req, res) => {
   var id1 = [req.query.id_pedido];
-  const query = `delete from pedido where id_pedido='${id1}'`;
+   console.log("id pedido------->"+req.query.id_pedido);
+  const query = ` select cantidad,id_herraje from pedido where id_pedido='${id1}'`;
   connect.query(query, (err, result) => {
     if (err) {
       throw err;
     } else {
-      res.send(result);
-      res.end();
+    //  res.send(result);
+      //res.end();
+      
+      const query = ` select existencias from inventario where id_herraje='${result[0].id_herraje}'`;
+      connect.query(query, (err, result1) => {
+        if (err) {
+          throw err;
+        } else {
+         // res.send(result);
+         //res.end();
+          var suma=result1[0].existencias+result[0].cantidad;
+             
+          const query = ` update inventario set existencias='${suma}' where id_herraje='${result[0].id_herraje}'`;
+         connect.query(query, (err, result1) => {
+        if (err) {
+          throw err;
+        } else {
+         // res.send(result);
+         //res.end();
+         const query = `delete from pedido where id_pedido='${id1}'`;
+         connect.query(query, (err, result) => {
+           if (err) {
+             throw err;
+           } else {
+           //  res.send(result);
+             //res.end();
+           }
+         }); 
+
+
+
+        }
+      });
+
+
+
+        }
+      });
+
+
+
+
+
     }
   });
+
 })
 
 //--------------------------------

@@ -55,15 +55,15 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label for="nombre_proveedor">Apellido Paterno</label>
-                    <input type="text" formControlName="ape_pat" class="form-control"  placeholder="" pattern="[A-Z|a-z|' ']*" >
+                    <input type="text" formControlName="ape_pat" class="form-control"  placeholder="" pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*" >
                   </div>
                   <div class="form-group col-md-4">
                     <label for="nombre_proveedor">Apellido Materno</label>
-                    <input type="text" formControlName="ape_mat" class="form-control"   placeholder="" pattern="[A-Z|a-z|' ']*" >
+                    <input type="text" formControlName="ape_mat" class="form-control"   placeholder="" pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*" >
                   </div>
                 </div>
                   <div class="form-row">
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                       <label for="tipo">Tipo</label>
                       <select class="form-control" id="tipo" formControlName="tipo">  
                         <option  value="0">Fisica</option>
@@ -155,11 +155,11 @@
                 </div>
                 <div class="form-group col-md-4">
                   <label for="nombre_proveedor">Apellido Paterno</label>
-                  <input type="text" formControlName="ape_pat" class="form-control" placeholder="" required pattern="[A-Z|a-z|' ']*">
+                  <input type="text" formControlName="ape_pat" class="form-control" placeholder="" required pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="nombre_proveedor">Apellido Materno</label>
-                  <input type="text" formControlName="ape_mat" class="form-control" placeholder="" required pattern="[A-Z|a-z|' ']*">
+                  <input type="text" formControlName="ape_mat" class="form-control" placeholder="" required pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                 </div>
               </div>
               
@@ -167,7 +167,7 @@
                 <div class="form-group col-md-6">
                   <div class="form-group">
                     <label for="tipo">Tipo</label>
-                    <select class="form-control" id="tipo" formControlName="tipo" *ngIf="this.tipo === '1'">  
+                    <select class="form-control" id="tipo" formControlName="tipo" >  
                       <option  value="0">Fisica</option>
                       <option  value="1">Moral</option>
                     </select>

@@ -53,7 +53,6 @@ export class ServicioService {
     let apemat = cliente.ape_mat;
     let telefono =cliente.telefono;
     let rfc = cliente.rfc;
-    let razonsocial =cliente.razonsocial;
     let tipo =cliente.tipo;
     let correo =cliente.correo;
     let calle =cliente.calle;
@@ -67,7 +66,7 @@ export class ServicioService {
     console.log(cliente);
     console.log(apepat);
   // return this.httpClient.get(`http://localhost:3000/updateclient?nombre=${nombre}&apepat=${apemat}&apemat=${apemat}&telefono=${telefono}&rfc=${rfc}&razonsocial=${razonsocial}&tipo=${tipo}&correo=${correo}&calle=${calle}&numint=${numint}&numext=${numext}&colonia=${colonia}&cp=${cp}&ciudad=${ciudad}&estado=${estado}&pais=${pais}&id=${id}`);
-  return this.httpClient.get(`/basedatos-api/updateclient?id=${id}&nombre=${nombre}&apepat=${apepat}&apemat=${apemat}&telefono=${telefono}&rfc=${rfc}&razonsocial=${razonsocial}&tipo=${tipo}&correo=${correo}&calle=${calle}&numint=${numint}&numext=${numext}&colonia=${colonia}&cp=${cp}&ciudad=${ciudad}&estado=${estado}&pais=${pais}`);
+  return this.httpClient.get(`/basedatos-api/updateclient?id=${id}&nombre=${nombre}&apepat=${apepat}&apemat=${apemat}&telefono=${telefono}&rfc=${rfc}&tipo=${tipo}&correo=${correo}&calle=${calle}&numint=${numint}&numext=${numext}&colonia=${colonia}&cp=${cp}&ciudad=${ciudad}&estado=${estado}&pais=${pais}`);
 
   }
 
@@ -137,7 +136,6 @@ export class ServicioService {
     let apemat =proveedor.ape_mat;
     let telefono =proveedor.telefono;
     let rfc = proveedor.rfc;
-    let razonsocial =proveedor.razon_social;
     let tipo =proveedor.tipo;
     let correo =proveedor.correo;
     let calle =proveedor.calle;
@@ -148,7 +146,7 @@ export class ServicioService {
     let ciudad =proveedor.ciudad;
     let estado =proveedor.estado;
     let pais =proveedor.pais;
-    return this.httpClient.get(`/basedatos-api/newproveedor?nombre=${nombre}&apepat=${apepat}&apemat=${apemat}&telefono=${telefono}&rfc=${rfc}&razonsocial=${razonsocial}&tipo=${tipo}&correo=${correo}&calle=${calle}&numint=${numint}&numext=${numext}&colonia=${colonia}&cp=${cp}&ciudad=${ciudad}&estado=${estado}&pais=${pais}`);
+    return this.httpClient.get(`/basedatos-api/newproveedor?nombre=${nombre}&apepat=${apepat}&apemat=${apemat}&telefono=${telefono}&rfc=${rfc}&tipo=${tipo}&correo=${correo}&calle=${calle}&numint=${numint}&numext=${numext}&colonia=${colonia}&cp=${cp}&ciudad=${ciudad}&estado=${estado}&pais=${pais}`);
   
   }
   deletproveedor(proveedor:any){

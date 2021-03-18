@@ -1000,6 +1000,21 @@ connect.query(query, (err, result) => {
   });
 })
 
+//conseguir existencias de un producto
+app.get('/existprod', (req, res) => {
+  var idhrrj = [req.body.id_herraje];
+  var nme = [req.body.nombre];
+  let querry = `select existencias from inventario where id_herraje='${idhrrj}', nombre='${nme}';`;
+  connect.query(querry, (err, res) => {
+    if(err){
+      throw err;
+    } else {
+      console.log(res);
+      res.send(res);
+    }
+  });
+});
+
 //--------------------Faltantes----------------------
 ///ver lista de faltantes
 //lista

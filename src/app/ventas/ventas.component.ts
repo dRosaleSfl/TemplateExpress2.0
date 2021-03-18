@@ -207,6 +207,11 @@ export class VentasComponent implements OnInit {
       this.encontrado=false;
       cantidad=valor;
       console.log(cantidad);
+      console.log("cantidad update: ");
+      console.log( this.ventaservicio.getexist(producto) );
+      /*
+        hot fix cantidad
+      */
 
      if (cantidad<producto.existencias){
       const tipoProducto = tipo === 'cvidrio' ? 0 : 1; // 0 con, 1 sin

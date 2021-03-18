@@ -414,6 +414,14 @@ getganancias(){
    return this.httpClient.get(`/basedatos-api/dped?id_pedido=${id1}`);
   }
 
+  //  checar existencias de un producto dado
+  getexist(producto){
+    let idhrr = producto.id_herraje;
+    let nme = producto.nombre;
+    console.log("entra getexist");
+    return this.httpClient.get(`/basedatos-api/existprod?id_herraje=${idhrr}&nombre=${nme}`);
+  }
+
   /* deleteVenta(venta:any){
     let id = venta.id_venta;
     return this.httpClient.get(`http://localhost:3000/deletventa?id=${id}`);

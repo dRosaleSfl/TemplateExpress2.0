@@ -75,12 +75,10 @@
                   </div>
                   <div class="form-group">
                     <label for="tipo">Tipo</label>
-                  
-
-                    <input *ngIf="this.tipo === '1' && tcliente "   type="text" class="form-control" id="tipo" placeholder="Moral"  value="Moral">
-                    <input *ngIf="this.tipo === '1' && !tcliente "   type="text" class="form-control" id="tipo" placeholder="Fisico" value="Fisico" >
-                    <input *ngIf="this.tipo != '1' && tcliente"  type="text"   class="form-control" id="tipo" placeholder="Moral" value="Moral" disabled="true">
-                    <input *ngIf="this.tipo != '1' && !tcliente"  type="text"   class="form-control" id="tipo" placeholder="Fisico"  value="Fisico "disabled="true">
+                    <select class="form-control" id="tipo" formControlName="tipo">  
+                      <option  value="0">Fisica</option>
+                      <option  value="1">Moral</option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-row">
@@ -203,12 +201,10 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="tipo">Tipo</label>
-
                 <select class="form-control" id="tipo" formControlName="tipo" *ngIf="this.tipo === '1'">  
                   <option  value="0">Fisica</option>
                   <option  value="1">Moral</option>
                 </select>
-
               </div>
               <div class="form-group col-md-6">
                 <label for="rfc">Rfc</label>

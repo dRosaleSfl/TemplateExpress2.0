@@ -70,10 +70,14 @@ export class InventarioComponent implements OnInit {
     if (filterValue === '') {
       this.inventario = this.buscarproducto;
     } else {
-      this.inventario = this.buscarproducto.filter((producto: { id_herraje: string; nombre: string; marca: string; }) =>
+      this.inventario = this.buscarproducto.filter((producto: { id_herraje: string; nombre: string; marca: string; preciocvidrio: string; preciosvidrio: string; existencias: string; min: string; }) =>
       producto.id_herraje.toLowerCase().includes(filterValueLower) ||
       producto.nombre.toLowerCase().includes(filterValueLower) ||
-      producto.marca.toLowerCase().includes(filterValueLower) 
+      producto.marca.toLowerCase().includes(filterValueLower) ||
+      producto.preciocvidrio.toString().includes(filterValueLower) || 
+      producto.preciosvidrio.toString().includes(filterValueLower) ||
+      producto.existencias.toString().includes(filterValueLower) ||
+      producto.min.toString().includes(filterValueLower) 
       );
     }
   }

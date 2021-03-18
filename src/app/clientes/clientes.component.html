@@ -58,13 +58,13 @@
                   </div>
                     <div class="form-group col-md-4">
                     <label for="ape_pat">Apellido paterno</label>
-                    <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat"  pattern="[A-Z|a-z|' ']*">
-                    <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat" disabled="true "  pattern="[A-Z|a-z|' ']*">
+                    <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat"  pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
+                    <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_pat" placeholder="" formControlName="ape_pat" disabled="true "  pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                     </div>
                     <div class="form-group col-md-4">
                       <label for="ape_mat">Apellido materno</label>
-                      <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat"   pattern="[A-Z|a-z|' ']*">
-                      <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat" disabled="true"   pattern="[A-Z|a-z|' ']*">
+                      <input *ngIf="this.tipo === '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat"   pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
+                      <input *ngIf="this.tipo != '1'" type="text" class="form-control" id="ape_mat" placeholder="" formControlName="ape_mat" disabled="true"   pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                       </div>
                 </div>
                 <div class="form-row">
@@ -73,7 +73,7 @@
                     <input *ngIf="this.tipo === '1'" type="text" class="form-control"  placeholder="" formControlName="rfc">
                     <input *ngIf="this.tipo != '1'" type="text" class="form-control"  placeholder="" formControlName="rfc" disabled="true">
                   </div>
-                  <div class="form-group">
+                  <div class="form-group col-md-6">
                     <label for="tipo">Tipo</label>
                     <select class="form-control" id="tipo" formControlName="tipo">  
                       <option  value="0">Fisica</option>
@@ -191,15 +191,15 @@
                 </div>
                  <div class="form-group col-md-4">
                     <label for="ape_pat">Apellido paterno</label>
-                    <input type="text" formControlName="ape_pat" class="form-control" placeholder=" "  required  pattern="[A-Z|a-z|' ']*">
+                    <input type="text" formControlName="ape_pat" class="form-control" placeholder=" "  required  pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                 </div>
                   <div class="form-group col-md-4">
                     <label for="ape_mat">Apellido materno</label>
-                    <input type="text" formControlName="ape_mat" class="form-control" placeholder=" "  required   pattern="[A-Z|a-z|' ']*">
+                    <input type="text" formControlName="ape_mat" class="form-control" placeholder=" "  required   pattern="[A-Z|a-z|' '|ZñÑáéíóúÁÉÍÓÚ\s]*">
                 </div>
               </div>
-            <div class="form-row">
-              <div class="form-group">
+            <div class="form-row ">
+              <div class="form-group col-md-6">
                 <label for="tipo">Tipo</label>
                 <select class="form-control" id="tipo" formControlName="tipo" *ngIf="this.tipo === '1'">  
                   <option  value="0">Fisica</option>

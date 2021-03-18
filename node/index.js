@@ -15,8 +15,8 @@ app.use(function (req, res, next) {
 const mysql = require('mysql');
 const connect = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: '',
+  user: 'usuariovero',
+  password: '190398',
 /*
   password: '123',
   user: 'usuariovero',
@@ -105,7 +105,7 @@ app.get('/newclient', (req, res) => {
         //  res.end();
       }
       var cp1 = result1[0].id_cp;
-      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}",'${numint}','${numext}',"${colonia}",'${cp1}')`;
+      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}","${numint}","${numext}","${colonia}",'${cp1}')`;
       connect.query(query2, (err, result2) => {
         if (err) {
           // throw err;
@@ -122,7 +122,7 @@ app.get('/newclient', (req, res) => {
             //>res.end();
           }
           var direccion = result3[0].id_direccion;
-          const query4 = `insert into clientes (nombre,ape_pat,ape_mat,telefono,rfc,tipo,correo,id_direccion) values ("${nombre}","${apepat}","${apemat}",'${telefono}',"${rfc}","${tipo}","${correo}",'${direccion}')`;
+          const query4 = `insert into clientes (nombre,ape_pat,ape_mat,telefono,rfc,tipo,correo,id_direccion) values ("${nombre}","${apepat}","${apemat}",'${telefono}',"${rfc}",'${tipo}',"${correo}",'${direccion}')`;
           connect.query(query4, (err, result4) => {
             if (err) {
               // throw err;
@@ -237,7 +237,6 @@ app.get('/updateclient', (req, res) => {
   var apemat = [req.query.apemat];
   var telefono = [req.query.telefono];
   var rfc = [req.query.rfc];
-  var razonsocial = [req.query.razonsocial];
   var tipo = [req.query.tipo];
   var correo = [req.query.correo];
   var calle = [req.query.calle];
@@ -250,7 +249,7 @@ app.get('/updateclient', (req, res) => {
   var pais = [req.query.pais];
   console.log(apepat);
   console.log(id);
-  const query = `update clientes set nombre="${nombre}",ape_pat="${apepat}",ape_mat="${apemat}",telefono='${telefono}',rfc="${rfc}",tipo="${tipo}",correo="${correo}" where id_cliente='${id}'`;
+  const query = `update clientes set nombre="${nombre}",ape_pat="${apepat}",ape_mat="${apemat}",telefono='${telefono}',rfc="${rfc}",tipo='${tipo}',correo="${correo}" where id_cliente='${id}'`;
   connect.query(query, (err, result) => {
     if (err) {
       //throw err;
@@ -265,10 +264,9 @@ app.get('/updateclient', (req, res) => {
       } else {
         //res.send(result);
         // res.end();
-      }
       var direccion = result1[0].id_direccion;
       console.log(direccion)
-      const query2 = `update direccion set calle="${calle}",num_int='${numint}',num_ext='${numext}',colonia="${colonia}" where id_direccion='${direccion}'`;
+      const query2 = `update direccion set calle="${calle}",num_int="${numint}",num_ext="${numext}",colonia="${colonia}" where id_direccion='${direccion}'`;
       connect.query(query2, (err, result2) => {
         if (err) {
           // throw err;
@@ -296,6 +294,7 @@ app.get('/updateclient', (req, res) => {
           });
         });
       });
+      }
     });
   });
 })
@@ -369,7 +368,7 @@ app.get('/newempleado', async (req, res) => {
         // res.end();
       }
       var cp1 = result1[0].id_cp;
-      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}",'${numint}','${numext}',"${colonia}",'${cp1}')`;
+      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}","${numint}","${numext}","${colonia}",'${cp1}')`;
       connect.query(query2, (err, result2) => {
         if (err) {
           //   throw err;
@@ -509,7 +508,7 @@ app.get('/updateempleado',(req,res)=>{
                     //res.end();
                   }
                   var direccion = result1[0].id_direccion;
-                  const query2 = `update direccion set calle="${calle}",num_int='${numint}',num_ext='${numext}',colonia="${colonia}" where id_direccion='${direccion}'`;
+                  const query2 = `update direccion set calle="${calle}",num_int="${numint}",num_ext="${numext}",colonia="${colonia}" where id_direccion='${direccion}'`;
                   connect.query(query2,(err,result2)=>{
                           if(err){
                             // throw err;
@@ -671,14 +670,13 @@ app.get('/updateproveedor', async (req, res) => {
   var pais = [req.query.pais];
   console.log(apepat);
   console.log(id);
-  const query = `update proveedores set nombre="${nombre}",ape_pat="${apepat}",ape_mat="${apemat}",telefono='${telefono}',rfc="${rfc}",tipo="${tipo}",correo="${correo}" where id_proveedor='${id}'`;
+  const query = `update proveedores set nombre="${nombre}",ape_pat="${apepat}",ape_mat="${apemat}",telefono='${telefono}',rfc="${rfc}",tipo='${tipo}',correo="${correo}" where id_proveedor='${id}'`;
   connect.query(query, (err, result) => {
     if (err) {
       //throw err;
     } else {
       //res.send(result);
       //res.end();
-    }
     const query1 = `select * from proveedores where id_proveedor='${id}'`;
     connect.query(query1, (err, result1) => {
       if (err) {
@@ -686,38 +684,59 @@ app.get('/updateproveedor', async (req, res) => {
       } else {
         //res.send(result);
         // res.end();
-      }
-      var direccion = result1[0].id_direccion;
-      console.log(direccion)
-      const query2 = `update direccion set calle="${calle}",num_int='${numint}',num_ext='${numext}',colonia="${colonia}" where id_direccion='${direccion}'`;
-      connect.query(query2, (err, result2) => {
-        if (err) {
-          // throw err;
-        } else {
-          //res.send(result);
-          // res.end();
-        }
-        const query3 = `select * from direccion where id_direccion='${direccion}'`;
-        connect.query(query3, (err, result3) => {
+        var direccion = result1[0].id_direccion;
+        console.log(direccion)
+        const query2 = `update direccion set calle="${calle}",num_int="${numint}",num_ext="${numext}",colonia="${colonia}" where id_direccion='${direccion}'`;
+        connect.query(query2, (err, result2) => {
           if (err) {
             // throw err;
           } else {
             //res.send(result);
             // res.end();
-          }
-          var cp1 = result3[0].cp;
-          const query4 = `update codigo_postal set cp='${cp}',ciudad="${ciudad}",estado="${estado}",pais="${pais}" where id_cp='${cp1}'`;
-          connect.query(query4, (err, result3) => {
+          const query3 = `select * from direccion where id_direccion='${direccion}'`;
+          connect.query(query3, (err, result3) => {
             if (err) {
               // throw err;
             } else {
               //res.send(result);
               // res.end();
+              var direccion = result1[0].id_direccion;
+              console.log(direccion)
+              const query2 = `update direccion set calle="${calle}",num_int="${numint}",num_ext="${numext}",colonia="${colonia}" where id_direccion='${direccion}'`;
+              connect.query(query2, (err, result2) => {
+              if (err) {
+                // throw err;
+              } else {
+                //res.send(result);
+                // res.end();
+                const query3 = `select * from direccion where id_direccion='${direccion}'`;
+                connect.query(query3, (err, result3) => {
+                if (err) {
+                  // throw err;
+                } else {
+                  //res.send(result);
+                  // res.end();
+                  var cp1 = result3[0].cp;
+                  const query4 = `update codigo_postal set cp='${cp}',ciudad="${ciudad}",estado="${estado}",pais="${pais}" where id_cp='${cp1}'`;
+                  connect.query(query4, (err, result3) => {
+                    if (err) {
+                      // throw err;
+                    } else {
+                      //res.send(result);
+                      // res.end();
+                    }
+                  });
+                }
+              });
             }
           });
-        });
+        }
       });
+    }
+  });
+}
     });
+    }
   });
 })
 //agregar un nuevo proveedor
@@ -758,7 +777,7 @@ app.get('/newproveedor', async (req, res) => {
         //  res.end();
       }
       var cp1 = result1[0].id_cp;
-      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}",'${numint}','${numext}',"${colonia}",'${cp1}')`;
+      const query2 = `insert into direccion (calle,num_int,num_ext,colonia,cp) values ("${calle}","${numint}","${numext}","${colonia}",'${cp1}')`;
       connect.query(query2, (err, result2) => {
         if (err) {
           // throw err;
@@ -775,7 +794,7 @@ app.get('/newproveedor', async (req, res) => {
             //>res.end();
           }
           var direccion = result3[0].id_direccion;
-          const query4 = `insert into proveedores (nombre,ape_pat,ape_mat,telefono,rfc,tipo,correo,id_direccion) values ("${nombre}","${apepat}","${apemat}",'${telefono}',"${rfc}","${tipo}","${correo}",'${direccion}')`;
+          const query4 = `insert into proveedores (nombre,ape_pat,ape_mat,telefono,rfc,tipo,correo,id_direccion) values ("${nombre}","${apepat}","${apemat}",'${telefono}',"${rfc}",'${tipo}',"${correo}",'${direccion}')`;
           connect.query(query4, (err, result4) => {
             if (err) {
               // throw err;

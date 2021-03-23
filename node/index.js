@@ -572,6 +572,7 @@ app.get('/proveedor', async (req, res) => {
   var id = [req.query.id];
   console.log(id);
   const query = `select a.nombre,a.ape_pat,a.ape_mat, a.correo,a.telefono,a.rfc,a.tipo,b.calle,b.num_int,b.num_ext,b.colonia,c.cp,c.ciudad,c.estado,c.pais from proveedores a, direccion b, codigo_postal c where a.id_direccion=b.id_direccion and b.cp=c.id_cp and a.id_proveedor='${id}' order by a.nombre;`;
+  console.log(query);
   connect.query(query, (err, result) => {
     if (err) {
       throw err;
@@ -579,7 +580,10 @@ app.get('/proveedor', async (req, res) => {
       res.send(result);
       res.end();
     }
+
+    console.log(result);
   });
+  
 })
 //borrar un proveedor
 //lista

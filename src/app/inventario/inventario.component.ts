@@ -121,7 +121,8 @@ export class InventarioComponent implements OnInit {
    var  agregar = new Number($('#agregar').val());
     console.log(agregar);
     if (this.inventarioForm1.valid) {
-    this.inventarioForm1.value.existencias= this.inventarioForm1.value.existencias+agregar;
+     var nuevo = this.inventarioForm1.value.existencias;
+    this.inventarioForm1.value.existencias= nuevo+agregar;
     console.log(this.inventarioForm1.value.existencias);
     console.log(this.inventarioForm1.value);
     this.inventarioservicio.editproducto(this.inventarioForm1.value).subscribe(

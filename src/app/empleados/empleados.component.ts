@@ -76,11 +76,11 @@ export class EmpleadosComponent implements OnInit {
     if (filterValue === '') {
       this.empleados = this.empleadobusqueda;
     } else {
-      this.empleados = this.empleadobusqueda.filter((empleado: { id_empleado: string | string[]; nombre: string; ape_pat: string; ape_mat: string; }) =>
-      empleado.id_empleado.toString().includes(filterValueLower) ||
-      empleado.nombre.toLowerCase().includes(filterValueLower) ||
-      empleado.ape_pat.toLowerCase().includes(filterValueLower) ||
-      empleado.ape_mat.toLowerCase().includes(filterValueLower)
+      this.empleados = this.empleadobusqueda.filter((cliente: { id_cliente: string | string[]; nombre: string; ape_pat: string; ape_mat: string; }) =>
+        cliente.id_cliente.toString().includes(filterValueLower) ||
+        cliente.nombre.toLowerCase().includes(filterValueLower) ||
+        cliente.ape_pat.toLowerCase().includes(filterValueLower) ||
+        cliente.ape_mat.toLowerCase().includes(filterValueLower)
       );
     }
   }

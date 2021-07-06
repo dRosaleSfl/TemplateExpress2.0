@@ -16,16 +16,18 @@ const mysql = require('mysql');
 const connect = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '123',
+  password: 'gjsggv160305',
 /*
+  password: '',
   user: 'usuariovero',
   password: '190398',
   password: '123',
   user: 'usuariovero',
   password: '190398',
   database: "teempla",
+  database: "templaexpress",
 */
-  database: 'teempla'
+  database: 'templaexpress'
 });
 //-------------login-------------------------
 app.get('/user',(req,res)=>{
@@ -1642,7 +1644,7 @@ app.get('/d', async (req, res) => {
 
 //--------------------------------
 
-app.listen(3000, (err, res) => {
+app.listen(3001, (err, res) => {
   if (err) {
     console.log('Error al levantar servidor')
     return;

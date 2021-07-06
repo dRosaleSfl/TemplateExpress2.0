@@ -116,7 +116,7 @@ export class GananciasComponent implements OnInit {
    });
   }
 
-  applyFilter(filterValue: string) {
+  applyFilter(filterValue: string) { 
     let filterValueLower = filterValue.toLowerCase();
     if (filterValue === '') {
       this.ganancias= this.gananciasBusqueda;

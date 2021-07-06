@@ -78,12 +78,13 @@ export class ClientesComponent implements OnInit {
     
 
   }
-  applyFilter(filterValue: string) {
+
+  applyFilter(filterValue: string) {  
     let filterValueLower = filterValue.toLowerCase();
     if (filterValue === '') {
       this.clientes = this.clientesBusqueda;
     } else {
-      this.clientes = this.clientesBusqueda.filter((cliente: { id_cliente: string | string[]; nombre: string; ape_pat: string; ape_mat: string; }) =>
+      this.clientes = this.clientesBusqueda.filter( (cliente: { id_cliente: string | string[]; nombre: string; ape_pat: string; ape_mat: string; }) =>
         cliente.id_cliente.toString().includes(filterValueLower) ||
         cliente.nombre.toLowerCase().includes(filterValueLower) ||
         cliente.ape_pat.toLowerCase().includes(filterValueLower) ||

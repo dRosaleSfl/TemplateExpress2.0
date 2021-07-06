@@ -8,7 +8,7 @@ import { ServicioService } from './../servicios/servicio.service';
   styleUrls: ['./general.component.css']
 })
 export class GeneralComponent implements OnInit {
-
+  imgurl = /* "../../assets/img/logo_trans.png" */ `../../../dist/img/logo_trans.png`;
   usaurio2:any;
   constructor(public router: ActivatedRoute,private servicio:ServicioService) {}
   usr;
